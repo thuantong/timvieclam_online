@@ -188,7 +188,7 @@
 
             });
 
-            $('body').addClass('sidebar-enable enlarged')
+            // $('body').addClass('sidebar-enable enlarged')
             // $.ajax({
             //     method : 'get',
             //     url:'/admin/danh-sach-bai-duyet/get',
