@@ -316,7 +316,7 @@
             <li>
                 <a href="/@if(Session::get('loai_tai_khoan') == 3){{'admin'}}@endif" class="nav-link logo text-center">
             <span class="logo">
-                <span class="logo-lg-text-light text-white">{{env('APP_NAME')}}@if(Session::get('loai_tai_khoan') == 3){{' - Quản trị'}}@endif</span>
+                <span class="logo-lg-text-light text-white">{{env('APP_NAME')}}@if(Session::get('loai_tai_khoan') == 3){{'AD'}}@endif</span>
 {{--                            <img src="assets\images\logo-sm.png" alt="" height="24">--}}
             {{--                            <img src="assets\images\logo-light.png" alt="" height="20">--}}
             <!-- <span class="logo-lg-text-light">Xeria</span> -->

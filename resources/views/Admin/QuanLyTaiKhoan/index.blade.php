@@ -1,4 +1,4 @@
-@extends('Admin.index')
+@extends('master.index')
 @section('content')
     <head>
         <link href="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\libs\bootstrap-touchspin\jquery.bootstrap-touchspin.min.css')}}"

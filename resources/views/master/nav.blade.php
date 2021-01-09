@@ -166,6 +166,16 @@
                         <span>{{__('Tin nhắn')}}</span>
                     </a>
                 </li>
+                <li>
+                    <a class="dropdown-item  notify-item"
+                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                        <i class="remixicon-logout-box-line"></i>
+                        <span>Đăng xuất</span>
+                        {{--                        {{ __('Logout') }}--}}
+                    </a>
+                </li>
+
                 @endif
             </ul>
 
