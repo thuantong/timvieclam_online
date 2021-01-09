@@ -79,7 +79,7 @@
                         @if(count($data) > 0)
                             @foreach($data as $row)
                             <tr>
-                                <td style="width: 100px; padding: 0" class="center-element"><img class="rounded-circle" src="@if($row['get_tai_khoan']['avatar'] != null){{URL::asset($row['get_tai_khoan']['avatar'])}}@else{{URL::asset('images/default-company-logo.jpg')}}@endif" style="width: calc(100%)"></td>
+                                <td style="width: 100px; padding: 0" class="center-element"><img class="rounded-circle" src="@if($row['get_tai_khoan']['avatar'] != null){{URL::asset(env('URL_ASSET_PUBLIC').$row['get_tai_khoan']['avatar'])}}@else{{URL::asset(env('URL_ASSET_PUBLIC').'images/default-company-logo.jpg')}}@endif" style="width: calc(100%)"></td>
                                 <td>
                                     <div class="row">
                                         <div class="col-sm-12 col-md-12 text-capitalize">@if($row['viec_can_tim'] != null){{$row['viec_can_tim']}}@endif</div>

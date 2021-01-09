@@ -14,7 +14,9 @@ $(function () {
         let value = $(this).parents('#logo_cong_ty').find('img').attr('src');
         $('#xem_anh_dai_dien').find('.modal-body').find('img').attr('src', value);
     });
-
+    $(document).on('click', '.logo_cong_ty_view-mobile', function () {
+        $('.logo_cong_ty_view').trigger('click');
+    });
     $("div#them-moi-cong-ty #so_luong_chi_nhanh").TouchSpin({
         min: 0,
         buttondown_class: "btn btn-primary waves-effect",
@@ -112,6 +114,10 @@ $(function () {
     $(document).on('click', '#logo_cong_ty .logo_cong_ty_change', function () {
         $(this).parents('#logo_cong_ty').find('.logo_cong_ty_file').trigger('click');
     });
+    $(document).on('click', '.logo_cong_ty_change-mobile', function () {
+        $('#logo_cong_ty .logo_cong_ty_change').trigger('click');
+    });
+
     $(document).on('change', '#logo_cong_ty .logo_cong_ty_file', function () {
         let getModal = $(this).parents('.modal').attr('id');
         $('#doi_anh_dai_dien.congty').data('type', getModal).modal('show');

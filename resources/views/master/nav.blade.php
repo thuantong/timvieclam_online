@@ -106,7 +106,7 @@
 {{--                @endif--}}
 
                 @if(Session::get('loai_tai_khoan') == 2)
-                    <li class="menu-title">{{__('Thông tin tuyển dụng')}}</li>
+                    <li class="menu-title">{{__('Chức năng khác')}}</li>
 
 
 

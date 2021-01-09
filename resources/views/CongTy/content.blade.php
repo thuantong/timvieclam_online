@@ -11,6 +11,7 @@
                 <label for="logo_cong_ty">{{__('Logo: ')}}</label>
             </div>
             <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8 center-element position-relative">
+
                 <div style="width: 8rem;height: 8rem;" id="logo_cong_ty">
                     <img src="@if(isset($data['data']) && $data['data']['logo'] != null){{URL::asset(env('URL_ASSET_PUBLIC').$data['data']['logo'].'')}}@else{{URL::asset(env('URL_ASSET_PUBLIC').'images/default-company-logo.jpg')}}@endif"
                          class="avatar-xl img-thumbnail"
@@ -38,18 +39,18 @@
                         </div>
                     </div>
 
-                    <div class="row mt-1 mb-1 d-block d-md-none">
-                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
-                            <button class="btn btn-success btn-sm logo_cong_ty_change">Đổi ảnh</button>
-                        </div>
-                    </div>
-                    <div class="row mt-1 mb-1 d-block d-md-none">
-                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
-                            <button class="btn btn-light btn-sm logo_cong_ty_view">Xem ảnh</button>
-                        </div>
+
+                </div>
+                <div class="row mt-1 mb-1 d-block d-md-none">
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
+                        <button class="btn btn-success btn-sm logo_cong_ty_change-mobile">Đổi ảnh</button>
                     </div>
                 </div>
-
+                <div class="row mt-1 mb-1 d-block d-md-none">
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
+                        <button class="btn btn-light btn-sm logo_cong_ty_view-mobile">Xem ảnh</button>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row form-group">
