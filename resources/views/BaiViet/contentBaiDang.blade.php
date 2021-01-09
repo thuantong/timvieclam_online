@@ -1,5 +1,5 @@
 <div class="row" id="form-body">
-    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 pl-0 pr-0">
         <div class="card-box mb-1">
             <div class="row">
                 <label class="col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">

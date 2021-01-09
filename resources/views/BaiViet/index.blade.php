@@ -42,7 +42,7 @@
     </div>
 {{--    Body bài viết--}}
     @include('BaiViet.contentBaiDang')
-    <div class="row card-box p-2">
+    <div class="row card-box p-0">
         <div class="col-sm-12 col-md-12">
             @include('BaiViet.buttonDangBai')
         </div>

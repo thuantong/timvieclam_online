@@ -106,7 +106,10 @@ class everyMinute extends Command
                     'view' => 'goi_y.index',
                     'data' => $row
                 );
-                Mail::to($row['get_tai_khoan']['email'])->send(new SendEmail($dataEmail));
+                if (count($row['tin_goi_y']) > 0){
+                    Mail::to($row['get_tai_khoan']['email'])->send(new SendEmail($dataEmail));
+                }
+
             }
         }
 //        $nguoiTimViecALL = NguoiTimViec::query()->with([

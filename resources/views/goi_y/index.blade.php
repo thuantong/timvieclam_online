@@ -173,7 +173,7 @@
                             <div class="col-sm-12 col-md-12 p-1">
                                 @foreach($dataobj['tin_goi_y'] as $row)
                                 <div class="row" style="border: #a3adc1 1px solid;margin-bottom: 10px">
-{{--                                    <div class="col-sm-12 col-md-12"><img src="{{URL::asset($row['get_cong_ty']['logo'])}}" style="width: 100px"></div>--}}
+                                    <div class="col-sm-12 col-md-12"><img src="{{URL::asset(env('URL_ASSET_PUBLIC').$row['get_cong_ty']['logo'])}}" style="width: 100px"></div>
                                     <p class="col-sm-12 col-md-12" style="text-transform: capitalize">{{$row['get_cong_ty']['name']}}</p>
                                     <p class="col-sm-12 col-md-12"><b style="text-transform: capitalize">{{$row['tieu_de']}}</b></p>
                                     <p class="col-sm-12 col-md-12"><a href="{{URL::asset('/bai-viet/thong-tin&baiviet='.$row['id'].'&chitiet=1')}}">Xem công việc</a></p>

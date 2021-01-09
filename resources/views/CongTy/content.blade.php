@@ -1,7 +1,7 @@
 <div class="row center-element">
 
 
-<div class="col-sm-12 col-md-8">
+<div class="col-sm-12 col-md-8 pl-0 pr-0">
     <div class="card-box">
         <input id="object-fillter" type="hidden"
                value="@if(isset($data['data']) && $data['data']['id'] != null){{$data['data']['id']}}@endif"
