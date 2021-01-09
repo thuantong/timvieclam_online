@@ -183,6 +183,11 @@
                                 {{--                                    </div>--}}
 
                                 {{--                                </div>--}}
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12">
+                                        Hạn nộp hồ sơ: {{$data['han_tuyen']}} - Mức lương: {{$data['luong_from']}} triệu đến {{$data['luong_to']}} triệu
+                                    </div>
+                                </div>
                                 @if(intval(Session::get('loai_tai_khoan')) == 1)
                                     <div class="form-group row">
 
@@ -210,6 +215,16 @@
                                                         class="btn @if(in_array($data['id'],$data['don_xin_viec']['data']) == false) btn-outline-warning @else btn-warning like-animation @endif waves-effect position-relative call-modal-nop-don"
                                                         @if(in_array($data['id'],$data['don_xin_viec']['data']) == false) id="call-modal-nop-don" @endif>
                                                         <i class="fa fa-send">@if(in_array($data['id'],$data['don_xin_viec']['data'])){{' Đã ứng tuyển'}}@else{{' Nộp đơn'}}@endif</i>
+                                                        {{--                                                    <span class="badge badge-danger noti-icon-badge position-absolute" style="right: 0px">{{$data['don_xin_viec']['total']}}</span>--}}
+
+                                                    </div>
+{{--@dd($data['get_nha_tuyen_dung']['get_tai_khoan']['id'])--}}
+                                                    <div
+                                                        class="btn btn-outline-info like-animation waves-effect position-relative call-nhan-tin-tuyen-dung">
+                                                        <a href="{{route('nhantin.index',['from'=>\Illuminate\Support\Facades\Auth::user()->id,'to'=>$data['get_nha_tuyen_dung']['get_tai_khoan']['id']])}}">
+                                                            <i class="fa fa-commenting-o"></i> Nhắn tin với NTD
+                                                        </a>
+
                                                         {{--                                                    <span class="badge badge-danger noti-icon-badge position-absolute" style="right: 0px">{{$data['don_xin_viec']['total']}}</span>--}}
 
                                                     </div>
@@ -255,9 +270,9 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label
-                                                class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-form-label text-left">Địa
-                                                chỉ</label>
+                                            <h4
+                                                class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-form-label text-left"><u>Địa
+                                                    chỉ</u></h4>
                                             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12" id="dia_chi">
                                                 <span>@if($data['dia_chi'] != null){{$data['dia_chi']}}@endif</span> -
                                                 <a href="{{route('trangchu.index',['dia_diem_id'=>$data['get_dia_diem']['id']])}}"
@@ -267,9 +282,9 @@
                                         </div>
 
                                         <div class="form-group row">
-                                            <label
-                                                class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-form-label text-left">Tính
-                                                chất công việc</label>
+                                            <h4
+                                                class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-form-label text-left"><u>Tính
+                                                    chất công việc</u></h4>
                                             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 chuc_vu" id="chuc_vu">
                                                 {{--                                        kiểu làm việc--}}
                                                 @if($data['get_chuc_vu'] != null)
@@ -281,9 +296,9 @@
                                         </div>
 
                                         <div class="form-group row">
-                                            <label
-                                                class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-form-label text-left">Chức
-                                                vụ</label>
+                                            <h4
+                                                class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-form-label text-left"><u>Chức
+                                                    vụ</u></h4>
                                             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 chuc_vu">
                                                 {{--                                        kiểu làm việc--}}
                                                 @if($data['get_kieu_lam_viec'] != null)
@@ -295,9 +310,9 @@
                                         </div>
 
                                         <div class="form-group row">
-                                            <label
-                                                class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-form-label text-left">Ngành
-                                                nghề</label>
+                                            <h4
+                                                class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-form-label text-left"><u>Ngành
+                                                    nghề</u></h4>
                                             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 nganh_nghe"
                                                  id="nganh_nghe">
                                                 @if($data['get_nganh_nghe'] != null)
@@ -308,9 +323,9 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label
-                                                class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-form-label text-left">Yêu
-                                                cầu bằng cấp</label>
+                                            <h4
+                                                class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-form-label text-left"><u>Yêu
+                                                    cầu bằng cấp</u></h4>
                                             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 yc_bang_cap"
                                                  id="yc_bang_cap">
                                                 @if($data['get_bang_cap'] != null)
@@ -319,9 +334,9 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label
-                                                class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-form-label text-left">Yêu
-                                                cầu kinh nghiệm</label>
+                                            <h4
+                                                class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-form-label text-left"><u>Yêu
+                                                    cầu kinh nghiệm</u></h4>
                                             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 kinh_nghiem"
                                                  id="kinh_nghiem">
                                                 @if($data['get_kinh_nghiem'] != null)
@@ -334,9 +349,9 @@
                                         @if($data['yeu_cau_ho_so'] != null && unserialize($data['yeu_cau_ho_so']) != null)
                                             @if(count(unserialize($data['yeu_cau_ho_so'])) != 0)
                                         <div class="form-group row">
-                                            <label
-                                                class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-form-label text-left">Hồ
-                                                sơ yêu cầu:</label>
+                                            <h4
+                                                class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-form-label text-left"><u>Hồ
+                                                    sơ yêu cầu</u></h4>
                                             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 kinh_nghiem"
                                                  id="ho_so_yeu_cau">
 

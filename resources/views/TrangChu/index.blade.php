@@ -355,14 +355,26 @@
                                     {{--                                    <span class="badge badge-danger noti-icon-badge position-absolute" style="right: 0px">{{$data['don_xin_viec']['total']}}</span>--}}
                                     {{----}}
                                     {{--                                </div>--}}
-                                    <a
-                                        class="btn btn-outline-info waves-effect position-relative call-nhan-tin-tuyen-dung">
-                                        <i class="text-dark fa fa-send">{{' Nhắn tin'}}</i>
+{{--                                    <a--}}
+{{--                                        class="btn btn-outline-info waves-effect position-relative call-nhan-tin-tuyen-dung">--}}
+{{--                                        <i class="text-dark fa fa-send">{{' Nhắn tin với NTD'}}</i>--}}
 
-                                    </a>
+{{--                                    </a>--}}
+
+
+
                                     <a
                                         class="btn btn-outline-warning waves-effect position-relative call-modal-nop-don">
                                         <i class="text-dark fa fa-send">{{' Nộp đơn'}}</i>
+
+                                    </a>
+                                    <a
+                                        class="btn btn-outline-info like-animation waves-effect position-relative call-nhan-tin-tuyen-dung">
+{{--                                        <a>--}}
+                                            <i class="fa fa-commenting-o"></i> Nhắn tin với NTD
+{{--                                        </a>--}}
+
+                                        {{--                                                    <span class="badge badge-danger noti-icon-badge position-absolute" style="right: 0px">{{$data['don_xin_viec']['total']}}</span>--}}
 
                                     </a>
                                     {{--                                    <a href="{{route('nopdon.nopDonBuocMot',array('nguoi_tim_viec'))}}"--}}

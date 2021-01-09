@@ -124,14 +124,17 @@
                     render: function (api, rowIdx, columns, meta) {
                         switch (parseInt(columns.status)) {
                             case 0:
-                                return '<span class="text-warning">Đã ẩn</span>';
+                                return '';
                             // break;
                             case 1:
                                 return '<span class="text-success">Đang tuyển dụng</span>';
                             // break;
                             case 3:
+                                return '';
+                            case 4:
                                 return '<span class="text-danger">Hết hạn</span>';
                             // break;
+
                         }
                     },
                     className: 'text-center'

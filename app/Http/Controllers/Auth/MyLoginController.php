@@ -184,7 +184,12 @@ class MyLoginController extends Controller
         if ($request->has('admin') == true){
             return redirect()->route('auth.form.login',['admin']);
         }else{
-            Session::put('url_previos',URL::previous());
+//            dd(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName());
+//            dd(\Illuminate\Support\Facades\Request::route(URL::previous())->getName());
+            if (app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() != 'nhantin.index'){
+                Session::put('url_previos',URL::previous());
+            }
+
             return redirect()->route('auth.form.login');
         }
 
