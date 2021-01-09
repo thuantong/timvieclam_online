@@ -356,6 +356,11 @@
                                     {{----}}
                                     {{--                                </div>--}}
                                     <a
+                                        class="btn btn-outline-info waves-effect position-relative call-nhan-tin-tuyen-dung">
+                                        <i class="text-dark fa fa-send">{{' Nhắn tin'}}</i>
+
+                                    </a>
+                                    <a
                                         class="btn btn-outline-warning waves-effect position-relative call-modal-nop-don">
                                         <i class="text-dark fa fa-send">{{' Nộp đơn'}}</i>
 
@@ -402,7 +407,7 @@
         }
 
         const getThongTinChiTietPost = (e) => {
-            // console.log('con cac ne', e);
+            console.log('con cac ne', e);
             // console.log('con cac dđne', e['don_xin_viec']['data'].length);
             // return;
             if (e != null) {
@@ -445,6 +450,13 @@
                     }
 
                 }
+                $('.call-nhan-tin-tuyen-dung').attr('id','call-nhan-tin-tuyen-dung');
+                let getBasicURL = '{{URL::asset('/')}}';
+                let idTaiKhoanDangNhap = null;
+                @if(Auth::user() != null)
+                idTaiKhoanDangNhap = '{{Auth::user()->id}}';
+                @endif
+                $('.call-nhan-tin-tuyen-dung').attr('href',getBasicURL+'nhan-tin-nguoi-dung?to='+e.get_nha_tuyen_dung.tai_khoan_id+'&from='+idTaiKhoanDangNhap);
 
                 $('.tieu-de-chi-tiet').data('id', e.id);
                 idBaiTuyenDung = $('.tieu-de-chi-tiet').data('id');
@@ -540,7 +552,8 @@
                 $('.kinh_nghiem').html(getProcessing());
                 $('.kieu_lam_viec').html(getProcessing());
                 $('.yc_bang_cap').html(getProcessing());
-
+                $('.call-nhan-tin-tuyen-dung').removeAttr('id');
+                $('.call-nhan-tin-tuyen-dung').removeAttr('href');
                 $('.gioi_tinh_tuyen').html(getProcessing());
                 $('.so_luong_tuyen').html(getProcessing());
                 $('.dia_diem').html(getProcessing());

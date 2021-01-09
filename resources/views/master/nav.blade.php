@@ -159,6 +159,13 @@
                         </a>
                     </li>
                 @endif
+
+                <li>
+                    <a href="{{route('nhantin.danhSach')}}" class="waves-effect">
+                        <i class="fa fa-credit-card"></i>
+                        <span>{{__('Tin nhắn')}}</span>
+                    </a>
+                </li>
                 @endif
             </ul>
 

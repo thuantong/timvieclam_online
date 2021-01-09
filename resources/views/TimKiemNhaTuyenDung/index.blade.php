@@ -76,7 +76,7 @@
                         <div class="gal-box">
                             <a href="{{route('nhatuyendung.chiTietNhaTuyenDung',['nha_tuyen_dung'=>$row['id']])}}">
                                 <img
-                                    src="@if(isset($row['get_cong_ty']['logo']) && $row['get_cong_ty']['logo'] != null){{URL::asset($row['get_cong_ty']['logo'])}}@else{{URL::asset('images/default-company-logo.jpg')}}@endif"
+                                    src="@if(isset($row['get_cong_ty']['logo']) && $row['get_cong_ty']['logo'] != null){{URL::asset(env('URL_ASSET_PUBLIC').$row['get_cong_ty']['logo'])}}@else{{URL::asset(env('URL_ASSET_PUBLIC').'images/default-company-logo.jpg')}}@endif"
                                     class="img-fluid">
                             </a>
                             <div class="gall-info">
@@ -85,7 +85,7 @@
                                     style="text-transform: uppercase">@if(isset($row['get_cong_ty']['name']) && $row['get_cong_ty']['name'] != null){{$row['get_cong_ty']['name']}}@endif</h4>
                                 <a>
                                     <img
-                                        src="@if(isset($row['get_tai_khoan']['avatar']) && $row['get_tai_khoan']['avatar'] != null){{URL::asset($row['get_tai_khoan']['avatar'])}}@else{{URL::asset('images/default-user-icon-8.jpg')}}@endif"
+                                        src="@if(isset($row['get_tai_khoan']['avatar']) && $row['get_tai_khoan']['avatar'] != null){{URL::asset(env('URL_ASSET_PUBLIC').$row['get_tai_khoan']['avatar'])}}@else{{URL::asset(env('URL_ASSET_PUBLIC').'images/default-user-icon-8.jpg')}}@endif"
                                         alt="user-img" class="rounded-circle d-none" height="24">
                                     <span
                                         class="text-muted ml-1 text-capitalize" style="font-size: 0px">@if(isset($row['get_tai_khoan']['ho_ten']) && $row['get_tai_khoan']['ho_ten'] != null){{$row['get_tai_khoan']['ho_ten']}}@endif</span>

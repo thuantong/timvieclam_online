@@ -11,9 +11,11 @@ class TinNhan extends Model
     public $timestamps = true;
 
     protected $fillable = [
-        'noi_dung','status'
+        'noi_dung','status','tai_khoan_id','to_tai_khoan_id'
     ];
 
-
+    public function getTaiKhoan(){
+        return $this->belongsTo(TaiKhoan::class,'tai_khoan_id');
+    }
     //
 }

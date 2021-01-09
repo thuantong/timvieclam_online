@@ -259,6 +259,15 @@ Route::namespace('NhaTuyenDung')->group(function (){
     });
 });
 
+Route::namespace('NhanTin')->group(function (){
+    Route::name('nhantin.')->group(function (){
+        Route::get('/nhan-tin-nguoi-dung/danh-sach','NhanTinController@danhSach')->name('danhSach');
+        Route::get('/nhan-tin-nguoi-dung','NhanTinController@index')->name('index');
+        Route::post('/nhan-tin-nguoi-dung/nhan-tin','NhanTinController@nhanTin')->name('nhanTin');
+
+    });
+});
+
 Route::get('/xem-chuc-nang-nha-tuyen-dung',function (){
    return view('review_nhatuyendung.index');
 });

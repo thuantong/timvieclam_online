@@ -196,13 +196,21 @@ a:active {
     text-decoration: underline !important;
 }
 
+/*.container-chat {*/
+/*    width: 300px;*/
+/*    height: 400px;*/
+/*    bottom: 1%;*/
+/*    position: fixed;*/
+/*    right: 10px;*/
+/*    z-index: 10*/
+/*}*/
 .container-chat {
-    width: 300px;
+    width: 50%;
     height: 400px;
-    bottom: 1%;
-    position: fixed;
-    right: 10px;
-    z-index: 10
+    /*bottom: 1%;*/
+    position: relative;
+    /*right: 10px;*/
+    z-index: 0
 }
 
 /*.did{*/

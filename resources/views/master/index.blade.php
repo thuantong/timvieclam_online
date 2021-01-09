@@ -572,7 +572,7 @@
                 @yield('content')
 
             <!-- end row -->
-                @include('Chat.index')
+{{--                @include('Chat.index')--}}
             </div> <!-- container -->
 
         </div> <!-- content -->

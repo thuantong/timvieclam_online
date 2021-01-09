@@ -111,7 +111,7 @@ class NguoiTimViecControler extends Controller
 //            }
             'getTaiKhoan',
             'getBaiViet' => function ($q) {
-                $q->select('id', 'nha_tuyen_dung_id');
+                $q->select('id', 'nha_tuyen_dung_id')->where('status',1);
             }
         ])->get()->toArray();
 //        if ($request->exists('tieu_de') && $request->get('tieu_de') != ""){
