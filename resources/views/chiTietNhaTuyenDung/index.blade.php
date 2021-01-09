@@ -317,7 +317,7 @@
                 <div class="row">
                     <div class="col-sm-6 col-md-6">
                         <div class="card-box">
-                            <i class="fa fa-info-circle text-muted float-right" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Tổng số người dùng"></i>
+                            <i class="fa fa-info-circle text-muted float-right" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Tổng số bài tuyển dụng đang tuyển"></i>
                             <h4 class="mt-0 font-16">Số bài đang tuyển dụng</h4>
 {{--                            @dd(\App\Models\TaiKhoan::query()->find(\Illuminate\Support\Facades\Auth::user()->id)->with(['getBaiTuyenDung'=>function($q){$q->where('status',1);}])->get());--}}
                             <h2 class="text-primary my-3 text-center"><span data-plugin="counterup">{{$data['cong_viec_dang_tuyen']}}</span></h2>
@@ -326,8 +326,8 @@
                     </div>
                     <div class="col-sm-6 col-md-6">
                         <div class="card-box">
-                            <i class="fa fa-info-circle text-muted float-right" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Tổng số người dùng"></i>
-                            <h4 class="mt-0 font-16">Số bài đã tạm ngưng</h4>
+                            <i class="fa fa-info-circle text-muted float-right" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Tổng số bài tuyển dụng đã tạm ngưng"></i>
+                            <h4 class="mt-0 font-16">Số bài tuyển dụng đã tạm ngưng</h4>
                             <h2 class="text-primary my-3 text-center"><span data-plugin="counterup">{{$data['cong_viec_da_ngung']}}</span></h2>
                             {{--                    <p class="text-muted mb-0">Total income: $22506 <span class="float-right"><i class="fa fa-caret-up text-success mr-1"></i>10.25%</span></p>--}}
                         </div>
