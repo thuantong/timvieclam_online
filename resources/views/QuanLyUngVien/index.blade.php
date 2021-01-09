@@ -1,30 +1,42 @@
 @extends('master.index')
 @section('content')
     <head>
-        <link href="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\libs\multiselect\multi-select.css')}}" rel="stylesheet" type="text/css">
-        <link href="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\libs\select2\select2.min.css')}}" rel="stylesheet" type="text/css">
-        <link href="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\libs\bootstrap-datepicker\bootstrap-datepicker.min.css')}}" rel="stylesheet"
+        <link href="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\libs\multiselect\multi-select.css')}}" rel="stylesheet"
               type="text/css">
+        <link href="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\libs\select2\select2.min.css')}}" rel="stylesheet"
+              type="text/css">
+        <link
+            href="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\libs\bootstrap-datepicker\bootstrap-datepicker.min.css')}}"
+            rel="stylesheet"
+            type="text/css">
         <!-- third party css -->
-        <link href="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\libs\datatables\dataTables.bootstrap4.css')}}" rel="stylesheet"
+        <link href="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\libs\datatables\dataTables.bootstrap4.css')}}"
+              rel="stylesheet"
               type="text/css">
-        <link href="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\libs\datatables\responsive.bootstrap4.css')}}" rel="stylesheet"
+        <link href="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\libs\datatables\responsive.bootstrap4.css')}}"
+              rel="stylesheet"
               type="text/css">
-        <link href="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\libs\datatables\buttons.bootstrap4.css')}}" rel="stylesheet" type="text/css">
-        <link href="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\libs\datatables\select.bootstrap4.css')}}" rel="stylesheet" type="text/css">
-        <link href="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\libs\sweetalert2\sweetalert2.min.css')}}" rel="stylesheet" type="text/css">
+        <link href="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\libs\datatables\buttons.bootstrap4.css')}}"
+              rel="stylesheet" type="text/css">
+        <link href="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\libs\datatables\select.bootstrap4.css')}}"
+              rel="stylesheet" type="text/css">
+        <link href="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\libs\sweetalert2\sweetalert2.min.css')}}"
+              rel="stylesheet" type="text/css">
         <!-- ION Slider -->
-        <link href="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\libs\ion-rangeslider\ion.rangeSlider.css')}}" rel="stylesheet" type="text/css">
+        <link href="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\libs\ion-rangeslider\ion.rangeSlider.css')}}"
+              rel="stylesheet" type="text/css">
     </head>
 
 
-    <div id="dat-lich-phong-van-modal" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false"
+    <div id="dat-lich-phong-van-modal" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static"
+         data-keyboard="false"
          aria-labelledby="full-width-modalLabel" aria-hidden="true" style="display: none;">
         <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="full-width-modalLabel">{{__('Gửi thông báo phỏng vấn cho ứng viên')}}</h4>
-{{--                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>--}}
+                    <h4 class="modal-title"
+                        id="full-width-modalLabel">{{__('Gửi thông báo phỏng vấn cho ứng viên')}}</h4>
+                    {{--                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>--}}
                 </div>
                 <div class="modal-body" style="min-height: 30vh">
                     <div class="form-group row">
@@ -46,28 +58,30 @@
                 </div>
 
                 <div class="modal-footer">
-{{--                    <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>--}}
-                    <button type="button" class="btn btn-primary waves-effect waves-light" id="save">Gửi thông báo</button>
+                    {{--                    <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>--}}
+                    <button type="button" class="btn btn-primary waves-effect waves-light" id="save">Gửi thông báo
+                    </button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
 
-    <div id="ghi-chu-phong-van-modal" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false"
+    <div id="ghi-chu-phong-van-modal" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static"
+         data-keyboard="false"
          aria-labelledby="full-width-modalLabel" aria-hidden="true" style="display: none;">
         <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="full-width-modalLabel">{{__('Ghi chú phỏng vấn')}}</h4>
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
                 <div class="modal-body" style="min-height: 30vh">
 
                 </div>
 
                 <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Đóng</button>
                     <button type="button" class="btn btn-primary waves-effect waves-light" id="save">Lưu lại</button>
                 </div>
             </div><!-- /.modal-content -->
@@ -87,7 +101,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Đóng</button>
-{{--                    <button type="button" class="btn btn-primary waves-effect waves-light">Save changes</button>--}}
+                    {{--                    <button type="button" class="btn btn-primary waves-effect waves-light">Save changes</button>--}}
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -109,9 +123,9 @@
     <div class="row center-element">
         <div class="col-sm-6 col-md-6">
             <div class="row">
-{{--                <label class="col-sm-4 col-md-4 text-right">Danh sách:</label>--}}
+                {{--                <label class="col-sm-4 col-md-4 text-right">Danh sách:</label>--}}
                 <select class="form-control col-sm-12 col-md-12" id="fillter-table-check">
-                    <option value=""disabled selected>Chọn Danh sách</option>
+                    <option value="" disabled selected>Chọn Danh sách</option>
                     <option value="1">Danh sách ứng viên đang chờ xác nhận</option>
                     <option value="2">Danh sách ứng viên đã xác nhận</option>
                     <option value="3">Tất cả</option>
@@ -129,7 +143,118 @@
                         <div class="table-responsive">
                             <table class="table datatable-check table-bordered table-hover mb-0"
                                    id="ung-vien-cho-xu-ly">
+
                                 <thead class="thead-light">
+                                <tr>
+                                    <th colspan="6" class="border-0">
+                                        <div class="row pb-2 bg-white">
+                                            <div class="col-sm-6 col-md-4">
+                                                <div class="row">
+                                                    <label class="col-sm-12 col-md-12">Công việc</label>
+                                                    <div class="col-sm-12 col-md-12">
+                                                        <select class="form-control" id="cong-viec-ung-tuyen-fillter">
+                                                            @if(count($data['bai_tuyen_dung']) > 0)
+                                                                <option value="">Tất cả</option>
+                                                                @foreach($data['bai_tuyen_dung'] as $row)
+                                                                    <option
+                                                                        value="{{$row['tieu_de']}}">{{$row['tieu_de']}}</option>
+                                                                @endforeach
+                                                            @else
+                                                                <option selected>Không có bài đang tuyển</option>
+                                                            @endif
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-4">
+                                                <div class="row">
+                                                    <label class="col-sm-12 col-md-12">Từ <span
+                                                            id="ngay-bat-dau-fillter-label">{{$data['ngay_xa_nhat']}}</span>
+                                                        đến hôm nay</label>
+                                                    <div class="col-sm-12 col-md-12">
+                                                        {{--                                                        <select class="form-control">--}}
+                                                        @if(count($data['bai_tuyen_dung']) > 0)
+                                                            <input class="form-control" id="from-date-ung-tuyen-fillter"
+                                                                   value="{{$data['ngay_xa_nhat']}}">
+                                                        @else
+                                                            <input class="form-control" readonly disabled
+                                                                   value="Không có bài đang tuyển">
+                                                        @endif
+
+                                                        {{--                                                        </select>--}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-4 text-left">
+{{--                                                <div class="row">--}}
+{{--                                                    <div class="col-sm-12 col-md-12 center-element">--}}
+                                                        <button class="btn btn-primary waves-effect waves-light"
+                                                                id="tim-kiem-fillter">Tìm kiếm
+                                                        </button>
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+                                            </div>
+                                            {{--                                            <div class="col-sm-6 col-md-4">--}}
+                                            {{--                                                <div class="row">--}}
+                                            {{--                                                    <label class="col-sm-12 col-md-12">Trạng thái</label>--}}
+                                            {{--                                                    <div class="col-sm-12 col-md-12">--}}
+                                            {{--                                                        <select class="form-control">--}}
+                                            {{--                                                            @if(count($data['bai_tuyen_dung']) > 0)--}}
+                                            {{--                                                                <option value="">Tất cả</option>--}}
+                                            {{--                                                                    <option value="{{$row['id']}}">{{$row['tieu_de']}}</option>--}}
+
+                                            {{--                                                            @else--}}
+                                            {{--                                                                <option selected>Không có bài đang tuyển</option>--}}
+                                            {{--                                                            @endif--}}
+
+                                            {{--                                                        </select>--}}
+                                            {{--                                                    </div>--}}
+                                            {{--                                                </div>--}}
+                                            {{--                                            </div>--}}
+
+
+                                        </div>
+
+                                    </th>
+                                    {{--                                    <th class="border-0">--}}
+                                    {{--                                        <div class="row">--}}
+                                    {{--                                            <div class="col-sm-12 col-md-12">--}}
+                                    {{--                                                <select class="form-control">--}}
+                                    {{--                                                    <option value="">Tất cả</option>--}}
+                                    {{--                                                    <option>dd</option>--}}
+                                    {{--                                                    <option>ff</option>--}}
+                                    {{--                                                </select>--}}
+                                    {{--                                            </div>--}}
+                                    {{--                                        </div>--}}
+                                    {{--                                        <input class="form-control">--}}
+                                    {{--                                    </th>--}}
+                                    {{--                                    <th>--</th>--}}
+                                    {{--                                    <th class="border-0">--}}
+                                    {{--                                        <div class="row">--}}
+                                    {{--                                            <div class="col-sm-12 col-md-12">--}}
+                                    {{--                                                <select class="form-control">--}}
+                                    {{--                                                    <option value="">Tất cả</option>--}}
+                                    {{--                                                    <option>dd</option>--}}
+                                    {{--                                                    <option>ff</option>--}}
+                                    {{--                                                </select>--}}
+                                    {{--                                            </div>--}}
+                                    {{--                                        </div>--}}
+
+                                    {{--                                    </th>--}}
+                                    {{--                                    <th class="border-0">--}}
+                                    {{--                                        <div class="row">--}}
+                                    {{--                                            <div class="col-sm-12 col-md-12">--}}
+                                    {{--                                                <select class="form-control">--}}
+                                    {{--                                                    <option value="">Tất cả</option>--}}
+                                    {{--                                                    <option>dd</option>--}}
+                                    {{--                                                    <option>ff</option>--}}
+                                    {{--                                                </select>--}}
+                                    {{--                                            </div>--}}
+                                    {{--                                        </div>--}}
+                                    {{--                                    </th>--}}
+                                    {{--                                    <th class="border-0"></th>--}}
+                                </tr>
                                 <tr>
                                     <th>#</th>
                                     <th>Avatar</th>
@@ -169,8 +294,10 @@
 @push('scripts')
     <script src="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\libs\datatables\jquery.dataTables.min.js')}}"></script>
     <script src="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\libs\datatables\dataTables.bootstrap4.js')}}"></script>
-    <script src="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\libs\datatables\dataTables.responsive.min.js')}}"></script>
-    <script src="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\libs\datatables\responsive.bootstrap4.min.js')}}"></script>
+    <script
+        src="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\libs\datatables\dataTables.responsive.min.js')}}"></script>
+    <script
+        src="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\libs\datatables\responsive.bootstrap4.min.js')}}"></script>
     <script src="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\libs\datatables\dataTables.buttons.min.js')}}"></script>
     <script src="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\libs\datatables\buttons.bootstrap4.min.js')}}"></script>
     <script src="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\libs\datatables\buttons.html5.min.js')}}"></script>
@@ -179,10 +306,12 @@
     <script src="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\libs\datatables\dataTables.keyTable.min.js')}}"></script>
     <script src="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\libs\datatables\dataTables.select.min.js')}}"></script>
     <script src="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\libs\multiselect\jquery.multi-select.js')}}"></script>
-    <script src="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\libs\jquery-quicksearch\jquery.quicksearch.min.js')}}"></script>
+    <script
+        src="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\libs\jquery-quicksearch\jquery.quicksearch.min.js')}}"></script>
     <script src="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\libs\select2\select2.min.js')}}"></script>
 
-    <script src="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\libs\bootstrap-datepicker\bootstrap-datepicker.min.js')}}"></script>
+    <script
+        src="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\libs\bootstrap-datepicker\bootstrap-datepicker.min.js')}}"></script>
     <!-- Ion Range Slider-->
     <script src="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\libs\ion-rangeslider\ion.rangeSlider.min.js')}}"></script>
 
@@ -190,7 +319,8 @@
     <script src="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\js\pages\range-sliders.init.js')}}"></script>
     <script type="text/javascript"
             src="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\libs\date-time-picker\moment-with-locales.min.js')}}"></script>
-    <script type="text/javascript" src="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\libs\sweetalert2\sweetalert2.min.js')}}"></script>
+    <script type="text/javascript"
+            src="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\libs\sweetalert2\sweetalert2.min.js')}}"></script>
     <link rel="stylesheet" type="text/css"
           href="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\libs\date-time-picker\bootstrap-datetimepicker.css')}}">
     <script type="text/javascript"
@@ -249,12 +379,12 @@
 
             $('#ung-vien-cho-xu-ly tbody').on('click', '.xem-ung-vien', function () {
                 let __this = $(this);
-                xemChiTietUngVien(__this,table);
+                xemChiTietUngVien(__this, table);
             });
 
             $('#ung-vien-phong-van tbody').on('click', '.xem-ung-vien', function () {
                 let __this = $(this);
-                xemChiTietUngVien(__this,table2);
+                xemChiTietUngVien(__this, table2);
             });
 
             $('#ung-vien-cho-xu-ly tbody').on('click', '.chon-ung-vien', function () {
@@ -283,7 +413,7 @@
                             getHtmlResponse(r);
                             if (r.status == 200) {
                                 $('#dat-lich-phong-van-modal').modal('show');
-                                $('#dat-lich-phong-van-modal').data('id',idRecord);
+                                $('#dat-lich-phong-van-modal').data('id', idRecord);
                                 // db_ajax_reload_page(table);
                                 // db_ajax_reload_all(table2);
                             }
@@ -299,7 +429,7 @@
                 let data = getDataRow_dt(table, table_row);
                 let idRecord = data.id;
                 $('#dat-lich-phong-van-modal').modal('show');
-                $('#dat-lich-phong-van-modal').data('id',idRecord);
+                $('#dat-lich-phong-van-modal').data('id', idRecord);
             });
 
             $('#ung-vien-cho-xu-ly tbody').on('click', '.tu-choi-ung-vien', function () {
@@ -425,13 +555,13 @@
 
                 $('#ghi-chu-phong-van-modal').modal('show');
                 let ajax = {
-                    url:"/nha-tuyen-dung/quan-ly-ung-vien/get-ghi-chu",
-                    method:"get",
-                    data:{
-                        id : idRecord
+                    url: "/nha-tuyen-dung/quan-ly-ung-vien/get-ghi-chu",
+                    method: "get",
+                    data: {
+                        id: idRecord
                     },
                 }
-                sendAjaxNoFunc(ajax.method,ajax.url,ajax.data,'').done(e=>{
+                sendAjaxNoFunc(ajax.method, ajax.url, ajax.data, '').done(e => {
                     $('#ghi-chu-phong-van-modal').find('.modal-body').html(e);
                     $(document).on('change', 'select', function () {
                         if ($(this).hasClass('is-invalid')) {
@@ -455,28 +585,27 @@
                 });
 
             });
-            $('#ghi-chu-phong-van-modal .modal-footer #save').on('click',function () {
+            $('#ghi-chu-phong-van-modal .modal-footer #save').on('click', function () {
                 let __this = $(this);
                 let __parent = __this.parents('.modal');
                 let __body = __parent.find('.modal-body');
                 let error = 0;
                 // error += notNullMessage(__body.find('not-null'));
                 let ajax = {
-                    method : 'post',
-                    url : '/nha-tuyen-dung/quan-ly-ung-vien/luu-ghi-chu',
-                    data : {
-                        id : __body.find('input#id-action').val(),
-                        ghi_chu : __body.find('textarea#ghi-chu-text').val(),
+                    method: 'post',
+                    url: '/nha-tuyen-dung/quan-ly-ung-vien/luu-ghi-chu',
+                    data: {
+                        id: __body.find('input#id-action').val(),
+                        ghi_chu: __body.find('textarea#ghi-chu-text').val(),
                     },
                 }
-                sendAjaxNoFunc(ajax.method,ajax.url,ajax.data,'').done(e=>{
+                sendAjaxNoFunc(ajax.method, ajax.url, ajax.data, '').done(e => {
                     getHtmlResponse(e);
-                    if (e.status == 200){
+                    if (e.status == 200) {
                         __parent.modal('hide');
                     }
                 })
             });
-
 
 
             $('.them-moi-danh-sach').text('Lọc');
@@ -484,41 +613,41 @@
             locDanhSach($('#ung-vien-cho-xu-ly_wrapper'));
             locDanhSachPhongVan($('#ung-vien-phong-van_wrapper'))
 
-            $('#ung-vien-cho-xu-ly_wrapper .dropdown-menu .dropdown-item').on('click',function () {
+            $('#ung-vien-cho-xu-ly_wrapper .dropdown-menu .dropdown-item').on('click', function () {
                 let id = $(this).data('value');
                 let __this = $(this);
                 $('.dropdown-item').removeClass('active');
                 __this.addClass('active');
                 // db_ajax_reload_all(table);
-                table.ajax.url('/nha-tuyen-dung/lay-danh-sach-ung-vien?type='+id).load();
+                table.ajax.url('/nha-tuyen-dung/lay-danh-sach-ung-vien?type=' + id).load();
                 // table.draw();
                 // table = getDanhSachUngVien(id);
             });
-            $('#ung-vien-phong-van_wrapper .dropdown-menu .dropdown-item').on('click',function () {
+            $('#ung-vien-phong-van_wrapper .dropdown-menu .dropdown-item').on('click', function () {
                 let id = $(this).data('value');
                 let __this = $(this);
                 $('.dropdown-item').removeClass('active');
                 __this.addClass('active');
                 // db_ajax_reload_all(table);
-                table2.ajax.url('/nha-tuyen-dung/lay-danh-sach-phong-van?type='+id).load();
+                table2.ajax.url('/nha-tuyen-dung/lay-danh-sach-phong-van?type=' + id).load();
                 // table.draw();
                 // table = getDanhSachUngVien(id);
             })
 
-            $('#dat-lich-phong-van-modal').find('.modal-footer #save').on('click',function () {
+            $('#dat-lich-phong-van-modal').find('.modal-footer #save').on('click', function () {
                 let __this = $(this);
                 let __parent = __this.parents('.modal');
                 let idRecord = __parent.data('id');
                 let ajax = {
-                    method:'post',
-                    url:"/nha-tuyen-dung/quan-ly-ung-vien/dat-lich-phong-van",
-                    data:{
-                        id : idRecord,
-                        ngay:__parent.find('#ngay-phong-van').val(),
-                        gio :__parent.find('#gio-phong-van').val()
+                    method: 'post',
+                    url: "/nha-tuyen-dung/quan-ly-ung-vien/dat-lich-phong-van",
+                    data: {
+                        id: idRecord,
+                        ngay: __parent.find('#ngay-phong-van').val(),
+                        gio: __parent.find('#gio-phong-van').val()
                     }
                 }
-                sendAjaxNoFunc(ajax.method, ajax.url,ajax.data,__this.attr('id')).done(e=>{
+                sendAjaxNoFunc(ajax.method, ajax.url, ajax.data, __this.attr('id')).done(e => {
                     console.log(e);
                     getHtmlResponse(e);
                     if (e.status == 200) {
@@ -530,9 +659,61 @@
                 });
 
             });
+
+            // $('#from-date-ung-tuyen-fillter').datepicker({
+            //     format: 'dd/mm/yyyy',
+            //     autoclose: true,
+            //     language: 'vi',
+            //     onChange: function(dateText, inst) {
+            //         var date = $(this).val();
+            //         var time = $('#time').val();
+            //         // alert('on select triggered');
+            //         console.log(dateText,inst)
+            //         $("#start").val(date + time.toString(' HH:mm').toString());
+            //
+            //     }
+            // });
+            lichNgay($('#from-date-ung-tuyen-fillter')).on('changeDate',function (e) {
+                // let value = e.format(0,"dd/mm/yyyy");
+// console.log(e.date.valueOf())
+                // console.log(new Date(e.date.valueOf()))
+                let value = moment(new Date(e.date.valueOf()));
+                let todayDate =  moment(new Date());
+                // console.log(new Date());
+                // console.log(value);
+                // console.log(todayDate);
+                // console.log(moment(value.format('YYYY-MM-DD')).isSameOrBefore(todayDate.format('YYYY-MM-DD')));
+                if (moment("'"+value.format('YYYY-MM-DD')+"'").isBefore("'"+todayDate.format('YYYY-MM-DD')+"'")){
+                    $('#ngay-bat-dau-fillter-label').text(value.format('DD/MM/YYYY'));
+                    // console.log('fail',todayDate.format('DD/MM/YYYY'));//lớn hơn// fail
+                }else{
+                    console.log(todayDate.format('DD/MM/YYYY'))
+                    // $('#from-date-ung-tuyen-fillter').datepicker("setDate" , todayDate.format('YYYY-MM-DD'))
+                    // $('#from-date-ung-tuyen-fillter').val(todayDate.format('DD/MM/YYYY')).trigger('change');
+                    $(e.target).val(todayDate.format('DD/MM/YYYY'));
+                    $('#ngay-bat-dau-fillter-label').text(todayDate.format('DD/MM/YYYY'));
+
+                    console.log('pas');//nhỏ hơn // pass
+                }
+                // console.log(moment('16/11/1999').format());
+
+            });
+            // $('#from-date-ung-tuyen-fillter').on('onSelect',function () {
+            //     alert()
+            // })
+            select2Default($('#cong-viec-ung-tuyen-fillter'))
+            //fillter tiêu đề
+            $('#tim-kiem-fillter').on('click', function () {
+                let value = {
+                    from_date: $('#from-date-ung-tuyen-fillter').val(),
+                    tieu_de: $('#cong-viec-ung-tuyen-fillter').val(),
+                }
+                // console.log(value)
+                table.ajax.url('/nha-tuyen-dung/lay-danh-sach-ung-vien?tieu_de='+value.tieu_de+'&from_date='+value.from_date).load();
+            });
         });
 
-        const xemChiTietUngVien = (element,dt_table)=>{
+        const xemChiTietUngVien = (element, dt_table) => {
             let table_row = element.parents('tr');
             let data = getDataRow_dt(dt_table, table_row);
             // console.log(data);
@@ -562,11 +743,11 @@
 
             let ajax = null;
             let newType = $('#ung-vien-cho-xu-ly_wrapper #loc-danh-sach').find('option:checked').val();
-                ajax = {
-                    method: 'get',
-                    url: '/nha-tuyen-dung/lay-danh-sach-ung-vien',
+            ajax = {
+                method: 'get',
+                url: '/nha-tuyen-dung/lay-danh-sach-ung-vien',
 
-                }
+            }
 
             let column = [
                 {
@@ -616,20 +797,20 @@
                     render: function (api, rowIdx, columns, meta) {
                         let displayNone = null;
                         let displayNoneDatLich = 'd-none';
-                        if (columns.status != 0){
+                        if (columns.status != 0) {
                             displayNone = 'd-none';
                         }
-                        if (columns.status == 1 && columns.thoi_gian_phong_van == null  && columns.ngay_phong_van == null){
+                        if (columns.status == 1 && columns.thoi_gian_phong_van == null && columns.ngay_phong_van == null) {
                             displayNoneDatLich = null;
                         }
                         return '<div class="" style="display: block">' +
                             '<button class="btn btn-warning btn-sm waves-effect xem-ung-vien">Xem chi tiết' +
                             '</button>' +
-                            '<button class="btn btn-primary btn-sm waves-effect chon-ung-vien text-center '+displayNone+'"><span>Chọn</span>' +
+                            '<button class="btn btn-primary btn-sm waves-effect chon-ung-vien text-center ' + displayNone + '"><span>Chọn</span>' +
                             '</button>' +
-                            '<button class="btn btn-light btn-sm waves-effect tu-choi-ung-vien '+displayNone+'">Từ chối' +
+                            '<button class="btn btn-light btn-sm waves-effect tu-choi-ung-vien ' + displayNone + '">Từ chối' +
                             '</button>' +
-                            '<button class="btn btn-light btn-sm waves-effect dat-lich-phong-van-ung-vien '+displayNoneDatLich+'">Đặt lịch phỏng vấn' +
+                            '<button class="btn btn-light btn-sm waves-effect dat-lich-phong-van-ung-vien ' + displayNoneDatLich + '">Đặt lịch phỏng vấn' +
                             '</button>' +
                             '</div>'
                     },
@@ -638,17 +819,17 @@
             ];
             return datatableAjax($('#ung-vien-cho-xu-ly'), ajax, column);
         }
-        const locDanhSach = (e)=>{
-            let parentNUT =  e.find('.them-moi-danh-sach').parent();
-            e.find('.them-moi-danh-sach').addClass('dropdown-toggle waves-effect waves-light').data('toggle','dropdown');
+        const locDanhSach = (e) => {
+            let parentNUT = e.find('.them-moi-danh-sach').parent();
+            e.find('.them-moi-danh-sach').addClass('dropdown-toggle waves-effect waves-light').data('toggle', 'dropdown');
             parentNUT.html(ungVienChoXuLy());
         }
-        const locDanhSachPhongVan = (e)=>{
-            let parentNUT =  e.find('.them-moi-danh-sach').parent();
-            e.find('.them-moi-danh-sach').addClass('dropdown-toggle waves-effect waves-light').data('toggle','dropdown');
+        const locDanhSachPhongVan = (e) => {
+            let parentNUT = e.find('.them-moi-danh-sach').parent();
+            e.find('.them-moi-danh-sach').addClass('dropdown-toggle waves-effect waves-light').data('toggle', 'dropdown');
             parentNUT.html(ungVienPhongVan());
         }
-        const ungVienChoXuLy = ()=>{
+        const ungVienChoXuLy = () => {
             // return '<select id="loc-danh-sach"><option value="0">Chờ xử lý</option><option value="-1">Tất cả</option></select>'
             return '<div class="btn btn-primary dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false">Lọc danh sách <i class="fa fa-th"></i></div>' +
                 '<div class="dropdown-menu">\n' +
@@ -656,7 +837,7 @@
                 '                                            <a class="dropdown-item" data-value="-1">Tất cả</a>\n' +
                 '                                        </div>'
         }
-        const ungVienPhongVan= ()=>{
+        const ungVienPhongVan = () => {
             // return '<select id="loc-danh-sach"><option value="0">Chờ xử lý</option><option value="-1">Tất cả</option></select>'
             return '<div class="btn btn-primary dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false">Lọc danh sách <i class="fa fa-th"></i></div>' +
                 '<div class="dropdown-menu">\n' +
@@ -719,17 +900,17 @@
                 {
                     render: function (api, rowIdx, columns, meta) {
                         let displayNone = 'd-none';
-                        if (columns.status == 2){
+                        if (columns.status == 2) {
                             displayNone = '';
                         }
                         return '<div class="" style="display: block">' +
                             '<button class="btn btn-warning btn-sm waves-effect xem-ung-vien">Xem chi tiết' +
                             '</button>' +
-                            '<button class="btn btn-primary btn-sm waves-effect chon-ung-vien text-center '+displayNone+'">Chấm Đậu' +
+                            '<button class="btn btn-primary btn-sm waves-effect chon-ung-vien text-center ' + displayNone + '">Chấm Đậu' +
                             '</button>' +
-                            '<button class="btn btn-light btn-sm waves-effect tu-choi-ung-vien '+displayNone+'">Chấm Rớt' +
+                            '<button class="btn btn-light btn-sm waves-effect tu-choi-ung-vien ' + displayNone + '">Chấm Rớt' +
                             '</button>' +
-                            '<button class="btn btn-info btn-sm waves-effect ghi-chu-ung-vien '+displayNone+'">Ghi Chú' +
+                            '<button class="btn btn-info btn-sm waves-effect ghi-chu-ung-vien ' + displayNone + '">Ghi Chú' +
                             '</button>' +
                             '</div>'
                     },

@@ -24,8 +24,31 @@ class QuanLyUngVienController extends Controller
 
     public function index()
     {
-//        dd(date('H:i'));
-        return view('QuanLyUngVien.index');
+        $nhaTuyenDungId = TaiKhoan::query()->find(Auth::user()->id)->getNhaTuyenDung->id;
+//        dd(Carbon::createFromFormat('d/m/Y','15/11/1999')->format('Y-m-d H:i:s'));
+//        dd(Carbon::now()->toDateTimeString());
+//        dd($nhaTuyenDungId);
+
+        $query = BaiTuyenDung::query()->where('nha_tuyen_dung_id', $nhaTuyenDungId)->where('status', 1);
+        $donXinViec = DonXinViec::query()->with([
+            'getBaiTuyenDung' => function ($q2) use ($nhaTuyenDungId) {
+                $q2->select('id', 'tieu_de', 'nha_tuyen_dung_id')->where('bai_tuyen_dung.nha_tuyen_dung_id', $nhaTuyenDungId);
+            },
+            'getNguoiTimViec' => function ($q2) {
+                $q2->select('id', 'avatar', 'tai_khoan_id')->with([
+                    'getTaiKhoan' => function ($q3) {
+                        $q3->select('id', 'ho_ten', 'email', 'phone');
+                    }
+                ]);
+            }
+        ])->orderBy('created_at', 'desc')->get()->toArray();
+        $ngayXaNhat = Carbon::parse(collect($donXinViec)->whereNotNull('get_bai_tuyen_dung')->values()->last()['created_at'])->format('d/m/Y');
+//        dd($query->get()->toArray());
+//        dd($ngayXaNhat);
+        $data['bai_tuyen_dung'] = $query->select('id','tieu_de','nha_tuyen_dung_id','status')->get()->toArray();
+//        dd($data['bai_tuyen_dung']);
+        $data['ngay_xa_nhat'] = $ngayXaNhat;
+        return view('QuanLyUngVien.index', compact('data'));
     }
 
     public function layDanhSachUngVien(Request $request)
@@ -33,8 +56,8 @@ class QuanLyUngVienController extends Controller
         $nhaTuyenDungId = TaiKhoan::query()->find(Auth::user()->id)->getNhaTuyenDung->id;
         $chuaChon = 0;
         $query = DonXinViec::query()->with([
-            'getBaiTuyenDung' => function ($q2) use ($nhaTuyenDungId) {
-                $q2->select('id', 'tieu_de', 'nha_tuyen_dung_id')->where('bai_tuyen_dung.nha_tuyen_dung_id', $nhaTuyenDungId);;
+            'getBaiTuyenDung' => function ($q2) use ($nhaTuyenDungId,$request) {
+                $q2->select('id', 'tieu_de', 'nha_tuyen_dung_id', 'status')->where('bai_tuyen_dung.nha_tuyen_dung_id', $nhaTuyenDungId)->where('tieu_de','like','%'.$request->get('tieu_de').'%')->where('status', 1);
             },
             'getNguoiTimViec' => function ($q2) {
                 $q2->select('id', 'avatar', 'tai_khoan_id')->with([
@@ -50,10 +73,14 @@ class QuanLyUngVienController extends Controller
         } else if ($request->has('type') && $request->get('type') > -1) {
             $query->where('status', $request->get('type'));
         }
+        if ($request->has('from_date')){
+            $query->whereDate('created_at','>=',Carbon::createFromFormat('d/m/Y',$request->get('from_date'))->format('Y-m-d'));
+        }
 //            ->where('status', $chuaChon);
 
         $dataQuery = $query->get()->toArray();
-        $data['data'] = collect($dataQuery)->whereNotNull('get_bai_tuyen_dung')->values()->toArray();
+//        dd($dataQuery);
+        $data['data'] = collect($dataQuery)->whereNotNull('get_bai_tuyen_dung')->where('get_bai_tuyen_dung.status')->values()->toArray();
 //      dd($data);
 //        dd($query->get()->toArray());
         return $data;
@@ -139,6 +166,7 @@ class QuanLyUngVienController extends Controller
             return $this->getResponse($title, 400, 'Chấm trúng tuyển ứng viên thất bại!');
         }
     }
+
     //châm rớt
     public function chamRotPhongVan(Request $request)
     {
@@ -217,7 +245,7 @@ class QuanLyUngVienController extends Controller
                 ])->select('id', 'tai_khoan_id');
             },
             'getBaiTuyenDung' => function ($q) {
-                $q->select('id', 'tieu_de','ten_chuc_vu');
+                $q->select('id', 'tieu_de', 'ten_chuc_vu');
             }
         ]);
         $data = $donXinViec->where('id', $idRecord)->get()->first()->toArray();
@@ -225,8 +253,10 @@ class QuanLyUngVienController extends Controller
 //        dd($donXinViec->where('id', $idRecord)->get()->first()->toArray());
         return view('QuanLyUngVien.ghi_chu', compact('data'));
     }
+
     //lưu ghi chú
-    public function luuGhiChu(Request $request){
+    public function luuGhiChu(Request $request)
+    {
         $title = "Thêm ghi chú phỏng vấn";
         try {
             $idRecord = $request->id;
@@ -234,9 +264,9 @@ class QuanLyUngVienController extends Controller
             $donXinViec = DonXinViec::query()->find($idRecord);
             $donXinViec->ghi_chu = $ghiChu;
             $donXinViec->save();
-            return $this->getResponse($title,200,'Thêm ghi chú phỏng vấn thành công!');
-        }catch (\Exception $exception){
-            return $this->getResponse($title,400,'Thêm ghi chú phỏng vấn thất bại');
+            return $this->getResponse($title, 200, 'Thêm ghi chú phỏng vấn thành công!');
+        } catch (\Exception $exception) {
+            return $this->getResponse($title, 400, 'Thêm ghi chú phỏng vấn thất bại');
         }
     }
 }

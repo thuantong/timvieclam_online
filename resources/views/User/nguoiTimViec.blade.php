@@ -394,13 +394,16 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 d-flex">
+                                                <div class="col-sm-12 col-md-6">
 {{--                                                    @dd()--}}
                                                     <input type="text"
                                                            class="form-control text-center font-weight-bold text-primary"
                                                            id="muc_luong_from"
                                                            value="@if($data['nguoi_tim_viec']['muc_luong'] != null && strlen($data['nguoi_tim_viec']['muc_luong']) != 1){{trim(substr($data['nguoi_tim_viec']['muc_luong'],0,strpos($data['nguoi_tim_viec']['muc_luong'],'-')))}}@else{{0}}@endif"
                                                            placeholder="Nhập mức lương">
+
+                                                </div>
+                                                <div class="col-sm-12 col-md-6">
                                                     <input type="text"
                                                            class="form-control text-center font-weight-bold text-primary"
                                                            id="muc_luong_to"

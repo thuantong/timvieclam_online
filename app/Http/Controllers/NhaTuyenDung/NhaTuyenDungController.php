@@ -59,7 +59,7 @@ class NhaTuyenDungController extends Controller
     public function chiTiet(Request $request){
         $idNguoiTimViec = $request->get('nguoi_tim_viec');
 
-        $data['nguoi_tim_viec'] = NguoiTimViec::query()->find($idNguoiTimViec)->with([
+        $data['nguoi_tim_viec'] = NguoiTimViec::query()->with([
             'getTaiKhoan' => function ($q1) {
                 $q1->select('id', 'ho_ten', 'email', 'phone');
             },
@@ -72,7 +72,7 @@ class NhaTuyenDungController extends Controller
             'getKieuLamViec' => function ($q1) {
                 $q1->select('id', 'name');
             }
-        ])->first()->toArray();
+        ])->find($idNguoiTimViec)->toArray();
 //        dd($data);
         $data['nguoi_tim_viec']['ky_nang'] = unserialize($data['nguoi_tim_viec']['ky_nang']);
         $data['nguoi_tim_viec']['exp_lam_viec'] = unserialize($data['nguoi_tim_viec']['exp_lam_viec']);
