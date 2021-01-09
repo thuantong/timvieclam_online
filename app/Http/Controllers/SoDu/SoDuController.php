@@ -57,10 +57,17 @@ class SoDuController extends Controller
 
                     break;
                 case 2:
-                    if ($this->taiKhoan->getNhaTuyenDung->getSoDu == null) {
-                        $soDuNew = $this->taiKhoan->getNhaTuyenDung->getSoDu()->save($soDu);
-                        Session::put('so_du', $soDuNew['tong_tien']);
-                    }
+//                    dd($this->taiKhoan->getNhaTuyenDung['id']);
+                    $newSoDu = new SoDu();
+                    $newSoDu->tong_tien = 200;
+                    $newSoDu->ten_tai_khoan = $soDu->ten_tai_khoan;
+                    $newSoDu->nha_tuyen_dung_id = $this->taiKhoan->getNhaTuyenDung['id'];
+                    $newSoDu->save();
+//                    if ($this->taiKhoan->getNhaTuyenDung->getSoDu == null) {
+////                        $soDuNew = $this->taiKhoan->getNhaTuyenDung->getSoDu()->save($soDu);
+//                        Session::put('so_du', $soDuNew['tong_tien']);
+                        Session::put('so_du', $newSoDu['tong_tien']);
+//                    }
                     break;
             }
 
