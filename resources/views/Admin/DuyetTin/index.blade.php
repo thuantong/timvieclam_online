@@ -323,7 +323,8 @@
                 // $('#review-modal').find('#nganh_nghe').text(e.get_kieu_lam_viec.name);
                 $('#review-modal').find('#yeu_cau_cong_viec').html(e.yeu_cau_cong_viec);
                 $('#review-modal').find('#quyen_loi_cong_viec').html(e.quyen_loi);
-                $('#review-modal').find('.iteam-click img').attr('src', '/' + e.get_cong_ty.logo);
+                let getURLasset = '{{URL::asset(env('URL_ASSET_PUBLIC'))}}'
+                $('#review-modal').find('.iteam-click img').attr('src', getURLasset + e.get_cong_ty.logo);
                 // $('#review-modal').find('.iteam-click img').attr('src','/'+e.get_cong_ty.logo);
                 $('#review-modal').find('.cong_ty,.iteam-click span:eq(1)').text(e.get_cong_ty.name);
                 $('#review-modal').find('#name_nguoi_dang').text(e.get_nha_tuyen_dung.ho_ten);

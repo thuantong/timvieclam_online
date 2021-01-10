@@ -32,7 +32,7 @@ class NguoiTimViecControler extends Controller
     {
         $idNguoiTimViec = $request->get('id');
 
-        $data['nguoi_tim_viec'] = NguoiTimViec::query()->find($idNguoiTimViec)->with([
+        $data['nguoi_tim_viec'] = NguoiTimViec::query()->with([
             'getTaiKhoan' => function ($q1) {
                 $q1->select('id', 'ho_ten', 'email', 'phone');
             },
@@ -45,10 +45,18 @@ class NguoiTimViecControler extends Controller
             'getKieuLamViec' => function ($q1) {
                 $q1->select('id', 'name');
             }
-        ])->first()->toArray();
+        ])->where('id',$idNguoiTimViec)->first()->toArray();
 //        dd($data);
         $data['nguoi_tim_viec']['ky_nang'] = unserialize($data['nguoi_tim_viec']['ky_nang']);
-        $data['nguoi_tim_viec']['exp_lam_viec'] = unserialize($data['nguoi_tim_viec']['exp_lam_viec']);
+
+        if ($request->has('kieu_xem')){
+            $dataExp = DonXinViec::query()->find($request->get('kieu_xem'))->toArray();
+//            dd($dataExp);
+            $data['nguoi_tim_viec']['exp_lam_viec'] = json_decode($dataExp['kinh_nghiem_lam_viec'],true);
+            $data['nguoi_tim_viec']['file_path'] = json_decode($dataExp['file'],true);
+        }else{
+            $data['nguoi_tim_viec']['exp_lam_viec'] = unserialize($data['nguoi_tim_viec']['exp_lam_viec']);
+        }
         $data['nguoi_tim_viec']['projects'] = unserialize($data['nguoi_tim_viec']['projects']);
 //        dd($data);
 //        $data['dia_diem'] = DiaDiem::all()->toArray();

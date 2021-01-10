@@ -718,12 +718,14 @@
             let data = getDataRow_dt(dt_table, table_row);
             // console.log(data);
             let idNguoiTimViec = data.get_nguoi_tim_viec.id;
-            // console.log(data)
+            // console.log(data);
+            // return;
             let ajax = {
                 method: 'get',
                 url: '/nguoi-tim-viet/chi-tiet',
                 data: {
-                    id: idNguoiTimViec
+                    id: idNguoiTimViec,
+                    kieu_xem: data.id//xem chi tiết đơn xin việc : id đơn xin việc
                 }
             }
             $('#chi-tiet-ung-cu-vien-modal').modal('show');

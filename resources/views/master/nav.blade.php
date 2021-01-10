@@ -162,7 +162,7 @@
 
                 <li>
                     <a href="{{route('nhantin.danhSach')}}" class="waves-effect">
-                        <i class="fa fa-credit-card"></i>
+                        <i class="fa fa-mail-forward"></i>
                         <span>{{__('Tin nhắn')}}</span>
                     </a>
                 </li>

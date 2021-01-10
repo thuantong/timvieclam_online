@@ -144,19 +144,23 @@
 {{--                                    </form>--}}
 
 {{--                                </div>--}}
-                                @if($data['nguoi_tim_viec']['file_path'] != null)
+                                @if($data['nguoi_tim_viec']['file_path'] != null && !is_array($data['nguoi_tim_viec']['file_path']))
                                     <div class="col-sm-12 col-md-12">
-
-                                        {{--                                        <a href="{{route('nguoitimviec.viewPDF',array('file_name'=>$data['nguoi_tim_viec']['file_path']))}}" target="_blank">Xem file</a>--}}
-                                        {{--                                        <object data="@if($data['nguoi_tim_viec']['file_path'] != null){{URL::asset($data['nguoi_tim_viec']['file_path'])}}@endif" type="application/pdf">--}}
-                                        <iframe src="@if($data['nguoi_tim_viec']['file_path'] != null){{URL::asset($data['nguoi_tim_viec']['file_path'])}}@endif" style="width: calc(100%);height: 500px"></iframe>
-                                        <a href="@if($data['nguoi_tim_viec']['file_path'] != null){{URL::asset($data['nguoi_tim_viec']['file_path'])}}@endif" class="btn btn-primary waves-effect waves-light position-absolute" style="right: 0px"><i class="fa fa-arrows"></i></a>
-                                        {{--                                        </object>--}}
-
-                                        {{--                                        <dic  id="load-file-pdf">--}}
-
-                                        {{--                                        </dic>--}}
+                                        <a href="@if($data['nguoi_tim_viec']['file_path'] != null){{URL::asset($data['nguoi_tim_viec']['file_path'])}}@endif" target="_blank">Xem File</a>
+{{--                                        <iframe src="@if($data['nguoi_tim_viec']['file_path'] != null){{URL::asset($data['nguoi_tim_viec']['file_path'])}}@endif" style="width: calc(100%);height: 500px"></iframe>--}}
+{{--                                        <a href="@if($data['nguoi_tim_viec']['file_path'] != null){{URL::asset($data['nguoi_tim_viec']['file_path'])}}@endif" class="btn btn-primary waves-effect waves-light position-absolute" style="right: 0px"><i class="fa fa-arrows"></i></a>--}}
                                     </div>
+                                    @else
+                                    @if($data['nguoi_tim_viec']['file_path'] != null)
+                                    @for($i=0,$row=$data['nguoi_tim_viec']['file_path'];$i<count($row);$i++)
+                                    <div class="col-sm-12 col-md-12">
+                                        <a target="_blank" href="@if($row[$i] != null){{URL::asset($row[$i])}}@endif">Xem File{{$i+1}}</a>
+                                        {{--                                        <iframe src="@if($data['nguoi_tim_viec']['file_path'] != null){{URL::asset($data['nguoi_tim_viec']['file_path'])}}@endif" style="width: calc(100%);height: 500px"></iframe>--}}
+                                        {{--                                        <a href="@if($data['nguoi_tim_viec']['file_path'] != null){{URL::asset($data['nguoi_tim_viec']['file_path'])}}@endif" class="btn btn-primary waves-effect waves-light position-absolute" style="right: 0px"><i class="fa fa-arrows"></i></a>--}}
+                                    </div>
+                                    @endfor
+                                        @endif
+
                                 @endif
                             </div>
 

@@ -649,3 +649,6 @@ b, strong {
         background-position: 400px 0;
     }
 }
+.morris-hover{
+    z-index: 0!important;
+}

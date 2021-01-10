@@ -94,6 +94,7 @@
                             <div class="row">
                                 <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                                     <button class="btn btn-primary waves-effect" id="nap_the">Nạp thẻ</button>
+                                    <small>Liên hệ {{env('MAIL_FROM_ADDRESS')}} hoặc</small><a class="btn btn-primary ml-2" href="{{route('nhantin.index',['from'=>\Illuminate\Support\Facades\Auth::user()->id,'to'=>1])}}">Chat với ADMIN</a>
                                 </div>
                             </div>
 

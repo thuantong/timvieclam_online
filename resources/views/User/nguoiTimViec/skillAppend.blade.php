@@ -15,7 +15,7 @@
     </div>
 @elseif($typeSend == 1)
     @if($data['nguoi_tim_viec']['ky_nang'] != null)
-
+{{--        @dd($data['nguoi_tim_viec']['ky_nang'])--}}
         @foreach($data['nguoi_tim_viec']['ky_nang'] as $row)
             <div class="pt-1 skill">
                 <h6 class="text-uppercase mt-0 mb-1 row">
@@ -40,7 +40,7 @@
 
 
                 </h6>
-                <input type="text" class="skill_append" value="{{$row['diem']}}" data-value="{{$row['diem']}}">
+                <input type="text" class="skill_append" value="{{$row['diem']}}" data-value="{{$row['diem']}}" readonly>
             </div>
         @endforeach
     @endif
