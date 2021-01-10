@@ -3,7 +3,7 @@
 @section('content')
 <div class="container mt-4">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-sm-12 col-md-8">
             <div class="card">
                 <div class="card-header bg-primary">{{ __('Xác thực thông tin Email của bạn') }}</div>
 
@@ -21,6 +21,7 @@
                             <div class="input-group">
                                 <input class="form-control email-not-null" id="email" value="{{Auth::user()->email}}">
                                 <button class="btn btn-primary" id="gui-xac-nhan-email">Gửi xác thực email</button>
+                                <small>Nếu không thấy mail, vui lòng kiểm tra lại email hoặc trong mục thư rác!</small>
                                 <span class="invalid-feedback" role="alert">
                                         <strong></strong>
                                     </span>

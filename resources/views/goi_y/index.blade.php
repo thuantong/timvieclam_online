@@ -117,7 +117,7 @@
         {{--            margin-bottom: .375rem !important--}}
         {{--        }--}}
                 .bg-primary {
-            background-color: #0a6aa1 !important;
+            background-color: #8D2226 !important;
             color: white;
         }
         /**/
