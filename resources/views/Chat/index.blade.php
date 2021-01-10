@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-sm-12 col-md-12 bg-primary" >
                     {{--                @dd(\App\Models\TaiKhoan::query()->find($denTaiKhoan))--}}
-                    <h5 class="text-white"><img src="{{URL::asset(env('URL_ASSET_PUBLIC').\App\Models\TaiKhoan::query()->find($denTaiKhoan)['avatar'])}}" class="pr-1" style="width: 30px;">{{\App\Models\TaiKhoan::query()->find($denTaiKhoan)['ho_ten']}}</h5>
+                    <h5 class="text-white"><img src="@if(\App\Models\TaiKhoan::query()->find($denTaiKhoan)['avatar'] !=null){{URL::asset(env('URL_ASSET_PUBLIC').\App\Models\TaiKhoan::query()->find($denTaiKhoan)['avatar'])}}@else{{URL::asset(env('URL_ASSET_PUBLIC').'images/default-user-icon-8.jpg')}}@endif" class="pr-1" style="width: 30px;">{{\App\Models\TaiKhoan::query()->find($denTaiKhoan)['ho_ten']}}</h5>
                     <input type="hidden" name="action_send" value="{{$denTaiKhoan}}">
                 </div>
             </div>
