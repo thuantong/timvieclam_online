@@ -760,7 +760,7 @@
                 {
                     render: function (api, rowIdx, columns, meta) {
                         let getBaseURL = '{{URL::asset(env('URL_ASSET_PUBLIC'))}}'
-                        return '<img src="' +getBaseURL+ columns.get_nguoi_tim_viec.avatar + '" style="width:50px;height:50px">';
+                        return '<img src="' +getBaseURL+'/'+ columns.get_nguoi_tim_viec.avatar + '" style="width:50px;height:50px">';
                     },
                     className: 'pr-1 pl-1 text-center'
                 },
