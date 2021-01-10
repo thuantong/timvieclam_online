@@ -16,18 +16,24 @@
             </div>
         </div>
     </div>
+    <div class="row center-element">
+        <div class="col-sm-12 col-md-8">
+            <div class="card-box">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="text-center">
+                            <h2 class="mt-0"><i class="mdi mdi-check-all"></i></h2>
+                            <h3 class="mt-0">Bạn đã ứng tuyển thành công !</h3>
 
-    <div class="row">
-        <div class="col-12">
-            <div class="text-center">
-                <h2 class="mt-0"><i class="mdi mdi-check-all"></i></h2>
-                <h3 class="mt-0">Bạn đã ứng tuyển thành công !</h3>
+                            <p class="w-75 mb-2 mx-auto">Nhà tuyển dụng đang xem hồ sơ của bạn, bạn sẽ nhận được phản hồi từ họ trong mục thông báo!.</p>
 
-                <p class="w-75 mb-2 mx-auto">Nhà tuyển dụng đang xem hồ sơ của bạn, bạn sẽ nhận được phản hồi từ họ trong mục thông báo!.</p>
-
+                        </div>
+                    </div> <!-- end col -->
+                </div> <!-- end row -->
             </div>
-        </div> <!-- end col -->
-    </div> <!-- end row -->
+        </div>
+    </div>
+
 
 @endsection
 
@@ -36,7 +42,7 @@
     $(function () {
         setTimeout(function () {
             window.location.href = "/";
-        }, 4000);
+        }, 3400);
     })
 </script>
 @endpush

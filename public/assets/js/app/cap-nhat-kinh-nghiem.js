@@ -1,5 +1,6 @@
 // const nopDonUngTuyen = async ()=>{
     // let __this = $(this);
+
     $(document).on('click','#nopDonUngTuyen',async function () {
         let kinh_nghiem_array =[];
         $('#exp-list li').each(function () {
