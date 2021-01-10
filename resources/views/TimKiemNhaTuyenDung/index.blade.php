@@ -91,7 +91,10 @@
                                         class="text-muted ml-1 text-capitalize" style="font-size: 0px">@if(isset($row['get_tai_khoan']['ho_ten']) && $row['get_tai_khoan']['ho_ten'] != null){{$row['get_tai_khoan']['ho_ten']}}@endif</span>
                                 </a>
                                 <p class="text-center mb-0">@if(isset($row['get_bai_viet']) && $row['get_bai_viet'] != null){{count($row['get_bai_viet'])." việc đang tuyển"}}@else
-                                        <span class="text-danger">{{"Chưa có bài tuyển dụng"}}</span> @endif</p>
+                                        <span class="text-danger">{{"Chưa có bài tuyển dụng"}}</span> @endif
+                                    <a class="btn btn-primary btn-sm waves-effect" href="{{route('nhantin.index',['to'=>$row['id'],'from'=>\Illuminate\Support\Facades\Auth::user()->id])}}">Nhắn tin</a>
+
+                                </p>
                                 {{--                        <span class="text-center"></span>--}}
                                 {{--                        <a href="javascript: void(0);" class="gal-like-btn"><i class="mdi mdi-heart-outline text-muted"></i></a>--}}
                             </div> <!-- gallery info -->

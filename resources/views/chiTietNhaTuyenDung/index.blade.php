@@ -95,6 +95,9 @@
                                         <span class="badge badge-danger noti-icon-badge position-absolute"
                                               style="right: 0px">{{$data['nha_tuyen_dung_da_quan_tam']['total']}}</span>
                                     </div>
+{{--                                    @dd($data)--}}
+                                    <a class="btn btn-primary btn-sm waves-effect" href="{{route('nhantin.index',['to'=>$data['id'],'from'=>\Illuminate\Support\Facades\Auth::user()->id])}}">Nhắn tin</a>
+
                                     {{--                                    <div class="btn btn-outline-info btn-sm quan-tam-nha-tuyen-dung" id="quan-tam-nha-tuyen-dung" data-id="@if($data['get_nha_tuyen_dung']['id'] != null){{$data['get_nha_tuyen_dung']['id']}}@endif"><i class="fa fa-heart">Quan tâm</i></div>--}}
                                     {{--                                    <button class="btn btn-info btn-sm"></button>--}}
                                 </div>

@@ -97,7 +97,10 @@
 {{--                                <td>Kinh nghiệm</td>--}}
                                 <td>{{$row['muc_luong']}} Triệu</td>
                                 <td>@if($row['get_dia_diem'] != null){{$row['get_dia_diem']['name']}}@endif</td>
-                                <td><a href="{{route('nhatuyendung.chiTiet',['nguoi_tim_viec'=>$row['id']])}}">Xem</a></td>
+                                <td><a href="{{route('nhatuyendung.chiTiet',['nguoi_tim_viec'=>$row['id']])}}">Xem</a>
+                                    <a href="{{route('nhantin.index',['to'=>$row['id'],'from'=>\Illuminate\Support\Facades\Auth::user()->id])}}">Nhắn tin</a>
+
+                                </td>
                             </tr>
                             @endforeach
                             @else
