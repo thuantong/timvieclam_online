@@ -16,6 +16,16 @@
                     </a>
                 </li>
                 @if(Auth::user() != null)
+                    @if(Session::get('loai_tai_khoan') != 3)
+                        <li class="d-md-none d-sm-block">
+                            <a class="center-element search-field-new-query waves-effect" id="search-field-new-query"
+                               data-toggle="collapse" data-target="#collapseExample" aria-expanded="false"
+                               aria-controls="collapseExample">
+                                <span>Tìm kiếm</span>
+                            </a>
+                        </li>
+                    @endif
+
                     <li class="">
                         @if(Session::get('loai_tai_khoan') != 3 && Session::get('loai_tai_khoan') != 1)
                             @if(Session::exists('so_du') == false)
@@ -162,7 +172,7 @@
 
                 <li>
                     <a href="{{route('nhantin.danhSach')}}" class="waves-effect">
-                        <i class="fa fa-mail-forward"></i>
+                        <i class="fa fa-envelope"></i>
                         <span>{{__('Tin nhắn')}}</span>
                     </a>
                 </li>
