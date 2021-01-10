@@ -221,6 +221,8 @@ class QuanLyUngVienController extends Controller
 
 //        dd(Hash::check($_token,$data['token']));
         $data['nguoi_tim_viec'] = $nguoiTimViec;
+        $data['phong_van']['ngay_phong_van'] = Carbon::parse($donXinViec->ngay_phong_van)->format('d/m/Y');
+        $data['phong_van']['gio_phong_van'] = $donXinViec->thoi_gian_phong_van;
         $dataEmail = array(
             'subject' => ucwords('Xác thực phỏng vấn'),
             'view' => 'QuanLyUngVien.gui_thong_bao',

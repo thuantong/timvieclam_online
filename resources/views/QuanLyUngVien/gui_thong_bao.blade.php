@@ -164,6 +164,7 @@
                             <div class="col-sm-12 col-md-12 p-1">
                                 <p>Chào {{ucwords($dataobj['nguoi_tim_viec']['get_tai_khoan']['ho_ten'])}},</p>
                                 <p>Chúc mừng Bạn đã vượt qua vòng sơ tuyển của công ty <span style="color: #0D0A0A">{{ucwords($dataobj['data']['get_cong_ty']['name'])}}</span></p>
+                                <p>Lịch hẹn phỏng vấn của bạn là: {{$dataobj['phong_van']['gio_phong_van']}}, ngày {{$dataobj['phong_van']['ngay_phong_van']}}</p>
                                 <p>Để xác nhận buổi tham gia phỏng vấn, {{env('APP_NAME')}} cần Bạn xác thực thông tin phỏng vấn.</p>
                                 <p>Bạn vui lòng vào <a href="{{route('mail.xacThucPhongVan',['token'=>$dataobj['token']])}}">(bấm tại đây)</a> để hoàn thành.</p>
 
