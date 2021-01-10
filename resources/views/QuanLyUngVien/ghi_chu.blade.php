@@ -12,7 +12,7 @@
         <label>Công việc ứng tuyển</label>
     </div>
     <div class="col-sm-12 col-md-8">
-        <h4>@if($data != null && isset($data['get_bai_tuyen_dung']['ten_chuc_vu'])){{ucwords($data['get_bai_tuyen_dung']['ten_chuc_vu'])}}@endif</h4>
+        <h4>@if($data != null && isset($data['get_bai_tuyen_dung']['tieu_de'])){{$data['get_bai_tuyen_dung']['tieu_de']}}@endif</h4>
     </div>
 </div>
 <div class="form-group row">
