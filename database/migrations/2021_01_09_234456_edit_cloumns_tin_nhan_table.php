@@ -16,7 +16,8 @@ class EditCloumnsTinNhanTable extends Migration
         Schema::table('tin_nhan', function (Blueprint $table) {
             $table->bigInteger('tai_khoan_id')->nullable()->unsigned();
             $table->bigInteger('to_tai_khoan_id')->nullable()->unsigned();
-//            $table->dropColumn('');
+            $table->foreign('tai_khoan_id')->references('id')->on('tai_khoan')->onDelete('no action')->onUpdate('no action');
+
         });
     }
 
