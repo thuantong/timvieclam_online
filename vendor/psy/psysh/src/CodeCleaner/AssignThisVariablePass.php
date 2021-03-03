@@ -17,23 +17,23 @@ use PhpParser\Node\Expr\Variable;
 use Psy\Exception\FatalErrorException;
 
 /**
- * Validate that the User input does not assign the `$this` variable.
+ * Validate that the user input does not assign the `$this` variable.
  *
  * @author Martin Hasoň <martin.hason@gmail.com>
  */
 class AssignThisVariablePass extends CodeCleanerPass
 {
     /**
-     * Validate that the User input does not assign the `$this` variable.
+     * Validate that the user input does not assign the `$this` variable.
      *
-     * @throws FatalErrorException if the User assign the `$this` variable
+     * @throws FatalErrorException if the user assign the `$this` variable
      *
      * @param Node $node
      */
     public function enterNode(Node $node)
     {
         if ($node instanceof Assign && $node->var instanceof Variable && $node->var->name === 'this') {
-            throw new FatalErrorException('Cannot re-assign $this', 0, E_ERROR, null, $node->getLine());
+            throw new FatalErrorException('Cannot re-assign $this', 0, \E_ERROR, null, $node->getLine());
         }
     }
 }

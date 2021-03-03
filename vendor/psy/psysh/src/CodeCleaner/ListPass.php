@@ -33,13 +33,13 @@ class ListPass extends CodeCleanerPass
 
     public function __construct()
     {
-        $this->atLeastPhp71 = \version_compare(PHP_VERSION, '7.1', '>=');
+        $this->atLeastPhp71 = \version_compare(\PHP_VERSION, '7.1', '>=');
     }
 
     /**
      * Validate use of list assignment.
      *
-     * @throws ParseErrorException if the User used empty with anything but a variable
+     * @throws ParseErrorException if the user used empty with anything but a variable
      *
      * @param Node $node
      */

@@ -353,7 +353,7 @@ BaiVietController extends Controller
         $data['don_xin_viec']['total'] = DonXinViec::query()->where('bai_tuyen_dung_id', $post)->count();
 
         $typeSend = 1;
-        return view('BaiViet.chiTiet', compact('data', 'nguoiTimViec', 'typeSend'));
+        return view('BaiViet.chiTiet', compact('data', 'typeSend'));
     }
 
     /**

@@ -43,6 +43,6 @@ class BladeServiceProvider extends ServiceProvider
         Blade::directive('money_xu', function ($money) {
             return "<?php echo number_format($money, 0); ?>";
         });
-        //
+      
     }
 }

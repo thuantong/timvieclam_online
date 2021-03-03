@@ -31,7 +31,7 @@ class EmptyArrayDimFetchPass extends CodeCleanerPass
     }
 
     /**
-     * @throws FatalErrorException if the User used empty empty array dim fetch outside of assignment
+     * @throws FatalErrorException if the user used empty empty array dim fetch outside of assignment
      *
      * @param Node $node
      */

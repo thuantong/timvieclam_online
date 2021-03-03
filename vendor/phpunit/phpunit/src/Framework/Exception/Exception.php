@@ -9,7 +9,11 @@
  */
 namespace PHPUnit\Framework;
 
+use function array_keys;
+use function get_object_vars;
 use PHPUnit\Util\Filter;
+use RuntimeException;
+use Throwable;
 
 /**
  * Base class for all PHPUnit Framework exceptions.
@@ -26,27 +30,27 @@ use PHPUnit\Util\Filter;
  * With enabled process isolation, test results are serialized in the child
  * process and unserialized in the parent process. The stack trace of Exceptions
  * may contain objects that cannot be serialized or unserialized (e.g., PDO
- * connections). Unserializing User-space objects from the child process into
+ * connections). Unserializing user-space objects from the child process into
  * the parent would break the intended encapsulation of process isolation.
  *
  * @see http://fabien.potencier.org/article/9/php-serialization-stack-traces-and-exceptions
  *
  * @internal This class is not covered by the backward compatibility promise for PHPUnit
  */
-class Exception extends \RuntimeException implements \PHPUnit\Exception
+class Exception extends RuntimeException implements \PHPUnit\Exception
 {
     /**
      * @var array
      */
     protected $serializableTrace;
 
-    public function __construct($message = '', $code = 0, \Throwable $previous = null)
+    public function __construct($message = '', $code = 0, Throwable $previous = null)
     {
         parent::__construct($message, $code, $previous);
 
         $this->serializableTrace = $this->getTrace();
 
-        foreach (\array_keys($this->serializableTrace) as $key) {
+        foreach (array_keys($this->serializableTrace) as $key) {
             unset($this->serializableTrace[$key]['args']);
         }
     }
@@ -64,7 +68,7 @@ class Exception extends \RuntimeException implements \PHPUnit\Exception
 
     public function __sleep(): array
     {
-        return \array_keys(\get_object_vars($this));
+        return array_keys(get_object_vars($this));
     }
 
     /**

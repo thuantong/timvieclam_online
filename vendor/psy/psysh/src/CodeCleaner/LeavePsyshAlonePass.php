@@ -16,14 +16,14 @@ use PhpParser\Node\Expr\Variable;
 use Psy\Exception\RuntimeException;
 
 /**
- * Validate that the User input does not reference the `$__psysh__` variable.
+ * Validate that the user input does not reference the `$__psysh__` variable.
  */
 class LeavePsyshAlonePass extends CodeCleanerPass
 {
     /**
-     * Validate that the User input does not reference the `$__psysh__` variable.
+     * Validate that the user input does not reference the `$__psysh__` variable.
      *
-     * @throws RuntimeException if the User is messing with $__psysh__
+     * @throws RuntimeException if the user is messing with $__psysh__
      *
      * @param Node $node
      */

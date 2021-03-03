@@ -38,9 +38,9 @@ class MethodEnumerator extends Enumerator
             return [];
         }
 
-        $showAll   = $input->getOption('all');
+        $showAll = $input->getOption('all');
         $noInherit = $input->getOption('no-inherit');
-        $methods   = $this->prepareMethods($this->getMethods($showAll, $reflector, $noInherit));
+        $methods = $this->prepareMethods($this->getMethods($showAll, $reflector, $noInherit));
 
         if (empty($methods)) {
             return [];
@@ -78,7 +78,7 @@ class MethodEnumerator extends Enumerator
             }
         }
 
-        \ksort($methods, SORT_NATURAL | SORT_FLAG_CASE);
+        \ksort($methods, \SORT_NATURAL | \SORT_FLAG_CASE);
 
         return $methods;
     }
@@ -120,7 +120,7 @@ class MethodEnumerator extends Enumerator
         if ($reflector->isInterface()) {
             return 'Interface Methods';
         } elseif (\method_exists($reflector, 'isTrait') && $reflector->isTrait()) {
-            return 'Traits Methods';
+            return 'Trait Methods';
         } else {
             return 'Class Methods';
         }

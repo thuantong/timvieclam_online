@@ -34,18 +34,18 @@ class FunctionEnumerator extends Enumerator
             return [];
         }
 
-        if ($input->getOption('User')) {
-            $label     = 'User Functions';
-            $functions = $this->getFunctions('User');
+        if ($input->getOption('user')) {
+            $label = 'User Functions';
+            $functions = $this->getFunctions('user');
         } elseif ($input->getOption('internal')) {
-            $label     = 'Internal Functions';
+            $label = 'Internal Functions';
             $functions = $this->getFunctions('internal');
         } else {
-            $label     = 'Functions';
+            $label = 'Functions';
             $functions = $this->getFunctions();
         }
 
-        $prefix = $reflector === null ? null : \strtolower($reflector->getName()) . '\\';
+        $prefix = $reflector === null ? null : \strtolower($reflector->getName()).'\\';
         $functions = $this->prepareFunctions($functions, $prefix);
 
         if (empty($functions)) {
@@ -61,9 +61,9 @@ class FunctionEnumerator extends Enumerator
     /**
      * Get defined functions.
      *
-     * Optionally limit functions to "User" or "internal" functions.
+     * Optionally limit functions to "user" or "internal" functions.
      *
-     * @param string|null $type "User" or "internal" (default: both)
+     * @param string|null $type "user" or "internal" (default: both)
      *
      * @return array
      */
@@ -74,7 +74,7 @@ class FunctionEnumerator extends Enumerator
         if ($type) {
             return $funcs[$type];
         } else {
-            return \array_merge($funcs['internal'], $funcs['User']);
+            return \array_merge($funcs['internal'], $funcs['user']);
         }
     }
 

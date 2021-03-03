@@ -61,7 +61,7 @@ class ConstantEnumerator extends Enumerator
             return [];
         }
 
-        $user     = $input->getOption('User');
+        $user = $input->getOption('user');
         $internal = $input->getOption('internal');
         $category = $input->getOption('category');
 
@@ -71,7 +71,7 @@ class ConstantEnumerator extends Enumerator
             if ($category === 'internal') {
                 $internal = true;
                 $category = null;
-            } elseif ($category === 'User') {
+            } elseif ($category === 'user') {
                 $user = true;
                 $category = null;
             }
@@ -80,7 +80,7 @@ class ConstantEnumerator extends Enumerator
         $ret = [];
 
         if ($user) {
-            $ret['User Constants'] = $this->getConstants('User');
+            $ret['User Constants'] = $this->getConstants('user');
         }
 
         if ($internal) {
@@ -89,7 +89,7 @@ class ConstantEnumerator extends Enumerator
 
         if ($category) {
             $caseCategory = \array_key_exists($category, self::$categoryLabels) ? self::$categoryLabels[$category] : \ucfirst($category);
-            $label = $caseCategory . ' Constants';
+            $label = $caseCategory.' Constants';
             $ret[$label] = $this->getConstants($category);
         }
 
@@ -98,7 +98,7 @@ class ConstantEnumerator extends Enumerator
         }
 
         if ($reflector !== null) {
-            $prefix = \strtolower($reflector->getName()) . '\\';
+            $prefix = \strtolower($reflector->getName()).'\\';
 
             foreach ($ret as $key => $names) {
                 foreach (\array_keys($names) as $name) {
@@ -116,7 +116,7 @@ class ConstantEnumerator extends Enumerator
      * Get defined constants.
      *
      * Optionally restrict constants to a given category, e.g. "date". If the
-     * category is "internal", include all non-User-defined constants.
+     * category is "internal", include all non-user-defined constants.
      *
      * @param string $category
      *
@@ -131,9 +131,9 @@ class ConstantEnumerator extends Enumerator
         $consts = \get_defined_constants(true);
 
         if ($category === 'internal') {
-            unset($consts['User']);
+            unset($consts['user']);
 
-            return \call_user_func_array('array_merge', $consts);
+            return \call_user_func_array('array_merge', \array_values($consts));
         }
 
         foreach ($consts as $key => $value) {

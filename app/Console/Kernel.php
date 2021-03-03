@@ -13,8 +13,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        'App\Console\Commands\everyMinute',
-        'App\Console\Commands\HanBTDCommand',
+        // 'App\Console\Commands\everyMinute',
+        // 'App\Console\Commands\HanBTDCommand',
     ];
 
     /**
@@ -25,8 +25,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-         $schedule->command('sendmail:update')->weekends();
-         $schedule->command('hantuyendung:doitrangthai')->daily();
+        //  $schedule->command('sendmail:update')->weekends();
+        //  $schedule->command('hantuyendung:doitrangthai')->daily();
     }
 
     /**

@@ -40,7 +40,7 @@ class PushoverHandler extends SocketHandler
      */
     private $parameterNames = [
         'token' => true,
-        'User' => true,
+        'user' => true,
         'message' => true,
         'device' => true,
         'title' => true,
@@ -67,7 +67,7 @@ class PushoverHandler extends SocketHandler
 
     /**
      * @param string       $token             Pushover api token
-     * @param string|array $users             Pushover User id or array of ids the message will be sent to
+     * @param string|array $users             Pushover user id or array of ids the message will be sent to
      * @param string|null  $title             Title sent to the Pushover API
      * @param string|int   $level             The minimum logging level at which this handler will be triggered
      * @param bool         $bubble            Whether the messages that are handled can bubble up the stack or not
@@ -78,7 +78,7 @@ class PushoverHandler extends SocketHandler
      * @param string|int   $emergencyLevel    The minimum logging level at which this handler will start
      *                                        sending "emergency" requests to the Pushover API
      * @param int          $retry             The retry parameter specifies how often (in seconds) the Pushover servers will
-     *                                        send the same notification to the User.
+     *                                        send the same notification to the user.
      * @param int          $expire            The expire parameter specifies how many seconds your notification will continue
      *                                        to be retried for (every retry seconds).
      */
@@ -125,7 +125,7 @@ class PushoverHandler extends SocketHandler
 
         $dataArray = [
             'token' => $this->token,
-            'User' => $this->user,
+            'user' => $this->user,
             'message' => $message,
             'title' => $this->title,
             'timestamp' => $timestamp,

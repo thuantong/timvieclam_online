@@ -30,8 +30,8 @@ class ClassEnumerator extends Enumerator
         }
 
         $internal = $input->getOption('internal');
-        $user     = $input->getOption('User');
-        $prefix   = $reflector === null ? null : \strtolower($reflector->getName()) . '\\';
+        $user = $input->getOption('user');
+        $prefix = $reflector === null ? null : \strtolower($reflector->getName()).'\\';
 
         $ret = [];
 
@@ -55,8 +55,8 @@ class ClassEnumerator extends Enumerator
     /**
      * Filter a list of classes, interfaces or traits.
      *
-     * If $internal or $User is defined, results will be limited to internal or
-     * User-defined classes as appropriate.
+     * If $internal or $user is defined, results will be limited to internal or
+     * user-defined classes as appropriate.
      *
      * @param string $key
      * @param array  $classes
@@ -71,7 +71,7 @@ class ClassEnumerator extends Enumerator
         $ret = [];
 
         if ($internal) {
-            $ret['Internal ' . $key] = \array_filter($classes, function ($class) use ($prefix) {
+            $ret['Internal '.$key] = \array_filter($classes, function ($class) use ($prefix) {
                 if ($prefix !== null && \strpos(\strtolower($class), $prefix) !== 0) {
                     return false;
                 }
@@ -83,7 +83,7 @@ class ClassEnumerator extends Enumerator
         }
 
         if ($user) {
-            $ret['User ' . $key] = \array_filter($classes, function ($class) use ($prefix) {
+            $ret['User '.$key] = \array_filter($classes, function ($class) use ($prefix) {
                 if ($prefix !== null && \strpos(\strtolower($class), $prefix) !== 0) {
                     return false;
                 }

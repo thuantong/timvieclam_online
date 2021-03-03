@@ -39,9 +39,9 @@ class Transient implements Readline
     public function __construct($historyFile = null, $historySize = 0, $eraseDups = false)
     {
         // don't do anything with the history file...
-        $this->history     = [];
+        $this->history = [];
         $this->historySize = $historySize;
-        $this->eraseDups   = $eraseDups;
+        $this->eraseDups = $eraseDups;
     }
 
     /**
@@ -98,7 +98,7 @@ class Transient implements Readline
     /**
      * {@inheritdoc}
      *
-     * @throws BreakException if User hits Ctrl+D
+     * @throws BreakException if user hits Ctrl+D
      *
      * @return string
      */
@@ -128,7 +128,7 @@ class Transient implements Readline
     /**
      * Get a STDIN file handle.
      *
-     * @throws BreakException if User hits Ctrl+D
+     * @throws BreakException if user hits Ctrl+D
      *
      * @return resource
      */

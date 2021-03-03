@@ -54,7 +54,7 @@ interface Readline
     public function readHistory();
 
     /**
-     * Read a single line of input from the User.
+     * Read a single line of input from the user.
      *
      * @param string|null $prompt
      *

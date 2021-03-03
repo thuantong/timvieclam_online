@@ -185,29 +185,29 @@ class Snapshot
     }
 
     /**
-     * Creates a snapshot User-defined constants.
+     * Creates a snapshot user-defined constants.
      */
     private function snapshotConstants(): void
     {
         $constants = \get_defined_constants(true);
 
-        if (isset($constants['User'])) {
-            $this->constants = $constants['User'];
+        if (isset($constants['user'])) {
+            $this->constants = $constants['user'];
         }
     }
 
     /**
-     * Creates a snapshot User-defined functions.
+     * Creates a snapshot user-defined functions.
      */
     private function snapshotFunctions(): void
     {
         $functions = \get_defined_functions();
 
-        $this->functions = $functions['User'];
+        $this->functions = $functions['user'];
     }
 
     /**
-     * Creates a snapshot User-defined classes.
+     * Creates a snapshot user-defined classes.
      */
     private function snapshotClasses(): void
     {
@@ -225,7 +225,7 @@ class Snapshot
     }
 
     /**
-     * Creates a snapshot User-defined interfaces.
+     * Creates a snapshot user-defined interfaces.
      */
     private function snapshotInterfaces(): void
     {
@@ -280,7 +280,7 @@ class Snapshot
     }
 
     /**
-     * Creates a snapshot of all static attributes in User-defined classes.
+     * Creates a snapshot of all static attributes in user-defined classes.
      */
     private function snapshotStaticAttributes(): void
     {
