@@ -107,9 +107,9 @@ class MyLoginController extends Controller
                 //Lưu avatar
                 Session::put('avatar', $nguoiTimViec['avatar']);
                 //Check email chưa confirm
-                if ($findUser->email_confirmed == null){
-                    return redirect()->route('auth.confirmEmailView');
-                }
+                // if ($findUser->email_confirmed == null){
+                //     return redirect()->route('auth.confirmEmailView');
+                // }
 
 
                 //pass all step
@@ -133,9 +133,9 @@ class MyLoginController extends Controller
                 Session::put('avatar', $nhaTuyenDung['avatar']);
 
                 //Check email chưa confirm
-                if ($findUser->email_confirmed == null){
-                    return redirect()->route('auth.confirmEmailView');
-                }
+                // if ($findUser->email_confirmed == null){
+                //     return redirect()->route('auth.confirmEmailView');
+                // }
 
                 //pass all step
                 if (Session::exists('url_previos') == true && Session::get('url_previos') != null){
@@ -153,9 +153,9 @@ class MyLoginController extends Controller
                 $quanTriVien = $findUser->getQuanTriVien;
 
                 //Check email chưa confirm
-                if ($findUser->email_confirmed == null){
-                    return redirect()->route('auth.confirmEmailView');
-                }
+                // if ($findUser->email_confirmed == null){
+                //     return redirect()->route('auth.confirmEmailView');
+                // }
 
                 //pass all step
                 return redirect()->route('admin.index');
