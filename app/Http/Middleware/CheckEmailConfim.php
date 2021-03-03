@@ -19,9 +19,9 @@ class CheckEmailConfim
     {
 
         $emailConfirm = Auth::user()->email_confirmed;
-        if ($emailConfirm == null){
-            return redirect()->route('auth.confirmEmailView');
-        }
+        // if ($emailConfirm == null){
+        //     return redirect()->route('auth.confirmEmailView');
+        // }
         return $next($request);
     }
 }
