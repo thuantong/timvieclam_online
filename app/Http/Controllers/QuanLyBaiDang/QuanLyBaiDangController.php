@@ -135,7 +135,7 @@ class QuanLyBaiDangController extends Controller
             $query->where('status',$trangThaiDangChoDuyet);
 //            $query;
         }
-
+        // dd($query->get()->toArray());
         $dataNew = $query->distinct('id');
 
         $dataNew = $dataNew->orderBy('status', 'asc')->orderBy('han_tuyen', 'desc')->get()->toArray();

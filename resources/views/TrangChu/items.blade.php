@@ -3,7 +3,7 @@
 {{--{{\GuzzleHttp\json_encode($data['bai_tuyen_dung']['current_page'])}}--}}
 {{--{{dd($data['bai_tuyen_dung'][1]['tieu_de'])}}--}}
 
-@if(count($data['bai_tuyen_dung']) != 0)
+@if(count($data['bai_tuyen_dung']->toArray()) != 0)
 {{--    @dd($data['bai_tuyen_dung'])--}}
     <input type="hidden" class="item-container-page" data-current="{{$data['trang_hien_tai']}}" data-pageurl="{{$data['check_trang']}}">
     @foreach($data['bai_tuyen_dung'] as $row)

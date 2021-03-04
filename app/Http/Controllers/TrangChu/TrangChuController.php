@@ -218,7 +218,7 @@ class TrangChuController extends Controller
 
             $data['trang_hien_tai'] = $data['bai_tuyen_dung']->currentPage();
             $data['check_trang'] = $data['bai_tuyen_dung']->nextPageUrl();
-
+            
             return $data;
 
         } catch (\Exception $e) {
