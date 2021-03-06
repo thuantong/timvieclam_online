@@ -1,13 +1,9 @@
-{{--{{$data['bai_tuyen_dung']->data[0]->tieu_de}}--}}
 
-{{--{{\GuzzleHttp\json_encode($data['bai_tuyen_dung']['current_page'])}}--}}
-{{--{{dd($data['bai_tuyen_dung'][1]['tieu_de'])}}--}}
-{{-- @dd($data['bai_tuyen_dung']['data']) --}}
 @if(count($data['bai_tuyen_dung']['data']) != 0)
-   {{-- @dd($data['bai_tuyen_dung']) --}}
+
     <input type="hidden" class="item-container-page" data-current="{{$data['trang_hien_tai']}}" data-pageurl="{{$data['check_trang']}}">
     @foreach($data['bai_tuyen_dung']['data'] as $row)
-    {{-- @dd($row) --}}
+
     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 bg-white ribbon-box iteam-click" data-id="{{$row['id']}}">
         <div class="row">
             <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2 p-0 center-element">
@@ -26,7 +22,7 @@
                             <div class="col-sm-4 col-md-4 col-xl-4 text"><span title="{{$row['luong_from']}}{{' - '}}{{$row['luong_to']}}{{' Triệu'}}"><span class="icofont icofont-money"></span>{{$row['luong_from']}}{{' - '}}{{$row['luong_to']}}{{' Triệu'}}</span></div>
                             <div class="col-sm-4 col-md-4 col-xl-4 text"><span title="{{$row['get_dia_diem']['name']}}"><span class="icofont icofont-location-pin"></span>{{$row['get_dia_diem']['name']}}</span></div>
                             <div class="col-sm-4 col-md-4 col-xl-4 text"><span title="{{$row['han_tuyen']}}"><span class="fa fa-calendar-plus-o"></span> {{$row['han_tuyen']}}</span></div>
-{{--                            <div class="col-sm-4 col-md-4 col-xl-4 text"><span title="{{$row['han_tuyen']}}">{{$row['han_tuyen']}}</span></div>--}}
+
                         </div>
                     </div>
                 </div>
@@ -45,11 +41,9 @@
             {{__('Không tìm thấy việc làm')}}
         </div>
     </div>
-{{--    <div class="text-primary">{{__('Không có dữ liệu')}}</div>--}}
+
 @endif
-{{--    <div class="processing-input text-center"><button class="btn btn-white" type="button" disabled="">--}}
-{{--                 Đang tải <span class="spinner-border spinner-border-sm mr-1" role="status" aria-hidden="true"></span>--}}
-{{--    </button></div>--}}
+
 
 
 @push('scripts')
