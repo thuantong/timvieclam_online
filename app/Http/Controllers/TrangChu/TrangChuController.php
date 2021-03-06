@@ -31,19 +31,14 @@ class TrangChuController extends Controller
     public function index(Request $request)
     {
 
-//        $nguoiTimViecALL['data']= '';
-
-//        if (Auth::user()->loai == 3){
-//            dd('trang admin');
-//        }
-//        dd('c');
-//        dd(TaiKhoan::query()->find(Auth::user()->id)->getNguoiTimViec()->first()->with([
-//            'getDonXinViec'=>function($q){
-//                $q->select('id','nguoi_tim_viec_id');
-//            }
-//        ])->get()->toArray());
         $data = $this->getBaiTuyenDung($request);
-
+        $data["bai_tuyen_dung"] = json_decode(json_encode($data["bai_tuyen_dung"],true),true);
+        $data["bai_tuyen_dung"]['data'] = $data["bai_tuyen_dung"]['data'];
+        // dd(json_decode($data["bai_tuyen_dung"],true));
+        // foreach($data["bai_tuyen_dung"] as $row){
+            
+        // }
+        // dd($data["bai_tuyen_dung"]['data']);
         return view('TrangChu.index', compact('data'));
     }
 

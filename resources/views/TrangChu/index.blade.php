@@ -66,7 +66,7 @@
             <div class="row">
                 <div class="col-sm-12 col-md-12">
                     <div class="card text-center mb-0" style="border-top: none">
-                        {{$data['bai_tuyen_dung']->links()}}
+                        {{-- {{$data['bai_tuyen_dung']->links()}} --}}
                     </div>
 
                 </div>

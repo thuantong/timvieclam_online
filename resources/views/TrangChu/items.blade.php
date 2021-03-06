@@ -2,11 +2,12 @@
 
 {{--{{\GuzzleHttp\json_encode($data['bai_tuyen_dung']['current_page'])}}--}}
 {{--{{dd($data['bai_tuyen_dung'][1]['tieu_de'])}}--}}
-
-@if(count($data['bai_tuyen_dung']->toArray()) != 0)
-{{--    @dd($data['bai_tuyen_dung'])--}}
+{{-- @dd($data['bai_tuyen_dung']['data']) --}}
+@if(count($data['bai_tuyen_dung']['data']) != 0)
+   {{-- @dd($data['bai_tuyen_dung']) --}}
     <input type="hidden" class="item-container-page" data-current="{{$data['trang_hien_tai']}}" data-pageurl="{{$data['check_trang']}}">
-    @foreach($data['bai_tuyen_dung'] as $row)
+    @foreach($data['bai_tuyen_dung']['data'] as $row)
+    {{-- @dd($row) --}}
     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 bg-white ribbon-box iteam-click" data-id="{{$row['id']}}">
         <div class="row">
             <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2 p-0 center-element">
