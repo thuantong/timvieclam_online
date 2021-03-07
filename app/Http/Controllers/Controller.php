@@ -37,6 +37,13 @@ class Controller extends BaseController
         );
     }
 
+    public function response($status,$data){
+
+        return [
+            'status'=>$status,
+            'data'=>$data,
+        ];
+    }
     public function checkDangKySoDu($chucNang,$route){
         $title = 'Chưa đăng ký Số dư';
 //        dd(Session::exists('so_du'));
