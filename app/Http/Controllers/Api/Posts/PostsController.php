@@ -15,11 +15,28 @@ use Illuminate\Support\Facades\Validator;
 
 class PostsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         try {
-            $query = DB::table('post_blog')->select('*')->get();
-            $data = json_encode($query, true);
+            $page = $request->get('page') ?? 0;
+            $limit = $request->get('limit') ?? 1000;
+            $start= ($page - 1)*$limit;
+            $query = DB::table('post_blog')->select('*');
+
+            // if($request->exists('page') && !$request->exists('post_id')){
+            //     $query->offset($start)->limit($limit);
+            // }
+            // if($request->exists('limit') && !$request->exists('post_id')){
+            //     $query->offset($start)->limit($limit);
+            // }
+            if($request->exists('post_id')){
+                $query->where('id',$request->get('post_id'));
+            }
+            // if(!$request->exists('post_id')){
+            //     $query->offset($start)->limit($limit);
+            // }
+            
+            $data = json_encode($query->offset($start)->limit($limit)->get(), true);
             return response($data);
         } catch (Exception $e) {
             return $e->getMessage();
