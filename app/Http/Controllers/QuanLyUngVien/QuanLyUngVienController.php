@@ -42,11 +42,17 @@ class QuanLyUngVienController extends Controller
                 ]);
             }
         ])->orderBy('created_at', 'desc')->get()->toArray();
-        $ngayXaNhat = Carbon::parse(collect($donXinViec)->whereNotNull('get_bai_tuyen_dung')->values()->last()['created_at'])->format('d/m/Y') ?? date('d/m/Y');
+        if(count($donXinViec) != 0){
+            $ngayXaNhat = Carbon::parse(collect($donXinViec)->whereNotNull('get_bai_tuyen_dung')->values()->last()['created_at'])->format('d/m/Y');
+            $data['ngay_xa_nhat'] = $ngayXaNhat;
+        }else{
+            $data['ngay_xa_nhat'] = date('d/m/Y');
+        }
 
         $data['bai_tuyen_dung'] = $query->select('id','tieu_de','nha_tuyen_dung_id','status')->get()->toArray();
 //        dd($data['bai_tuyen_dung']);
-        $data['ngay_xa_nhat'] = $ngayXaNhat;
+
+        
         return view('QuanLyUngVien.index', compact('data'));
     }
 
