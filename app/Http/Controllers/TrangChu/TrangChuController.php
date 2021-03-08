@@ -29,7 +29,7 @@ class TrangChuController extends Controller
         $data = $this->getBaiTuyenDung($request);
        
 
-        dd(json_decode($data,true));
+        // dd(json_decode($data,true));
         // $data["bai_tuyen_dung"]['data'] = $data["bai_tuyen_dung"]['data'];
         // dd(json_decode($data["bai_tuyen_dung"],true));
        
