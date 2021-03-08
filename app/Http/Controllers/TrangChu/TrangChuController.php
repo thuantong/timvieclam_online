@@ -27,7 +27,9 @@ class TrangChuController extends Controller
     {
 
         $data = $this->getBaiTuyenDung($request);
-        $data["bai_tuyen_dung"] = json_decode(json_encode($data["bai_tuyen_dung"],true),true);
+        // $data["bai_tuyen_dung"] = $data["bai_tuyen_dung"];
+
+        dd($data["bai_tuyen_dung"]);
         $data["bai_tuyen_dung"]['data'] = $data["bai_tuyen_dung"]['data'];
         // dd(json_decode($data["bai_tuyen_dung"],true));
        
@@ -179,11 +181,8 @@ class TrangChuController extends Controller
             $trangThaiDaDuyet = 1;
             $dataNew = $query->distinct('id')->where('status', $trangThaiDaDuyet);
 
-//            if ($request->exists('tieu_de') && $request->get('tieu_de') != "") {
-//                $dataNew = $dataNew->orWhere('tieu_de', 'like', '%' . $request->get('tieu_de') . '%');
-//            }
             $dataNew = $dataNew->orderBy('isHot', 'desc')->get()->toArray();
-//            dd($dataNew);
+
             $colect = collect($dataNew);
             if ($request->exists('dia_diem') && $request->get('dia_diem') != "") {
                 $colect = $colect->whereNotNull('get_dia_diem');
@@ -191,8 +190,7 @@ class TrangChuController extends Controller
             if ($request->exists('nganh_nghe') && $request->get('nganh_nghe') != "") {
                 $colect = $colect->where('get_nganh_nghe','!=',array());
             }
-            $colect = $colect->values()->toArray();
-//            dd($colect);
+
             $perpage = 10;
             $colection = collect($colect);
             $data['bai_tuyen_dung'] = new LengthAwarePaginator(
