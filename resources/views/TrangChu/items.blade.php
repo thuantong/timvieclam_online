@@ -1,8 +1,8 @@
 
-@if(count($data['bai_tuyen_dung']['data']) != 0)
+@if(count($data['bai_tuyen_dung']) != 0)
 
     <input type="hidden" class="item-container-page" data-current="{{$data['trang_hien_tai']}}" data-pageurl="{{$data['check_trang']}}">
-    @foreach($data['bai_tuyen_dung']['data'] as $row)
+    @foreach($data['bai_tuyen_dung'] as $row)
 
     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 bg-white ribbon-box iteam-click" data-id="{{$row['id']}}">
         <div class="row">
