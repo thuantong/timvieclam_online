@@ -336,6 +336,7 @@ BaiVietController extends Controller
 
         // $data['bai_tuyen_dung'] = $newQuery->distinct('id')->where('status', $trangThaiDaDuyet)->orWhere('tieu_de','like','%' . $data['tieu_de'] . '%')->orderBy('isHot', 'desc')->paginate(10, ['id', 'tieu_de', 'ten_chuc_vu', 'luong_from', 'luong_to', 'isHot', 'status', 'han_tuyen', 'nha_tuyen_dung_id', 'dia_diem_id', 'cong_ty_id'], 'page');
         $data['bai_tuyen_dung'] = $newQuery->distinct('id')->where('status', $trangThaiDaDuyet)->orWhere('tieu_de','like','%' . $data['tieu_de'] . '%')->paginate(10, ['id', 'tieu_de', 'ten_chuc_vu', 'luong_from', 'luong_to', 'isHot', 'status', 'han_tuyen', 'nha_tuyen_dung_id', 'dia_diem_id', 'cong_ty_id'], 'page');
+        
         $data['trang_hien_tai'] = $data['bai_tuyen_dung']->currentPage();
         $data['check_trang'] = $data['bai_tuyen_dung']->nextPageUrl();
         //        if ($request->has('kieu_lam_viec') == true && $request->get('kieu_lam_viec') != null) {

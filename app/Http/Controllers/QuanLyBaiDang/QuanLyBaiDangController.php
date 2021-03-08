@@ -138,7 +138,8 @@ class QuanLyBaiDangController extends Controller
         // dd($query->get()->toArray());
         $dataNew = $query->distinct('id');
 
-        $dataNew = $dataNew->orderBy('status', 'asc')->orderBy('han_tuyen', 'desc')->get()->toArray();
+        // $dataNew = $dataNew->orderBy('status', 'asc')->orderBy('han_tuyen', 'desc')->get()->toArray();
+        $dataNew = $dataNew->get()->toArray();
 //            dd($dataNew);
         $colect = collect($dataNew);
         if ($request->exists('dia_diem') && $request->get('dia_diem') != "") {
