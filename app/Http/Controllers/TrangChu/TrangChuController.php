@@ -109,7 +109,6 @@ class TrangChuController extends Controller
 
     public function getBaiTuyenDung(Request $request)
     {
-        // try {
             $page = 1;//default
             $query = BaiTuyenDung::with([
                 'getNhaTuyenDung' => function ($subquery) {
@@ -182,7 +181,7 @@ class TrangChuController extends Controller
 
             // $dataNew = $dataNew->orderBy('isHot', 'desc')->get()->toArray();
             $dataNew = $dataNew->get()->toArray();
-
+            
             $colect = collect($dataNew);
             if ($request->exists('dia_diem') && $request->get('dia_diem') != "") {
                 $colect = $colect->whereNotNull('get_dia_diem');
@@ -193,8 +192,6 @@ class TrangChuController extends Controller
 
             $perpage = 10;
             $colection = collect($colect);
-
-            
 
             $data['bai_tuyen_dung'] = new LengthAwarePaginator(
                 $colection->forPage($page, $perpage),
@@ -208,10 +205,6 @@ class TrangChuController extends Controller
             $data['check_trang'] = $data['bai_tuyen_dung']->nextPageUrl();
             
             return $data;
-
-        // } catch (\Exception $e) {
-        //     return redirect('/');
-        // }
 
     }
     public function vietLam(Request $request){
