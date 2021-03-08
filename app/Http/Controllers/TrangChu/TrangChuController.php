@@ -181,7 +181,8 @@ class TrangChuController extends Controller
             $trangThaiDaDuyet = 1;
             $dataNew = $query->distinct('id')->where('status', $trangThaiDaDuyet);
 
-            $dataNew = $dataNew->orderBy('isHot', 'desc')->get()->toArray();
+            // $dataNew = $dataNew->orderBy('isHot', 'desc')->get()->toArray();
+            $dataNew = $dataNew->get()->toArray();
 
             $colect = collect($dataNew);
             if ($request->exists('dia_diem') && $request->get('dia_diem') != "") {
