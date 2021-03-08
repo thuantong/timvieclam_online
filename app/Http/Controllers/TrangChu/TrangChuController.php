@@ -193,13 +193,16 @@ class TrangChuController extends Controller
 
             $perpage = 10;
             $colection = collect($colect);
-            $data['bai_tuyen_dung'] = new LengthAwarePaginator(
+
+            
+
+            $data['bai_tuyen_dung'] = collect(new LengthAwarePaginator(
                 $colection->forPage($page, $perpage),
                 $colection->count(),
                 $perpage,
                 $page,
                 ['path' => route($request->route()->getName())]
-            );
+            ))->toArray();
 
             $data['trang_hien_tai'] = $data['bai_tuyen_dung']->currentPage();
             $data['check_trang'] = $data['bai_tuyen_dung']->nextPageUrl();
