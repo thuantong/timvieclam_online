@@ -29,8 +29,8 @@ class TrangChuController extends Controller
         $data = $this->getBaiTuyenDung($request);
         // $data["bai_tuyen_dung"] = $data["bai_tuyen_dung"];
 
-        dd($data["bai_tuyen_dung"]);
-        $data["bai_tuyen_dung"]['data'] = $data["bai_tuyen_dung"]['data'];
+        // dd($data["bai_tuyen_dung"]);
+        // $data["bai_tuyen_dung"]['data'] = $data["bai_tuyen_dung"]['data'];
         // dd(json_decode($data["bai_tuyen_dung"],true));
        
         return view('TrangChu.index', compact('data'));
@@ -196,18 +196,18 @@ class TrangChuController extends Controller
 
             
 
-            $data['bai_tuyen_dung'] = collect(new LengthAwarePaginator(
+            $data['bai_tuyen_dung'] = new LengthAwarePaginator(
                 $colection->forPage($page, $perpage),
                 $colection->count(),
                 $perpage,
                 $page,
                 ['path' => route($request->route()->getName())]
-            ))->toArray();
+            );
 
             $data['trang_hien_tai'] = $data['bai_tuyen_dung']->currentPage();
             $data['check_trang'] = $data['bai_tuyen_dung']->nextPageUrl();
             
-            return $data;
+            return collect($data)->toArray();
 
         } catch (\Exception $e) {
             return redirect('/');
