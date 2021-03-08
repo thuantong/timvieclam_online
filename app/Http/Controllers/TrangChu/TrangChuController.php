@@ -110,7 +110,7 @@ class TrangChuController extends Controller
 
     public function getBaiTuyenDung(Request $request)
     {
-        try {
+        // try {
             $page = 1;//default
             $query = BaiTuyenDung::with([
                 'getNhaTuyenDung' => function ($subquery) {
@@ -209,9 +209,9 @@ class TrangChuController extends Controller
             
             return collect($data)->toArray();
 
-        } catch (\Exception $e) {
-            return redirect('/');
-        }
+        // } catch (\Exception $e) {
+        //     return redirect('/');
+        // }
 
     }
     public function vietLam(Request $request){
