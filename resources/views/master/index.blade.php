@@ -11,39 +11,39 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\images\animat-diamond-color.gif')}}">
+    <link rel="shortcut icon" href="{{secure_asset(env('URL_ASSET_PUBLIC').'assets\images\animat-diamond-color.gif')}}">
 
     <!-- plugin css -->
-    <link href="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\libs\jquery-vectormap\jquery-jvectormap-1.2.2.css')}}"
+    <link href="{{secure_asset(env('URL_ASSET_PUBLIC').'assets\libs\jquery-vectormap\jquery-jvectormap-1.2.2.css')}}"
           rel="stylesheet"
           type="text/css">
     <!-- App css -->
-    <link href="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\css\bootstrap.min.css')}}" rel="stylesheet"
+    <link href="{{secure_asset(env('URL_ASSET_PUBLIC').'assets\css\bootstrap.min.css')}}" rel="stylesheet"
           type="text/css">
     <!-- typicon icon -->
     <link rel="stylesheet" type="text/css"
-          href="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\icon\typicons-icons\css\typicons.min.css')}}">
+          href="{{secure_asset(env('URL_ASSET_PUBLIC').'assets\icon\typicons-icons\css\typicons.min.css')}}">
 
     <link rel="stylesheet" type="text/css"
-          href="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\icon\themify-icons\themify-icons.css')}}">
+          href="{{secure_asset(env('URL_ASSET_PUBLIC').'assets\icon\themify-icons\themify-icons.css')}}">
     <!-- Font Awesome -->
     <link rel="stylesheet" type="text/css"
-          href="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\icon\font-awesome\css\font-awesome.min.css')}}">
+          href="{{secure_asset(env('URL_ASSET_PUBLIC').'assets\icon\font-awesome\css\font-awesome.min.css')}}">
     <!-- ico font -->
     <link rel="stylesheet" type="text/css"
-          href="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\icon\icofont\css\icofont.css')}}">
+          href="{{secure_asset(env('URL_ASSET_PUBLIC').'assets\icon\icofont\css\icofont.css')}}">
     @include('script_js.select2.css')
     <!-- feather Awesome -->
     <link rel="stylesheet" type="text/css"
-          href="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\icon\feather\css\feather.css')}}">
-    <link href="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\css\croppie\croppie.css')}}" rel="stylesheet"
+          href="{{secure_asset(env('URL_ASSET_PUBLIC').'assets\icon\feather\css\feather.css')}}">
+    <link href="{{secure_asset(env('URL_ASSET_PUBLIC').'assets\css\croppie\croppie.css')}}" rel="stylesheet"
           type="text/css">
-    <link href="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\css\croppie\demo.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{secure_asset(env('URL_ASSET_PUBLIC').'assets\css\croppie\demo.css')}}" rel="stylesheet" type="text/css">
 
     <!-- Jquery Toast css -->
-    <link href="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\js\vtoast\vtoast.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\css\app.min.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\css\style-customs.css')}}" rel="stylesheet"
+    <link href="{{secure_asset(env('URL_ASSET_PUBLIC').'assets\js\vtoast\vtoast.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{secure_asset(env('URL_ASSET_PUBLIC').'assets\css\app.min.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{secure_asset(env('URL_ASSET_PUBLIC').'assets\css\style-customs.css')}}" rel="stylesheet"
           type="text/css">
 
 </head>
