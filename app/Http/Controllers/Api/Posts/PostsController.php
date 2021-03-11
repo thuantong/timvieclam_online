@@ -23,21 +23,20 @@ class PostsController extends Controller
             $start= ($page - 1)*$limit;
             $query = DB::table('post_blog')->select('*');
 
-            
             if($request->exists('post_id')){
                 $query->where('id',$request->get('post_id'));
             }
-            // if(!$request->exists('post_id')){
-            //     $query->offset($start)->limit($limit);
-            // }
-            // $object = new Object();
+            
             $object= clone $query;
             $total_record = $object->count();
             $total_page = ceil($total_record/$limit);
                 $result = $query->offset($start)->limit($limit)->orderBy('created_at','desc')->get();
                 $data = $this->response(200,$result);
             // $data['data'] = ;
-            $data['total_page'] = $total_page;
+	    $data['pagination'] = array(
+		'page'=>$page,'limit'=>$limit,'total'=>$total_page
+		);
+           
             $data = json_encode($data, true);
             return response($data);
         } catch (Exception $e) {
