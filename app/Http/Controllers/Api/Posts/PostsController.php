@@ -34,7 +34,7 @@ class PostsController extends Controller
                 $data = $this->response(200,$result);
             // $data['data'] = ;
 	    $data['pagination'] = array(
-		'page'=>$page,'limit'=>$limit,'total'=>$total_page
+		'page'=>$page,'limit'=>$limit,'total_page'=>$total_page
 		);
            
             $data = json_encode($data, true);
