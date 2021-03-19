@@ -20,27 +20,40 @@ class PostsController extends Controller
         try {
             $page = $request->get('page') ?? 0;
             $limit = $request->get('limit') ?? 1000;
-            $start= ($page - 1)*$limit;
+            $start = ($page - 1) * $limit;
             $query = DB::table('post_blog')->select('*');
 
-            if($request->exists('post_id')){
-                $query->where('id',$request->get('post_id'));
+            if ($request->exists('post_id')) {
+                $query->where('id', $request->get('post_id'));
             }
-            
-            $object= clone $query;
+
+            $object = clone $query;
             $total_record = $object->count();
-            $total_page = ceil($total_record/$limit);
-                $result = $query->offset($start)->limit($limit)->orderBy('created_at','desc')->get();
-                $data = $this->response(200,$result);
+            $total_page = ceil($total_record / $limit);
+            $result = $query->offset($start)->limit($limit)->orderBy('created_at', 'desc')->get();
+            $data = $this->response(200, $result);
             // $data['data'] = ;
-	    $data['pagination'] = array(
-		'page'=>$page,'limit'=>$limit,'total_page'=>$total_page
-		);
-           
+            $data['pagination'] = array(
+                'page' => $page, 'limit' => $limit, 'total_page' => $total_page
+            );
+
             $data = json_encode($data, true);
             return response($data);
         } catch (Exception $e) {
             return $e->getMessage();
+        }
+    }
+
+    public function detail(Request $request)
+    {
+        try {
+            $post = DB::table('post_blog')->find($request->post);
+            $response_data = $post ?? [];
+            $data = $this->response(200, $response_data);
+            $data = json_encode($data, true);
+            return response($data);
+        } catch (Exception $e) {
+            return response($e->getMessage());
         }
     }
 
@@ -78,7 +91,7 @@ class PostsController extends Controller
             $query->sub_content = $requestJson['sub_content'];
             $query->content = $requestJson['content'];
             $query->save();
-            $data = json_encode($query,true);
+            $data = json_encode($query, true);
             return response($data);
         } catch (Exception $e) {
             return $e->getMessage();
@@ -87,11 +100,11 @@ class PostsController extends Controller
 
     public function delete($id)
     {
-        try{
+        try {
             $query = Posts::query()->find($id);
             $query->delete();
             return response("ok");
-        }catch (Exception $e) {
+        } catch (Exception $e) {
             return $e->getMessage();
         }
     }
