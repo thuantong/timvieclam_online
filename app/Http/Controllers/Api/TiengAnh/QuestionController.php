@@ -58,7 +58,8 @@ class QuestionController extends Controller
         $replace = substr($image_64, 0, strpos($image_64, ',')+1); 
         $image = str_replace($replace, '', $image_64); 
         $image = str_replace(' ', '+', $image); 
-        $imageName = Str::random(15).time().'.'.$extension;
+        // $imageName = Str::random(15).time().'.'.$extension;
+        $imageName = Str::random(15).time().'.png';
         $path = URL::to('/').'/images/'.$imageName;
         file_put_contents($path, base64_decode($image));
         return URL::to('/')."/images/".$imageName;
