@@ -60,7 +60,7 @@ class QuestionController extends Controller
         $image = str_replace(' ', '+', $image); 
         // $imageName = Str::random(15).time().'.'.$extension;
         $imageName = Str::random(15).time().'.png';
-        $path = URL::to('/').'/images/'.$imageName;
+        $path = public_path().'/images/'.$imageName;
         file_put_contents($path, base64_decode($image));
         return URL::to('/')."/images/".$imageName;
     }
@@ -75,7 +75,7 @@ class QuestionController extends Controller
         $audio = str_replace($replace, '', $audio_64); 
         $audio = str_replace(' ', '+', $audio); 
         $audioName = Str::random(15).time().'.mp3';
-        $path = URL::to('/').'/audios/'.$audioName;
+        $path = public_path().'/audios/'.$audioName;
         file_put_contents($path, base64_decode($audio));
         // return array();
         return URL::to('/')."/audios/".$audioName;
