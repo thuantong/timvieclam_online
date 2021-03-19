@@ -80,4 +80,9 @@ class QuestionController extends Controller
         // return array();
         return URL::to('/')."/audios/".$audioName;
     }
+    public function delete($id)
+    {
+        $question = Question::query()->find($id);
+        $question->delete();
+    }
 }
