@@ -23,7 +23,7 @@ class QuestionController extends Controller
             $data = $this->response(200, $question);
             return response(json_encode($data, true));
         }
-        $question = Question::query()->orderBy('id', 'desc')->get();
+        $question = Question::query()->orderBy('id', 'asc')->get();
         return json_encode($question ?? [], true);
     }
     public function create(Request $request)
