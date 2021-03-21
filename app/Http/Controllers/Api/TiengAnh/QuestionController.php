@@ -57,6 +57,7 @@ $q->orderBy('id', 'asc');
 
     public function update(Request $request)
     {
+        header('Access-Control-Allow-Origin: *');
         $question = Question::query()->find($request->id);
         $question->name = $request->name;
         $question->a = $request->a;
