@@ -48,6 +48,17 @@ class QuestionController extends Controller
       
     }
 
+
+    public function update(Request $request)
+    {
+        $question = Question::query()->find($request->id);
+        $question->correct = $request->correct;
+        $question->save();
+        $data = $this->response(200,$question);
+   
+        return response(json_encode($data,true));
+    }
+
     public function uploadImage($requestImage):string
     {
         if(!isset($requestImage)){

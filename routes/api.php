@@ -34,6 +34,7 @@ Route::namespace('Api')->group(function () {
             Route::name('tienganh.')->group(function () {
                 Route::get('/get-question', 'QuestionController@index')->name('getQuestion');
                 Route::post('/create-question', 'QuestionController@create')->name('createQuestion');
+                Route::post('/update-question', 'QuestionController@update')->name('updateQuestion');
                 Route::delete('/delete-question/{id}', 'QuestionController@delete')->name('deleteQuestion');
 
                 Route::get('/get-topic', 'TopicController@index')->name('getTopic');
