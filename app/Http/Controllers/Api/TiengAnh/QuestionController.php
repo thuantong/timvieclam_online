@@ -8,24 +8,23 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
+
 class QuestionController extends Controller
 {
     public function index(Request $request)
     {
-        if($request->has('topic')){
-            $question = Topic::query()->where('id',$request->topic)->with('getQuestion')->get();
-            $data = $this->response(200,$question);
-            return response(json_encode($data,true));
-
+        if ($request->has('topic')) {
+            $question = Topic::query()->where('id', $request->topic)->with('getQuestion')->get();
+            $data = $this->response(200, $question);
+            return response(json_encode($data, true));
         }
-        if($request->has('question')){
+        if ($request->has('question')) {
             $question = Question::query()->find($request->question);
-            $data = $this->response(200,$question);
-            return response(json_encode($data,true));
-
+            $data = $this->response(200, $question);
+            return response(json_encode($data, true));
         }
-        $question = Question::all();
-        return json_encode($question?? [],true);
+        $question = Question::query()->orderBy('id', 'asc')->get();
+        return json_encode($question ?? [], true);
     }
     public function create(Request $request)
     {
@@ -48,10 +47,9 @@ class QuestionController extends Controller
         $question->part_id = $request->part_id;
         $question->save();
 
-        $data = $this->response(200,$question);
-   
-        return response(json_encode($data,true));
-      
+        $data = $this->response(200, $question);
+
+        return response(json_encode($data, true));
     }
 
 
@@ -73,43 +71,44 @@ class QuestionController extends Controller
         $question->image = $this->uploadImage($request->image);
         $question->audio = $this->uploadAudio($request->audio);
         $question->topic_id = $request->topic_id;
-        $question->part_id = $request->part_id;        $question->save();
-        $data = $this->response(200,$question);
-   
-        return response(json_encode($data,true));
+        $question->part_id = $request->part_id;
+        $question->save();
+        $data = $this->response(200, $question);
+
+        return response(json_encode($data, true));
     }
 
-    public function uploadImage($requestImage):string
+    public function uploadImage($requestImage): string
     {
-        if(!isset($requestImage)){
+        if (!isset($requestImage)) {
             return "";
         }
         $image_64 = $requestImage;
         $extension = explode('/', explode(':', substr($image_64, 0, strpos($image_64, ';')))[1])[1];
-        $replace = substr($image_64, 0, strpos($image_64, ',')+1); 
-        $image = str_replace($replace, '', $image_64); 
-        $image = str_replace(' ', '+', $image); 
+        $replace = substr($image_64, 0, strpos($image_64, ',') + 1);
+        $image = str_replace($replace, '', $image_64);
+        $image = str_replace(' ', '+', $image);
         // $imageName = Str::random(15).time().'.'.$extension;
-        $imageName = Str::random(15).time().'.png';
-        $path = public_path().'/images/'.$imageName;
+        $imageName = Str::random(15) . time() . '.png';
+        $path = public_path() . '/images/' . $imageName;
         file_put_contents($path, base64_decode($image));
-        return URL::to('/')."/images/".$imageName;
+        return URL::to('/') . "/images/" . $imageName;
     }
-    public function uploadAudio($requestAudio):string
+    public function uploadAudio($requestAudio): string
     {
-        if(!isset($requestAudio)){
+        if (!isset($requestAudio)) {
             return "";
         }
         $audio_64 = $requestAudio;
         $extension = explode('/', explode(':', substr($audio_64, 0, strpos($audio_64, ';')))[1])[1];
-        $replace = substr($audio_64, 0, strpos($audio_64, ',')+1); 
-        $audio = str_replace($replace, '', $audio_64); 
-        $audio = str_replace(' ', '+', $audio); 
-        $audioName = Str::random(15).time().'.mp3';
-        $path = public_path().'/audios/'.$audioName;
+        $replace = substr($audio_64, 0, strpos($audio_64, ',') + 1);
+        $audio = str_replace($replace, '', $audio_64);
+        $audio = str_replace(' ', '+', $audio);
+        $audioName = Str::random(15) . time() . '.mp3';
+        $path = public_path() . '/audios/' . $audioName;
         file_put_contents($path, base64_decode($audio));
         // return array();
-        return URL::to('/')."/audios/".$audioName;
+        return URL::to('/') . "/audios/" . $audioName;
     }
     public function delete($id)
     {
