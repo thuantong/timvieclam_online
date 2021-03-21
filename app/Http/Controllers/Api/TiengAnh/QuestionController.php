@@ -14,7 +14,9 @@ class QuestionController extends Controller
     public function index(Request $request)
     {
         if ($request->has('topic')) {
-            $question = Topic::query()->where('id', $request->topic)->with('getQuestion')->get();
+            $question = Topic::query()->where('id', $request->topic)->with(['getQuestion'=>function($q){
+$q->orderBy('id', 'asc');
+            }])->get();
             $data = $this->response(200, $question);
             return response(json_encode($data, true));
         }
