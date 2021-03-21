@@ -18,6 +18,12 @@ class QuestionController extends Controller
             return response(json_encode($data,true));
 
         }
+        if($request->has('question')){
+            $question = Question::query()->find($request->question);
+            $data = $this->response(200,$question);
+            return response(json_encode($data,true));
+
+        }
         $question = Question::all();
         return json_encode($question?? [],true);
     }
