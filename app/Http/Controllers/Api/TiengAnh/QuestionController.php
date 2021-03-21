@@ -52,8 +52,22 @@ class QuestionController extends Controller
     public function update(Request $request)
     {
         $question = Question::query()->find($request->id);
+        $question->name = $request->name;
+        $question->a = $request->a;
+        $question->b = $request->b;
+        $question->c = $request->c;
+        $question->d = $request->d;
         $question->correct = $request->correct;
-        $question->save();
+        $question->name_trans = $request->name_trans;
+        $question->a_trans = $request->a_trans;
+        $question->b_trans = $request->b_trans;
+        $question->c_trans = $request->c_trans;
+        $question->d_trans = $request->d_trans;
+        $question->descipt = $request->descipt;
+        $question->image = $this->uploadImage($request->image);
+        $question->audio = $this->uploadAudio($request->audio);
+        $question->topic_id = $request->topic_id;
+        $question->part_id = $request->part_id;        $question->save();
         $data = $this->response(200,$question);
    
         return response(json_encode($data,true));
