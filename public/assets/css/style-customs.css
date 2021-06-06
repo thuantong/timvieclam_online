@@ -653,5 +653,5 @@ b, strong {
     z-index: 0!important;
 }
 #content-detail-left::-webkit-scrollbar { 
-    display: none;  /* Safari and Chrome */
+    display: none;  /* Safari and Chrome place*/
 }
