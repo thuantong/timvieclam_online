@@ -45,7 +45,7 @@ class PasswordController extends Controller
                 ),
             );
             $sendEmail = $newConfirm->email;
-            dd($sendEmail);
+            // dd($sendEmail);
             Mail::to($sendEmail)->send(new SendEmail($dataEmail));
         }else{
 //            echo "<script>alert('Bạn đã gửi rồi')</script>";
