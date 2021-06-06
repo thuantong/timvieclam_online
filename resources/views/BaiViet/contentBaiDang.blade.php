@@ -173,13 +173,14 @@
                             <div class="row">
                                 {{--                                    <div class="col-sm-12 col-md-4">--}}
                                 {{--                                        <img src="@if(isset($data['cong_ty']) && $data['cong_ty']['logo'] != null){{URL::asset(''.$data['cong_ty']['logo'].'')}}@else{{URL::asset('images/default-company-logo.jpg')}}@endif" width="100" height="100">--}}
+                                {{-- @dd($data['cong_ty']) --}}
                                 <input id="cong_ty_tuyen_dung" class="not-null" title="Công ty tuyển dụng"
                                        type="hidden" title="Công ty"
-                                       value="@if(isset($data['cong_ty']) && $data['cong_ty']['id'] != null){{$data['cong_ty']['id']}}@endif">
+                                       value="@if((count($data['cong_ty']) > 0) && isset($data['cong_ty']) && $data['cong_ty']['id'] != null){{$data['cong_ty']['id']}}@endif">
 
                                 {{--                                    </div>--}}
                                 <div class="col-sm-12 col-md-12"
-                                     id="cong_ty_tuyen_dung_name">@if(isset($data['cong_ty']) && $data['cong_ty']['name'] != null)
+                                     id="cong_ty_tuyen_dung_name">@if((count($data['cong_ty']) > 0) && isset($data['cong_ty']) && $data['cong_ty']['name'] != null)
                                         <h5>{{ucwords($data['cong_ty']['name'])}}</h5>@else <h5>{{'Chưa thêm công ty tuyển dụng'}}</h5> @endif
                                     <button class="btn btn-sm waves-effect btn-warning call-them-moi-cong-ty"
                                             id="call-them-moi-cong-ty">Chỉnh sửa

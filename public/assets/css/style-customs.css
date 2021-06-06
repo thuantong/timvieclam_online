@@ -563,9 +563,9 @@ b, strong {
     border-color: var(--normal) !important;
 }
 
-.content-page {
+/* .content-page {
     padding: 0 15px 0px 15px !important;
-}
+} */
 
 .footer {
     background: var(--normal) !important;
@@ -651,4 +651,7 @@ b, strong {
 }
 .morris-hover{
     z-index: 0!important;
+}
+#content-detail-left::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
 }

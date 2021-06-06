@@ -60,7 +60,7 @@ class CongTyController extends Controller
         $data = $this->getData();
 //        dd($data);
 //        dd(\GuzzleHttp\json_decode());
-//        dd($data);
+    //    dd(isset($data['data']));
         return view('CongTy.index', compact('data'));
     }
 

@@ -62,50 +62,55 @@ class AdminTrangChuController extends Controller
         $thangNay_tru_4 = BaiTuyenDung::query()->whereMonth('created_at', '=', Carbon::now()->subMonths(4)->month)->count();
         $thangNay_tru_5 = BaiTuyenDung::query()->whereMonth('created_at', '=', Carbon::now()->subMonths(5)->month)->count();
 //        dd(Carbon::now()->subMonths(5)->format('m-Y'));
-        $index = 0;
-        if ($thangNay_tru_5 > 0) {
-            $chartBTD[$index] = array(
-                'x' => 'Tháng ' . Carbon::now()->subMonths(5)->format('m-Y'),
-                'y' => $thangNay_tru_5
-            );
-            $index++;
+        if($thangNay>0){
+            $index = 0;
+            if ($thangNay_tru_5 > 0) {
+                $chartBTD[$index] = array(
+                    'x' => 'Tháng ' . Carbon::now()->subMonths(5)->format('m-Y'),
+                    'y' => $thangNay_tru_5
+                );
+                $index++;
+            }
+            if ($thangNay_tru_4 > 0) {
+                $chartBTD[$index] = array(
+                    'x' => 'Tháng ' . Carbon::now()->subMonths(4)->format('m-Y'),
+                    'y' => $thangNay_tru_4
+                );
+                $index++;
+            }
+            if ($thangNay_tru_3 > 0) {
+                $chartBTD[$index] = array(
+                    'x' => 'Tháng ' . Carbon::now()->subMonths(3)->format('m-Y'),
+                    'y' => $thangNay_tru_3
+                );
+                $index++;
+            }
+            if ($thangNay_tru_2 > 0) {
+                $chartBTD[$index] = array(
+                    'x' => 'Tháng ' . Carbon::now()->subMonths(2)->format('m-Y'),
+                    'y' => $thangNay_tru_2
+                );
+                $index++;
+            }
+            if ($thangNay_tru_1 > 0) {
+                $chartBTD[$index] = array(
+                    'x' => 'Tháng ' . Carbon::now()->subMonths(1)->format('m-Y'),
+                    'y' => $thangNay_tru_1
+                );
+                $index++;
+            }
+            if ($thangNay > 0) {
+                $chartBTD[$index] = array(
+                    'x' => 'Tháng ' . Carbon::now()->subMonths(0)->format('m-Y'),
+                    'y' => $thangNay
+                );
+            }
+        }else{
+            $chartBTD = [];
         }
-        if ($thangNay_tru_4 > 0) {
-            $chartBTD[$index] = array(
-                'x' => 'Tháng ' . Carbon::now()->subMonths(4)->format('m-Y'),
-                'y' => $thangNay_tru_4
-            );
-            $index++;
-        }
-        if ($thangNay_tru_3 > 0) {
-            $chartBTD[$index] = array(
-                'x' => 'Tháng ' . Carbon::now()->subMonths(3)->format('m-Y'),
-                'y' => $thangNay_tru_3
-            );
-            $index++;
-        }
-        if ($thangNay_tru_2 > 0) {
-            $chartBTD[$index] = array(
-                'x' => 'Tháng ' . Carbon::now()->subMonths(2)->format('m-Y'),
-                'y' => $thangNay_tru_2
-            );
-            $index++;
-        }
-        if ($thangNay_tru_1 > 0) {
-            $chartBTD[$index] = array(
-                'x' => 'Tháng ' . Carbon::now()->subMonths(1)->format('m-Y'),
-                'y' => $thangNay_tru_1
-            );
-            $index++;
-        }
-        if ($thangNay > 0) {
-            $chartBTD[$index] = array(
-                'x' => 'Tháng ' . Carbon::now()->subMonths(0)->format('m-Y'),
-                'y' => $thangNay
-            );
-        }
+        
 
-//dd($chartBTD);
+// dd($chartBTD);
         $dataBTD = json_encode($chartBTD, true);
 //        dd(json_decode($dataBTD, true));
 //        dd($thangNay);

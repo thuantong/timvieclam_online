@@ -92,14 +92,14 @@ BaiVietController extends Controller
 
         $this->nhaTuyenDung = TaiKhoan::query()->find(Auth::user()->id)->getNhaTuyenDung;
 
-        $data['kinh_nghiem'] = KinhNghiem::query()->orderBy('id', 'asc')->get();
-        $data['nganh_nghe'] = NganhNghe::query()->orderBy('name', 'asc')->get();
-        $data['cong_ty'] = $this->nhaTuyenDung->getCongTy()->first(['id', 'name', 'logo']);
-        $data['chuc_vu'] = ChucVu::query()->orderBy('name', 'asc')->get();
-        $data['dia_diem'] = DiaDiem::query()->orderBy('name', 'asc')->get();
-        $data['kieu_lam_viec'] = KieuLamViec::query()->orderBy('name', 'asc')->get();
-        $data['bang_cap'] = BangCap::query()->orderBy('name', 'asc')->get();
-        $data['quy_mo_nhan_su'] = QuyMoNhanSu::query()->orderBy('id', 'asc')->get();
+        $data['kinh_nghiem'] = KinhNghiem::query()->orderBy('id', 'asc')->get()->toArray();
+        $data['nganh_nghe'] = NganhNghe::query()->orderBy('name', 'asc')->get()->toArray();
+        $data['cong_ty'] = $this->nhaTuyenDung->getCongTy()->first(['id', 'name', 'logo'])->toArray();
+        $data['chuc_vu'] = ChucVu::query()->orderBy('name', 'asc')->get()->toArray();
+        $data['dia_diem'] = DiaDiem::query()->orderBy('name', 'asc')->get()->toArray();
+        $data['kieu_lam_viec'] = KieuLamViec::query()->orderBy('name', 'asc')->get()->toArray();
+        $data['bang_cap'] = BangCap::query()->orderBy('name', 'asc')->get()->toArray();
+        $data['quy_mo_nhan_su'] = QuyMoNhanSu::query()->orderBy('id', 'asc')->get()->toArray();
 //        dd($data);
         return view('BaiViet.index', compact('data'));
     }
@@ -384,8 +384,17 @@ BaiVietController extends Controller
                 $subquery->select('id', 'name');
             },
             'getCongTy' => function ($subquery) {
-                $subquery->select('id', 'name', 'logo');
+                $subquery->select('id', 'name', 'logo','dia_chi','gioi_thieu','websites','so_nhan_vien')->with(
+                    [
+                        'getQuyMoNhanSu'=> function ($subquery2){
+                        $subquery2->select('id', 'name');
+                    },
+                    'getNganhNghe'
+                    ]
+                
+                )->get();
             },
+            // 'getCongTy',
             'getNganhNghe',
             'getChucVu' => function ($subquery) {
                 $subquery->select('id', 'name');
@@ -399,12 +408,12 @@ BaiVietController extends Controller
             'getBangCap' => function ($subquery) {
                 $subquery->select('id', 'name');
             },
-        ])->select(['id', 'tieu_de', 'ten_chuc_vu', 'luong_from','luong_to', 'tuoi', 'gioi_tinh_tuyen', 'so_luong_tuyen', 'isHot', 'status', 'han_tuyen', 'nha_tuyen_dung_id', 'dia_diem_id', 'chuc_vu_id', 'kinh_nghiem_id', 'cong_ty_id', 'kieu_lam_viec_id', 'bang_cap_id'])->find($post)->toArray();
+        ])->select(['id', 'tieu_de', 'ten_chuc_vu', 'luong_from','yeu_cau_ho_so','luong_to', 'tuoi', 'gioi_tinh_tuyen', 'so_luong_tuyen', 'isHot', 'status', 'han_tuyen', 'nha_tuyen_dung_id', 'dia_diem_id', 'chuc_vu_id', 'kinh_nghiem_id', 'cong_ty_id', 'kieu_lam_viec_id', 'bang_cap_id','mo_ta','yeu_cau_cong_viec','quyen_loi','dia_chi'])->find($post)->toArray();
         $data = $query;
 //        $data['luong'] = unserialize($data['luong']);
         $data['tuoi'] = unserialize($data['tuoi']);
         $data['tieu_de'] = ucwords($data['tieu_de']);
-
+        $data['yeu_cau_ho_so'] = unserialize($data['yeu_cau_ho_so']);
         if (Session::has('loai_tai_khoan')) {
             if (intval(Session::get('loai_tai_khoan')) == 1) {
                 $nguoiTimViecTim = TaiKhoan::query()->find(Auth::user()->id)->getNguoiTimViec()->first();

@@ -455,7 +455,7 @@
     <!-- Start Page Content here -->
     <!-- ============================================================== -->
 
-    <div class="content-page">
+    <div class="content-page pr-0 pl-0 pr-lg-1 pl-lg-1">
         <div class="content">
 
             <!-- Start Content-->

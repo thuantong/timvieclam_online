@@ -27,13 +27,13 @@
                         <div class="col-sm-9 col-md-10 col-lg-10 col-xl-10 pr-0">
                             <div class="row">
                                 <div class="col-sm-12 col-md-4">
-                                    <img src="@if(isset($data['cong_ty']) && $data['cong_ty']['logo'] != null){{URL::asset(''.$data['cong_ty']['logo'].'')}}@else{{URL::asset('images/default-company-logo.jpg')}}@endif" width="100" height="100">
-                                    <input id="cong_ty_tuyen_dung_update" class="not-null" type="hidden" title="Công ty" value="@if(isset($data['cong_ty']) && $data['cong_ty']['id'] != null){{$data['cong_ty']['id']}}@endif">
+                                    <img src="@if((count($data['cong_ty']) > 0) && isset($data['cong_ty']) && $data['cong_ty']['logo'] != null){{URL::asset(''.$data['cong_ty']['logo'].'')}}@else{{URL::asset('images/default-company-logo.jpg')}}@endif" width="100" height="100">
+                                    <input id="cong_ty_tuyen_dung_update" class="not-null" type="hidden" title="Công ty" value="@if((count($data['cong_ty']) > 0) && isset($data['cong_ty']) && $data['cong_ty']['id'] != null){{$data['cong_ty']['id']}}@endif">
                                     <span class="invalid-feedback" role="alert">
                             <strong></strong>
                         </span>
                                 </div>
-                                <div class="col-sm-12 col-md-8" id="cong_ty_tuyen_dung_name">@if(isset($data['cong_ty']) && $data['cong_ty']['name'] != null)<h5>{{ucwords($data['cong_ty']['name'])}}</h5>@else{{'Chưa thêm công ty tuyển dụng'}}@endif</div>
+                                <div class="col-sm-12 col-md-8" id="cong_ty_tuyen_dung_name">@if((count($data['cong_ty']) > 0) && isset($data['cong_ty']) && $data['cong_ty']['name'] != null)<h5>{{ucwords($data['cong_ty']['name'])}}</h5>@else{{'Chưa thêm công ty tuyển dụng'}}@endif</div>
                             </div>
 
                         </div>

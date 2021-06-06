@@ -729,3 +729,18 @@ const db_ajax_reload_page = (e) => {
 //     })
 // }
 
+$(document).on('click','a[data-toggle="collapse"]',function(){
+    let __this = $(this);
+    if(__this.hasClass('element')){
+        if(__this.hasClass('hide')){
+            __this.html('<i class="fa fa-expand"></i>');
+            __this.removeClass('hide');
+            __this.addClass('show');
+        }else{
+            __this.html('<i class="fa fa-compress"></i>');
+            __this.removeClass('show');
+            __this.addClass('hide');
+        }
+    }
+    
+});

@@ -127,39 +127,7 @@
             }
             __parent.find('textarea').val(""+value+"");
         });
-        // let customeditor =$('body').find('.custom-editor');
-        // if (customeditor != undefined && customeditor.length > 0){
-        //     customeditor.each(function () {
-        //         new Quill('#'+$(this).attr(), {
-        //             theme: "snow",
-        //             // placeholder: 'Compose an epic...',
-        //             modules: {toolbar: [ ["bold", "italic", "underline"], [{list: "ordered"}, {list: "bullet"}], [{align: []}], [], ["clean"]]}
-        //         });            })
-        // }
-        // console.log($('body').find('.custom-editor').length)
-        // mo_ta_cong_viec
-        //
-        // var quill = new Quill("#snow-editor", {
-        //     theme: "snow",
-        //     modules: {toolbar: [[{font: []}, {size: []}], ["bold", "italic", "underline", "strike"], [{color: []}, {background: []}], [{script: "super"}, {script: "sub"}], [{header: [!1, 1, 2, 3, 4, 5, 6]}, "blockquote", "code-block"], [{list: "ordered"}, {list: "bullet"}, {indent: "-1"}, {indent: "+1"}], ["direction", {align: []}], ["link", "image", "video", "formula"], ["clean"]]}
-        // });
-        // var editor = new Quill('#editor', {
-        // //     modules: { toolbar: '#toolbar' },
-        //     theme: 'bubble'
-        // });\
-        // var quill = new Quill('#editor', {
-        //     modules: {
-        //         toolbar: [
-        //             // [{ header: [2, 2, false] }],
-        //             ['bold', 'italic', 'underline'],
-        //             ['align']
-        //         ]
-        //     },
-        //     placeholder: 'Compose an epic...',
-        //     theme: 'snow'  // or 'bubble'
-        // });
-        // quill = new Quill("#bubble-editor", {theme: "bubble"});
-        // new Quill('#' + uid, options);
+        
         let table = null;
         let HTMLcongTy = null;
         let getBaseURL = '{{URL::asset('/')}}';
@@ -170,13 +138,6 @@
             select2Default($('select#quy_mo_nhan_su'));
             select2Default($('select#dia_diem'));
             select2MultipleDefault($('select#linh_vuc_hoat_dong'),'Chọn Ngành nghề')
-            // $('select#from_day,select#to_day,select#quy_mo_nhan_su').select2({
-            //     dropdownParent: $('div#cap-nhat-cong-ty ')
-            // });
-            // $('select#linh_vuc_hoat_dong').select2({
-            //     placeholder: ' Chọn Ngành nghề',
-            //     allowClear: false
-            // });
 
             $("#so_luong_chi_nhanh").TouchSpin({
                 min: 0,
@@ -214,9 +175,7 @@
             });
         }
     </script>
-{{--    <script type="text/javascript">--}}
-{{--        let HTMLcongTy = null;--}}
-{{--    </script>--}}
+
     <script type="text/javascript" src="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\js\date-picker-vi.js')}}"></script>
 {{--    js đăng bài--}}
     @include('BaiViet.scriptThemMoi')

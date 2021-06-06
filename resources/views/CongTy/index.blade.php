@@ -50,37 +50,6 @@
 {{--    </div>--}}
 
 
-
-
-
-
-    {{--    <div class="row">--}}
-    {{--        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">--}}
-    {{--            <div class="card-box p-1 mb-1 text-right">--}}
-
-    {{--                <div class="row">--}}
-    {{--                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">--}}
-    {{--                        <div class="table-responsive">--}}
-    {{--                            <table class="table table-bordered table-hover mb-0" id="danh-sach-cong-ty">--}}
-    {{--                                <thead class="thead-light">--}}
-    {{--                                <tr>--}}
-    {{--                                    <th class="text-center">Logo</th>--}}
-    {{--                                    <th class="text-center">Tên</th>--}}
-    {{--                                    <th class="text-center">Email</th>--}}
-    {{--                                    <th class="text-center">Số điện thoại</th>--}}
-    {{--                                    <th class="text-center">Websites</th>--}}
-    {{--                                    <th class="text-center">Giới thiệu công ty</th>--}}
-    {{--                                    <th class="text-center">Chức năng</th>--}}
-    {{--                                </tr>--}}
-    {{--                                </thead>--}}
-    {{--                            </table>--}}
-    {{--                        </div>--}}
-    {{--                    </div>--}}
-    {{--                </div>--}}
-
-    {{--            </div>--}}
-    {{--        </div>--}}
-    {{--    </div>--}}
 @endsection
 @push('scripts')
     <script src="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\libs\datatables\jquery.dataTables.min.js')}}"></script>

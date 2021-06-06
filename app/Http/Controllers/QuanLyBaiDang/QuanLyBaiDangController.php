@@ -24,6 +24,7 @@ class QuanLyBaiDangController extends Controller
         $this->middleware(['auth','email.confirm','nha_tuyen_dung']);
         $this->middleware(function ($request, $next) {
             $this->nhaTuyenDung = TaiKhoan::query()->find(Auth::user()->id)->getNhaTuyenDung;
+            // dd($this->nhaTuyenDung);
             return $next($request);
         });
     }
@@ -31,17 +32,21 @@ class QuanLyBaiDangController extends Controller
     public function index(){
 //        $btd = BaiTuyenDung::query()->whereDate(['han_tuyen','>=',Carbon::now()->format('d/m/Y'));
 //
-//        dd($btd->get()->toArray());
-//        dd(Carbon::createFromFormat('d/m/Y','23/12/2020'));
-        $data['kinh_nghiem'] = KinhNghiem::query()->orderBy('id', 'asc')->get();
-        $data['nganh_nghe'] = NganhNghe::query()->orderBy('name', 'asc')->get();
-        $data['cong_ty'] = $this->nhaTuyenDung->getCongTy()->orderBy('created_at', 'desc')->first()->toArray();
-        $data['chuc_vu'] = ChucVu::query()->orderBy('name', 'asc')->get();
-        $data['dia_diem'] = DiaDiem::query()->orderBy('name', 'asc')->get();
-        $data['kieu_lam_viec'] = KieuLamViec::query()->orderBy('name', 'asc')->get();
-        $data['bang_cap'] = BangCap::query()->orderBy('name', 'asc')->get();
-        $data['quy_mo_nhan_su'] = QuyMoNhanSu::query()->orderBy('id', 'asc')->get();
-//        dd($data);
+        $data['kinh_nghiem'] = KinhNghiem::query()->orderBy('id', 'asc')->get()->toArray();
+        $data['nganh_nghe'] = NganhNghe::query()->orderBy('name', 'asc')->get()->toArray();
+    
+        $checkCongTy = $this->nhaTuyenDung->getCongTy();
+        if($checkCongTy->get()->toArray() != null){
+            $data['cong_ty'] = $checkCongTy->orderBy('created_at', 'desc')->first()->toArray();
+        }else{
+            $data['cong_ty'] = array();
+        }
+        $data['chuc_vu'] = ChucVu::query()->orderBy('name', 'asc')->get()->toArray();
+        $data['dia_diem'] = DiaDiem::query()->orderBy('name', 'asc')->get()->toArray();
+        $data['kieu_lam_viec'] = KieuLamViec::query()->orderBy('name', 'asc')->get()->toArray();
+        $data['bang_cap'] = BangCap::query()->orderBy('name', 'asc')->get()->toArray();
+        $data['quy_mo_nhan_su'] = QuyMoNhanSu::query()->orderBy('id', 'asc')->get()->toArray();
+    //    dd();
         return view('QuanLyTuyenDung.QLBaiDang.index',compact('data'));
     }
     public function getDanhSach(Request $request){

@@ -1130,6 +1130,10 @@ pre code {
   .offset-sm-11 {
     margin-left: 91.6666666667%;
   }
+
+  .content-page-padding-sm{
+    padding: 0 0px 0px 0px !important;
+  }
 }
 
 @media (min-width: 768px) {
