@@ -30,7 +30,7 @@ class PasswordController extends Controller
         $newCode = rand(100000,999999);
         $myCode = $newCode;
         $timKiem = PasswordReset::query()->where('email',$email)->first();
-       dd($timKiem);
+    //    dd($timKiem);
 
         if ($timKiem != null){
             $newConfirm = new PasswordReset();
@@ -45,6 +45,7 @@ class PasswordController extends Controller
                 ),
             );
             $sendEmail = $newConfirm->email;
+            dd($sendEmail);
             Mail::to($sendEmail)->send(new SendEmail($dataEmail));
         }else{
 //            echo "<script>alert('Bạn đã gửi rồi')</script>";
