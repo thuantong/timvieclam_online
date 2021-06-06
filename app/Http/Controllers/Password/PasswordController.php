@@ -30,9 +30,9 @@ class PasswordController extends Controller
         $newCode = rand(100000,999999);
         $myCode = $newCode;
         $timKiem = PasswordReset::query()->where('email',$email)->first();
-//        dd($timKiem);
+       dd($timKiem);
 
-        if ($timKiem == null){
+        if ($timKiem != null){
             $newConfirm = new PasswordReset();
             $newConfirm->email = $email;
             $newConfirm->token = $myCode;
