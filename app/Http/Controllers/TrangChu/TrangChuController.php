@@ -20,7 +20,7 @@ class TrangChuController extends Controller
 
     public function __construct()
     {
-//        $this->middleware('auth');
+    //    $this->middleware('cacheResponse:1200');
     }
 
     public function index(Request $request)

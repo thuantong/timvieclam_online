@@ -37,6 +37,7 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \Spatie\ResponseCache\Middlewares\CacheResponse::class
         ],
 
         'api' => [
@@ -68,5 +69,7 @@ class Kernel extends HttpKernel
         'nha_tuyen_dung'=>\App\Http\Middleware\CheckNhaTuyenDung::class,
         'nguoi_tim_viec'=>\App\Http\Middleware\CheckNguoiTimViec::class,
         'auth.admin'=>\App\Http\Middleware\authAdmin::class,
+        'doNotCacheResponse' => \Spatie\ResponseCache\Middlewares\DoNotCacheResponse::class,
+        'cacheResponse' => \Spatie\ResponseCache\Middlewares\CacheResponse::class,
     ];
 }
