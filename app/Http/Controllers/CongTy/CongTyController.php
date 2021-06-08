@@ -40,18 +40,23 @@ class CongTyController extends Controller
         $data['nganh_nghe'] = NganhNghe::all()->toArray();
         $data['quy_mo_nhan_su'] = QuyMoNhanSu::all()->toArray();
         $data['dia_diem'] = DiaDiem::all()->toArray();
-        $data['data'] = $this->nhaTuyenDung->getCongTy()->first();
-        if ($data['data'] != null){
-            $getNganhNghe = $data['data']->getNganhNgheId()->toArray();
-            $data['data'] = $data['data']->toArray();
-            $data['data']['nganh_nghe_ids'] = $getNganhNghe;
-            $data['data']['dia_chi_chi_nhanh'] = unserialize($data['data']['dia_chi_chi_nhanh']);
-            $data['data']['gio_lam_viec'] = unserialize($data['data']['gio_lam_viec']);
-            $data['data']['ngay_lam_viec'] = unserialize($data['data']['ngay_lam_viec']);
+        $checkCongty =$this->nhaTuyenDung;
+        if($checkCongty->getCongTy()->count() == 1){
+            $data['data'] = $checkCongty->getCongTy()->first();
+            if ($data['data'] != null){
+                $getNganhNghe = $data['data']->getNganhNgheId()->toArray();
+                $data['data'] = $data['data']->toArray();
+                $data['data']['nganh_nghe_ids'] = $getNganhNghe;
+                $data['data']['dia_chi_chi_nhanh'] = unserialize($data['data']['dia_chi_chi_nhanh']);
+                $data['data']['gio_lam_viec'] = unserialize($data['data']['gio_lam_viec']);
+                $data['data']['ngay_lam_viec'] = unserialize($data['data']['ngay_lam_viec']);
+            }
+    
+        }else{
+             $data['data'] = array();
         }
-
-
-
+    
+        
         return $data;
     }
     public function index()

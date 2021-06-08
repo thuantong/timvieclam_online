@@ -31,7 +31,7 @@ Route::namespace('Auth')->group(function (){
 //Trang chủ
 Route::namespace('TrangChu')->group(function () {
     Route::name('trangchu.')->group(function () {
-        Route::get('/', 'TrangChuController@index')->name('index')->middleware('cacheResponse:1200');
+        Route::get('/', 'TrangChuController@index')->name('index')->middleware('cacheResponse:1200');;
         Route::get('/danh-sach-viec-lam', 'TrangChuController@vietLam')->name('vietLam');
         Route::get('/gioi-thieu-ve-chung-toi', 'TrangChuController@gioiThieuVeChungToi')->name('gioiThieuVeChungToi');
 
@@ -150,9 +150,6 @@ Route::namespace('Admin')->group(function () {
         Route::get('/admin','AdminTrangChuController@index')->name('index');
 //        Route::get('/admin/get-thong-bao','AdminTrangChuController@getThongbao')->name('getThongbao');
         Route::post('/admin/thong-bao/chuyen-trang-thai','AdminTrangChuController@chuyenTrangThaiDaXem')->name('chuyenTrangThaiDaXem');
-//        Route::get('/admin/login')->name('index');
-//        Route::get('/admin/login')->name('index');
-
 
         Route::get('/admin/danh-sach-bai-duyet','DuyetBaiVietController@index')->name('duyetbaiviet');
         Route::get('/admin/danh-sach-bai-duyet/get','DuyetBaiVietController@getDanhSachDuyetTin')->name('getDanhSachDuyetTin');

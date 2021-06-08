@@ -86,7 +86,8 @@ BaiVietController extends Controller
     {
 //        dd(Carbon::now('Asia/Ho_Chi_Minh')->timestamp);
         $checkSoDu = $this->checkDangKySoDu('Đăng bài tuyển dụng', '/dang-bai-viet');
-//        dd($checkSoDu);
+
+
         if ($checkSoDu['status'] == 400) {
             return view('SoDu.index', compact('checkSoDu'));
         }
@@ -95,7 +96,14 @@ BaiVietController extends Controller
 
         $data['kinh_nghiem'] = KinhNghiem::query()->orderBy('id', 'asc')->get()->toArray();
         $data['nganh_nghe'] = NganhNghe::query()->orderBy('name', 'asc')->get()->toArray();
-        $data['cong_ty'] = $this->nhaTuyenDung->getCongTy()->first(['id', 'name', 'logo'])->toArray();
+        $checkCongty =$this->nhaTuyenDung;
+        if($checkCongty->getCongTy()->count() == 1){
+            $data['cong_ty'] = $checkCongty->getCongTy()->first(['id', 'name', 'logo'])->toArray();
+        }else{
+             $data['cong_ty'] = array();
+        }
+        
+       
         $data['chuc_vu'] = ChucVu::query()->orderBy('name', 'asc')->get()->toArray();
         $data['dia_diem'] = DiaDiem::query()->orderBy('name', 'asc')->get()->toArray();
         $data['kieu_lam_viec'] = KieuLamViec::query()->orderBy('name', 'asc')->get()->toArray();
@@ -273,8 +281,7 @@ BaiVietController extends Controller
     //chi tiết bài tuyển dụng
     public function getThongTinBaiViet($post, Request $request)
     {
-        $data = Cache::remember('bai_tuyen_dung', 60*60, function () use($post) {
-            return BaiTuyenDung::query()->with([
+        $data = BaiTuyenDung::query()->with([
                 'getNhaTuyenDung'=>function($q){
                 $q->with([
                     'getTaiKhoan'=>function($q2){
@@ -283,7 +290,7 @@ BaiVietController extends Controller
                 ]);
                 }
                 , 'getNganhNghe', 'getCongTy', 'getChucVu', 'getKieuLamViec', 'getDiaDiem', 'getBangCap', 'getKinhNghiem'])->find($post)->toArray();
-        });
+      
 
         // dd(Cache::get('bai_tuyen_dung'));
         // $data = BaiTuyenDung::query()->with([
@@ -319,26 +326,29 @@ BaiVietController extends Controller
         }
 
         $newQuery = BaiTuyenDung::with([
-            'getNhaTuyenDung' => function ($subquery) {
-                $subquery->select('id', 'tai_khoan_id')->with(
-                    [
-                        'getTaiKhoan' => function ($q) {
-                            $q->select('id', 'ho_ten');
-                        }
-                    ]
-                );
-            },
-            'getDonHang' => function ($subquery) {
-                $subquery->select('id', 'so_luong as so_ngay_bai_dang', 'bai_tuyen_dung_id');
-            },
-            'getDiaDiem' => function ($subquery) {
-                $subquery->select('id', 'name as dia_diem');
-            },
-            'getCongTy' => function ($subquery) {
-                $subquery->select('id', 'name as cong_ty_name', 'logo as cong_ty_logo');
-            },
-
-        ]);
+                'getNhaTuyenDung' => function ($subquery) {
+                    $subquery->select('id', 'tai_khoan_id')->with(
+                        [
+                            'getTaiKhoan' => function ($q) {
+                                $q->select('id', 'ho_ten');
+                            }
+                        ]
+                    );
+                },
+                'getDonHang' => function ($subquery) {
+                    $subquery->select('id', 'so_luong as so_ngay_bai_dang', 'bai_tuyen_dung_id');
+                },
+                'getDiaDiem' => function ($subquery) {
+                    $subquery->select('id', 'name as dia_diem');
+                },
+                'getCongTy' => function ($subquery) {
+                    $subquery->select('id', 'name as cong_ty_name', 'logo as cong_ty_logo');
+                },
+    
+            ]);
+    
+        
+        
         if ($data['kieu_lam_viec_id'] != null) {
             $newQuery->where('kieu_lam_viec_id', $data['kieu_lam_viec_id']);
         }
@@ -627,59 +637,27 @@ BaiVietController extends Controller
                     if ($request->has('getTin') == false) {
                         //init value
                         $tieuDe = $request->get('tieu_de');
-//                        $countSpace = substr_count($tieuDe, ' ');
-//                        for ($i = 0;$i<$countSpace;$i++){
-//                            echo trim(substr($tieuDe, 0, strrpos($tieuDe," ")));
-//                            $tieuDe = trim(substr($tieuDe, strrpos($tieuDe," ")));
-//                            if ($countSpace-1 == $i){
-//                                echo $tieuDe;
-//                            }
-//                        }
-//                        echo $tieuDe;
-//                        dd(substr($tieuDe, strrpos($tieuDe," ")));
-//                    $nganhNghe = $request->get('nganh_nghe_id') == null ? null : $request->get('nganh_nghe_id');
+
                         $diaDiem = $request->get('dia_diem_id') == null ? null : $request->get('dia_diem_id');
 
                         $query->where('tieu_de', 'like', '%' . $tieuDe . '%');
-//                        if ($countSpace > 0) {
-//                            for ($i = 0; $i < $countSpace; $i++) {
-//                                $query->orWhere('tieu_de', 'like', '%' . trim(substr($tieuDe, 0, strrpos($tieuDe, " "))) . '%');
-//                                $tieuDe = trim(substr($tieuDe, strrpos($tieuDe, " ")));
-//                                if ($countSpace - 1 == $i) {
-//                                    $query->orWhere('tieu_de', 'like', '%' . trim(substr($tieuDe, 0, strrpos($tieuDe, " "))) . '%');
-//
-////                                echo $tieuDe;
-//                                }
-//                            }
-//                        }
 
-//                    $query->orWhere('ten_chuc_vu', 'like', '%' . $tieuDe . '%');
                         if ($diaDiem != null) {
                             $query->where('dia_diem_id', $diaDiem);
                         }
-//                    dd($query->distinct('id')->where('status',1)->get()->toArray());
-                        $data['bai_tuyen_dung'] = $query->distinct('id')->where('status', $trangThaiDaDuyet)->paginate(10, ['id', 'tieu_de', 'ten_chuc_vu', 'luong_from','luong_to', 'isHot', 'status', 'han_tuyen', 'nha_tuyen_dung_id', 'dia_diem_id', 'cong_ty_id'], 'page', $page);
 
-//                    $query->where('nganh_nghe_id','');
+                        $data['bai_tuyen_dung'] = $query->distinct('id')->where('status', $trangThaiDaDuyet)->paginate(10, ['id', 'tieu_de', 'ten_chuc_vu', 'luong_from','luong_to', 'isHot', 'status', 'han_tuyen', 'nha_tuyen_dung_id', 'dia_diem_id', 'cong_ty_id'], 'page', $page);
 
                     }
 
                     break;
             }
         }
-//        dd($query->get()->toArray());
-        //tìm kiếm
 
-//        dd($query->get()->toArray());
-//        dd($allNganhNghe);
-
-//        dd($diaDiem);
-//        $data['bai_tuyen_dung'] = $query->distinct('id')->where('status',$trangThaiDaDuyet)->get(['id','tieu_de','ten_chuc_vu','luong','isHot','status','han_tuyen', 'nha_tuyen_dung_id','dia_diem_id','cong_ty_id'])->toArray();
-//        $data['bai_tuyen_dung'] = $query->distinct('id')->where('status',$trangThaiDaDuyet)->paginate(10, ['id','tieu_de','ten_chuc_vu','luong','isHot','status','han_tuyen', 'nha_tuyen_dung_id','dia_diem_id','cong_ty_id'], 'page', $page);
         $data['trang_hien_tai'] = $data['bai_tuyen_dung']->currentPage();
         $data['check_trang'] = $data['bai_tuyen_dung']->nextPageUrl();
 
-//        dd($data);
+    //    dd($data);
         return view('TrangChu.items', compact('data'));
 
     }

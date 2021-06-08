@@ -26,8 +26,12 @@
             </div>
         </div>
     </div>
+  
+    {{-- @if (isset($data['data']) && (count($data['data']) > 0)) --}}
     @include('CongTy.modal.anh_dai_dien')
     @include('CongTy.modal.xemAnhDaiDien')
+    {{-- @endif --}}
+    
 
     <div class="row">
         <div class="col-12">
@@ -46,7 +50,11 @@
 
 {{--    <div class="row center-element">--}}
 
-        @include('CongTy.content')
+    {{-- @if (isset($data['data']) && (count($data['data']) > 0)) --}}
+    @include('CongTy.content')
+
+    {{-- @endif --}}
+   
 {{--    </div>--}}
 
 
