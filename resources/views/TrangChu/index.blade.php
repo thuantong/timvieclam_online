@@ -111,7 +111,9 @@
         }
 
         const getThongTinChiTietPost = (e) => {
-            console.log('con cac ne', e);
+            // console.log('con cac ne', e);
+            let baseURL = '{{ URL::asset('/') }}';
+                // console.log("bc"+baseURL);
             // console.log('con cac dđne', e['don_xin_viec']['data'].length);
             // return;
             if (e != null) {
@@ -204,8 +206,8 @@
                 $('.kieu_lam_viec').text(e.get_kieu_lam_viec.name);
                 $('.yc_bang_cap').text(e.get_bang_cap.name);
 
-
-                $('.cong_ty_logo').attr('src',e.get_cong_ty.logo);
+            
+                $('.cong_ty_logo').attr('src',baseURL+e.get_cong_ty.logo);
                 $('.cong_ty_websites').text(" "+e.get_cong_ty.websites);
                 $('.cong_ty_dia_chi').text(" "+e.get_cong_ty.dia_chi);
                 $('.quy_mo').text(" "+e.get_cong_ty.get_quy_mo_nhan_su.name);

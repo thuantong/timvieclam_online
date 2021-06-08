@@ -82,8 +82,8 @@ Route::namespace('BaiViet')->group(function (){
         Route::get('/dang-bai-viet','BaiVietController@index')->name('index')->middleware(['auth','email.confirm','nha_tuyen_dung']);
         Route::get('/tin-tuyen-dung', 'BaiVietController@layTatCaBaiViet');
         Route::post('/dang-bai-viet/luu-tin','BaiVietController@savePost')->name('savepost')->middleware(['auth','email.confirm']);
-        Route::get('/bai-viet/thong-tin&baiviet={post}&chitiet=1','BaiVietController@getThongTinBaiViet')->name('getThongTinBaiViet')->middleware(['auth','email.confirm','cacheResponse:1200']);
-        Route::get('/bai-viet/thong-tin&baiviet={post}&chitiet=0','BaiVietController@getThongTinBaiVietClick')->name('getThongTinBaiVietClick')->middleware('cacheResponse:1200');
+        Route::get('/bai-viet/thong-tin&baiviet={post}&chitiet=1','BaiVietController@getThongTinBaiViet')->name('getThongTinBaiViet')->middleware(['auth','email.confirm']);
+        Route::get('/bai-viet/thong-tin&baiviet={post}&chitiet=0','BaiVietController@getThongTinBaiVietClick')->name('getThongTinBaiVietClick');
         Route::post('/bai-viet/like','BaiVietController@likePost')->name('likePost')->middleware(['auth','email.confirm']);
         Route::get('/bai-viet/chinh-sua','BaiVietController@chinhSua')->name('chinhSua')->middleware(['auth','email.confirm']);
         Route::post('/bai-viet/chinh-sua/luu-tin','BaiVietController@luuChinhSua')->name('luuChinhSua')->middleware(['auth','email.confirm']);

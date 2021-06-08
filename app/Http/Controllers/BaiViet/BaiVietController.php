@@ -384,8 +384,7 @@ BaiVietController extends Controller
     public function getThongTinBaiVietClick($post, Request $request)
     {
 
-        $query = Cache::remember('bai_tuyen_dung_click', 60*60, function () use($post) {
-        return BaiTuyenDung::with([
+        $query = BaiTuyenDung::with([
             'getNhaTuyenDung' => function ($subquery) {
                 $subquery->select('id', 'tai_khoan_id')->with(
                     [
@@ -427,7 +426,7 @@ BaiVietController extends Controller
                 $subquery->select('id', 'name');
             },
         ])->select(['id', 'tieu_de', 'ten_chuc_vu', 'luong_from','yeu_cau_ho_so','luong_to', 'tuoi', 'gioi_tinh_tuyen', 'so_luong_tuyen', 'isHot', 'status', 'han_tuyen', 'nha_tuyen_dung_id', 'dia_diem_id', 'chuc_vu_id', 'kinh_nghiem_id', 'cong_ty_id', 'kieu_lam_viec_id', 'bang_cap_id','mo_ta','yeu_cau_cong_viec','quyen_loi','dia_chi'])->find($post)->toArray();
-        });
+     
         
         // dd(Cache::get('bai_tuyen_dung_click'));
         $data = $query;

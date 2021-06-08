@@ -10,7 +10,7 @@
     </i>  </small>
 </div>
 <div class="row">
-    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 p-0">
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
         <div class="form-group row">
             <h4
                 class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-form-label text-left">

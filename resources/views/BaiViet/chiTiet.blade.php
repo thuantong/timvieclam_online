@@ -37,8 +37,8 @@
     @include('CongTy.gioiThieu')
 
     <div class="row">
-        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-            <div class="card-box p-1 mb-1">
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 p-0">
+            <div class="card-box p-2 mb-1">
 
                 <div class="row" id="container-section">
                     <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8">
