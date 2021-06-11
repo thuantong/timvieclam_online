@@ -11,7 +11,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                @include('Congty.content')
+               @include('CongTy.content')
 
             </div>
             <div class="modal-footer">
