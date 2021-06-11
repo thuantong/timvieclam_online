@@ -19,8 +19,8 @@ class ComposerStaticInit7327b8faaa9b8d27a495492bce80e52b
         '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
         'def43f6c87e4f8dfd0c9e1b1bab14fe8' => __DIR__ . '/..' . '/symfony/polyfill-iconv/bootstrap.php',
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
-        'a1105708a18b76903365ca1c4aa61b02' => __DIR__ . '/..' . '/symfony/translation/Resources/functions.php',
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
+        'a1105708a18b76903365ca1c4aa61b02' => __DIR__ . '/..' . '/symfony/translation/Resources/functions.php',
         'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
@@ -83,9 +83,6 @@ class ComposerStaticInit7327b8faaa9b8d27a495492bce80e52b
             'Symfony\\Component\\CssSelector\\' => 30,
             'Symfony\\Component\\Console\\' => 26,
             'Svg\\' => 4,
-            'Spatie\\ResponseCache\\' => 21,
-            'Spatie\\LaravelPackageTools\\Database\\Factories\\' => 46,
-            'Spatie\\LaravelPackageTools\\' => 27,
         ),
         'R' => 
         array (
@@ -313,18 +310,6 @@ class ComposerStaticInit7327b8faaa9b8d27a495492bce80e52b
         'Svg\\' => 
         array (
             0 => __DIR__ . '/..' . '/phenx/php-svg-lib/src/Svg',
-        ),
-        'Spatie\\ResponseCache\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/spatie/laravel-responsecache/src',
-        ),
-        'Spatie\\LaravelPackageTools\\Database\\Factories\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/spatie/laravel-package-tools/database/factories',
-        ),
-        'Spatie\\LaravelPackageTools\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/spatie/laravel-package-tools/src',
         ),
         'Ramsey\\Uuid\\' => 
         array (
@@ -5045,30 +5030,6 @@ class ComposerStaticInit7327b8faaa9b8d27a495492bce80e52b
         'SebastianBergmann\\Type\\UnknownType' => __DIR__ . '/..' . '/sebastian/type/src/UnknownType.php',
         'SebastianBergmann\\Type\\VoidType' => __DIR__ . '/..' . '/sebastian/type/src/VoidType.php',
         'SebastianBergmann\\Version' => __DIR__ . '/..' . '/sebastian/version/src/Version.php',
-        'Spatie\\LaravelPackageTools\\Exceptions\\InvalidPackage' => __DIR__ . '/..' . '/spatie/laravel-package-tools/src/Exceptions/InvalidPackage.php',
-        'Spatie\\LaravelPackageTools\\Package' => __DIR__ . '/..' . '/spatie/laravel-package-tools/src/Package.php',
-        'Spatie\\LaravelPackageTools\\PackageServiceProvider' => __DIR__ . '/..' . '/spatie/laravel-package-tools/src/PackageServiceProvider.php',
-        'Spatie\\ResponseCache\\CacheProfiles\\BaseCacheProfile' => __DIR__ . '/..' . '/spatie/laravel-responsecache/src/CacheProfiles/BaseCacheProfile.php',
-        'Spatie\\ResponseCache\\CacheProfiles\\CacheAllSuccessfulGetRequests' => __DIR__ . '/..' . '/spatie/laravel-responsecache/src/CacheProfiles/CacheAllSuccessfulGetRequests.php',
-        'Spatie\\ResponseCache\\CacheProfiles\\CacheProfile' => __DIR__ . '/..' . '/spatie/laravel-responsecache/src/CacheProfiles/CacheProfile.php',
-        'Spatie\\ResponseCache\\Commands\\ClearCommand' => __DIR__ . '/..' . '/spatie/laravel-responsecache/src/Commands/ClearCommand.php',
-        'Spatie\\ResponseCache\\Events\\CacheMissed' => __DIR__ . '/..' . '/spatie/laravel-responsecache/src/Events/CacheMissed.php',
-        'Spatie\\ResponseCache\\Events\\ClearedResponseCache' => __DIR__ . '/..' . '/spatie/laravel-responsecache/src/Events/ClearedResponseCache.php',
-        'Spatie\\ResponseCache\\Events\\ClearingResponseCache' => __DIR__ . '/..' . '/spatie/laravel-responsecache/src/Events/ClearingResponseCache.php',
-        'Spatie\\ResponseCache\\Events\\ResponseCacheHit' => __DIR__ . '/..' . '/spatie/laravel-responsecache/src/Events/ResponseCacheHit.php',
-        'Spatie\\ResponseCache\\Exceptions\\CouldNotUnserialize' => __DIR__ . '/..' . '/spatie/laravel-responsecache/src/Exceptions/CouldNotUnserialize.php',
-        'Spatie\\ResponseCache\\Facades\\ResponseCache' => __DIR__ . '/..' . '/spatie/laravel-responsecache/src/Facades/ResponseCache.php',
-        'Spatie\\ResponseCache\\Hasher\\DefaultHasher' => __DIR__ . '/..' . '/spatie/laravel-responsecache/src/Hasher/DefaultHasher.php',
-        'Spatie\\ResponseCache\\Hasher\\RequestHasher' => __DIR__ . '/..' . '/spatie/laravel-responsecache/src/Hasher/RequestHasher.php',
-        'Spatie\\ResponseCache\\Middlewares\\CacheResponse' => __DIR__ . '/..' . '/spatie/laravel-responsecache/src/Middlewares/CacheResponse.php',
-        'Spatie\\ResponseCache\\Middlewares\\DoNotCacheResponse' => __DIR__ . '/..' . '/spatie/laravel-responsecache/src/Middlewares/DoNotCacheResponse.php',
-        'Spatie\\ResponseCache\\Replacers\\CsrfTokenReplacer' => __DIR__ . '/..' . '/spatie/laravel-responsecache/src/Replacers/CsrfTokenReplacer.php',
-        'Spatie\\ResponseCache\\Replacers\\Replacer' => __DIR__ . '/..' . '/spatie/laravel-responsecache/src/Replacers/Replacer.php',
-        'Spatie\\ResponseCache\\ResponseCache' => __DIR__ . '/..' . '/spatie/laravel-responsecache/src/ResponseCache.php',
-        'Spatie\\ResponseCache\\ResponseCacheRepository' => __DIR__ . '/..' . '/spatie/laravel-responsecache/src/ResponseCacheRepository.php',
-        'Spatie\\ResponseCache\\ResponseCacheServiceProvider' => __DIR__ . '/..' . '/spatie/laravel-responsecache/src/ResponseCacheServiceProvider.php',
-        'Spatie\\ResponseCache\\Serializers\\DefaultSerializer' => __DIR__ . '/..' . '/spatie/laravel-responsecache/src/Serializers/DefaultSerializer.php',
-        'Spatie\\ResponseCache\\Serializers\\Serializer' => __DIR__ . '/..' . '/spatie/laravel-responsecache/src/Serializers/Serializer.php',
         'Stringable' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
         'Svg\\DefaultStyle' => __DIR__ . '/..' . '/phenx/php-svg-lib/src/Svg/DefaultStyle.php',
         'Svg\\Document' => __DIR__ . '/..' . '/phenx/php-svg-lib/src/Svg/Document.php',

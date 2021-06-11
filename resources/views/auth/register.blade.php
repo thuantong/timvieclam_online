@@ -12,7 +12,7 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="name" class="col-sm-12 col-md-4 col-form-label text-md-right">{{ __('Họ và tên') }}</label>
+                            <label for="name" class="col-sm-12 col-md-4 col-form-label text-md-right ho_ten">{{ __('Họ và tên') }}</label>
 
                             <div class="col-sm-12 col-md-6">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="off" autofocus>
@@ -27,7 +27,6 @@
 
                         <div class="form-group row">
                             <label for="email-confirmed" class="col-sm-12 col-md-4 col-form-label text-md-right">{{ __('Địa chỉ E-Mail') }}</label>
-
                             <div class="col-sm-12 col-md-6">
                                 <input id="email-confirmed" type="email" class="form-control @error('email_confirmed') is-invalid @enderror" name="email_confirmed" value="{{ old('email_confirmed') }}" required autocomplete="off">
 
@@ -123,6 +122,19 @@
         $(function () {
             let backround = "{{URL::asset(env('URL_ASSET_PUBLIC').'images/default/kDRPs.jpg')}}";
             $('body').css('background-image','url('+backround+')');
+
+            $('.custom-control-label').on('click',function(){
+                let __this = $(this)
+                let valueCheck = __this.parent().find('input').val();
+
+                if(valueCheck == 2){
+                    $('.ho_ten').text("Tên công ty")
+                    
+                }else{
+                    
+                    $('.ho_ten').text("Họ và tên")
+                }
+            })
         })
     </script>
 @endpush

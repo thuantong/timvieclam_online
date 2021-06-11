@@ -101,14 +101,7 @@
             select2Default($('select#quy_mo_nhan_su'));
             select2Default($('select#dia_diem'));
             select2MultipleDefault($('select#linh_vuc_hoat_dong'),'Chọn Ngành nghề')
-            // $('select#from_day,select#to_day,select#quy_mo_nhan_su').select2({
-            //     dropdownParent: $('div#cap-nhat-cong-ty ')
-            // });
-            // $('select#linh_vuc_hoat_dong').select2({
-            //     placeholder: ' Chọn Ngành nghề',
-            //     allowClear: false
-            // });
-
+            
             $("#so_luong_chi_nhanh").TouchSpin({
                 min: 0,
                 buttondown_class: "btn btn-primary waves-effect",
@@ -206,6 +199,9 @@
             // $('#gioi_thieu_cong_ty').on('focusout',function () {
             //         $('#ten_cong_ty').focus().select();
             // });
+
+            
+
             $(document).on('input change', 'div#cap-nhat-cong-ty #so_luong_chi_nhanh', function () {
 
                 let __this = $(this);

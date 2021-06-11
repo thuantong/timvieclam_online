@@ -50,7 +50,7 @@
                         <div class="col-sm-12 col-md-12">
                             <span class="fa fa-group"></span><span class="quy_mo">
                             @if(isset($data['get_cong_ty']) && $data['get_cong_ty'] != null)
-                                    {{$data['quy_mo_nhan_su']['name']}}
+                                    {{$data['get_cong_ty']['get_quy_mo_nhan_su']['name']}}
                                 @endif
                              </span>
                         </div>
@@ -92,22 +92,23 @@
                     @if(isset($data['get_cong_ty']) && intval(Session::get('loai_tai_khoan')) == 1)
                         <div class="row">
                             <div class="col-sm-6 col-md-6 text-left">
+                                {{-- @dd($data['nguoi_tim_viec']['get_nha_tuyen_dung_quan_tam']) --}}
                                 <div
-                                    class="btn quan-tam-nha-tuyen-dung mt-2  @if(isset($data['get_cong_ty']) && in_array($data['get_nha_tuyen_dung']['id'],$data['nha_tuyen_dung_da_quan_tam']['data']) == true) btn-info like-animation @else btn-outline-info @endif waves-effect position-relative"
+                                    class="btn quan-tam-nha-tuyen-dung mt-2  @if(isset($data['get_nha_tuyen_dung']) && in_array($data['get_nha_tuyen_dung']['id'],$data['nguoi_tim_viec']['get_nha_tuyen_dung_quan_tam']) == true) btn-info like-animation @else btn-outline-info @endif waves-effect position-relative"
                                     id="quan-tam-nha-tuyen-dung"
-                                    data-id="@if(isset($data['get_cong_ty']) && $data['get_nha_tuyen_dung']['id'] != null){{$data['get_nha_tuyen_dung']['id']}}@endif">
-                                    <i class="icofont icofont-thumbs-up">@if(isset($data['get_cong_ty']) && in_array($data['get_nha_tuyen_dung']['id'],$data['nha_tuyen_dung_da_quan_tam']['data']) == true){{' Đã quan tâm'}}@else{{' Quan tâm'}}@endif</i>
+                                    data-id="@if(isset($data['get_nha_tuyen_dung']) && $data['get_nha_tuyen_dung']['id'] != null){{$data['get_nha_tuyen_dung']['id']}}@endif">
+                                    <i class="icofont icofont-thumbs-up">@if(isset($data['get_nha_tuyen_dung']) && in_array($data['get_nha_tuyen_dung']['id'],$data['nguoi_tim_viec']['get_nha_tuyen_dung_quan_tam']) == true){{' Đã quan tâm'}}@else{{' Quan tâm'}}@endif</i>
                                     <span class="badge badge-danger noti-icon-badge position-absolute"
-                                          style="right: 0px">{{$data['nha_tuyen_dung_da_quan_tam']['total']}}</span>
+                                          style="right: 0px">@if(isset($data['get_nha_tuyen_dung']) && in_array($data['get_nha_tuyen_dung']['id'],$data['nguoi_tim_viec']['get_nha_tuyen_dung_quan_tam']) == true){{count($data['get_nha_tuyen_dung']['get_nguoi_tim_viec_quan_tam'])}}@endif</span>
                                 </div>
 
                             </div>
                             <div class="col-sm-6 col-md-6 text-right">
                                 <button
-                                    class="btn mt-2 @if(in_array($data['get_nha_tuyen_dung']['id'],$data['bao_cao']['data']) == false) btn-outline-primary @else btn-primary like-animation @endif waves-effect bao-cao-button-call"
-                                    @if(in_array($data['get_nha_tuyen_dung']['id'],$data['bao_cao']['data']) == false) id="bao-cao-button-call" data-id="{{$data['get_nha_tuyen_dung']['id']}}" @endif
+                                    class="btn mt-2 @if(count($data['nguoi_tim_viec']) && in_array($data['get_nha_tuyen_dung']['id'],$data['nguoi_tim_viec']['get_bao_cao']) == false) btn-outline-primary @else btn-primary like-animation @endif waves-effect bao-cao-button-call"
+                                    @if(count($data['nguoi_tim_viec']) && in_array($data['get_nha_tuyen_dung']['id'],$data['nguoi_tim_viec']['get_bao_cao']) == false) id="bao-cao-button-call" data-id="{{$data['get_nha_tuyen_dung']['id']}}" @endif
                                 ><i
-                                        class="fa fa-exclamation"></i>@if(in_array($data['get_nha_tuyen_dung']['id'],$data['bao_cao']['data'])){{__(' Đã báo cáo')}}@else{{__(' Báo cáo')}}@endif
+                                        class="fa fa-exclamation"></i>@if(count($data['nguoi_tim_viec']) && in_array($data['get_nha_tuyen_dung']['id'],$data['nguoi_tim_viec']['get_bao_cao'])){{__(' Đã báo cáo')}}@else{{__(' Báo cáo')}}@endif
                                 </button>
                             </div>
 

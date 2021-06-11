@@ -34,9 +34,9 @@ class RelationshipMapping extends Migration
             $table->foreign('tai_khoan_id')->references('id')->on('tai_khoan')->onDelete('no action')->onUpdate('no action');
         });
 
-        Schema::table('so_du', function (Blueprint $table) {
-            $table->foreign('nguoi_tim_viec_id')->references('id')->on('nguoi_tim_viec')->onDelete('cascade')->onUpdate('cascade');
-        });
+        // Schema::table('so_du', function (Blueprint $table) {
+        //     $table->foreign('nguoi_tim_viec_id')->references('id')->on('nguoi_tim_viec')->onDelete('cascade')->onUpdate('cascade');
+        // });
 
         Schema::table('quan_tam', function (Blueprint $table) {
             $table->foreign('nguoi_tim_viec_id')->references('id')->on('nguoi_tim_viec')->onDelete('cascade')->onUpdate('cascade');

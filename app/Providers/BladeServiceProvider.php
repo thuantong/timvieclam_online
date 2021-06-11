@@ -7,9 +7,11 @@ use App\Models\ChucVu;
 use App\Models\DiaDiem;
 use App\Models\KieuLamViec;
 use App\Models\NganhNghe;
+use App\Models\QuyMoNhanSu;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Cache;
 
 class BladeServiceProvider extends ServiceProvider
 {
@@ -20,9 +22,25 @@ class BladeServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        
     }
 
+    public function variBlade()
+    {
+        $bladeDiaDiem = DiaDiem::all()->toArray();
+        View::share('dia_diem', $bladeDiaDiem);
+        $bladeNganhNghe = NganhNghe::all()->toArray();
+        View::share('nganh_nghe', $bladeNganhNghe);
+        $bladeBangCap = BangCap::all()->toArray();
+        View::share('bang_cap', $bladeBangCap);
+        $bladeChucVu = ChucVu::all()->toArray();
+        View::share('chuc_vu', $bladeChucVu);
+        $bladeKieuLamViec = KieuLamViec::all()->toArray();
+        View::share('kieu_lam_viec', $bladeKieuLamViec);
+        $bladeQuy_mo_nhan_su = QuyMoNhanSu::all()->toArray();
+        View::share('quy_mo_nhan_su', $bladeQuy_mo_nhan_su);
+        // dd('cc');
+    }
     /**
      * Bootstrap services.
      *
@@ -30,16 +48,10 @@ class BladeServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $diaDiem = DiaDiem::all()->toArray();
-        View::share('dia_diem', $diaDiem);
-        $nganhNghe = NganhNghe::all()->toArray();
-        View::share('nganh_nghe', $nganhNghe);
-        $bangCap = BangCap::all()->toArray();
-        View::share('bang_cap', $bangCap);
-        $chucVu = ChucVu::all()->toArray();
-        View::share('chuc_vu', $chucVu);
-        $kieuLamViec = KieuLamViec::all()->toArray();
-        View::share('kieu_lam_viec', $kieuLamViec);
+        $value = Cache::remember('bladeVari', 60*60, function () {
+            return $this->variBlade();
+        });
+        // $this->variBlade();
         Blade::directive('money_xu', function ($money) {
             return "<?php echo number_format($money, 0); ?>";
         });

@@ -38,6 +38,19 @@ class NguoiTimViec extends Model
         'gioi_tinh' => 1,
     ];
 
+    public function getExpLamViecAttribute(){
+        return unserialize($this->attributes['exp_lam_viec']);
+    }
+    public function getProjectsAttribute(){
+        return unserialize($this->attributes['projects']);
+    }
+    public function getSocialAttribute(){
+        return unserialize($this->attributes['social']);
+    }
+    public function getKyNangAttribute(){
+        return unserialize($this->attributes['ky_nang']);
+    }
+
     //Tài khoản người tìm việc
     public function getTaiKhoan(){
         return $this->belongsTo(TaiKhoan::class,'tai_khoan_id');

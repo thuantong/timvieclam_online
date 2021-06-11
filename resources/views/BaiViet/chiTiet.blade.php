@@ -72,13 +72,14 @@
                                         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 pt-1 pb-1">
                                             <div class="row center-element text-center">
                                                 <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                    {{-- @dd($data['id'],$data['get_luu_bai']) --}}
                                                     <div
-                                                        class="btn @if(in_array($data['id'],$data['bai_da_luu']['data']) == true) btn-primary like-animation @else btn-outline-primary @endif waves-effect position-relative"
+                                                        class="btn @if(in_array($data['id'],$data['nguoi_tim_viec']['get_luu_bai']) == true) btn-primary like-animation @else btn-outline-primary @endif waves-effect position-relative"
                                                         id="trang-chu-like-post" data-id="{{$data['id']}}">
-                                                        <i class="icofont icofont-thumbs-up">@if(in_array($data['id'],$data['bai_da_luu']['data'])){{' Đã lưu'}}@else{{' Lưu bài'}}@endif</i>
+                                                        <i class="icofont icofont-thumbs-up">@if(in_array($data['id'],$data['nguoi_tim_viec']['get_luu_bai'])){{' Đã lưu'}}@else{{' Lưu bài'}}@endif</i>
                                                         <span
                                                             class="badge badge-danger noti-icon-badge position-absolute"
-                                                            style="right: 0px">{{$data['bai_da_luu']['total']}}</span>
+                                                            style="right: 0px">{{count($data['get_luu_bai'])}}</span>
                                                     </div>
                                                     {{--                                                <a class="nav-link dropdown-toggle  waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">--}}
                                                     {{--                                                    <i class="icofont icofont-bell-alt noti-icon"></i>--}}
@@ -88,11 +89,12 @@
 {{--                                                            title="Chat với nhà tuyển dụng">--}}
 {{--                                                        <i class="icofont icofont-ui-text-loading "></i> Chat--}}
 {{--                                                    </button>--}}
-
+{{-- @dd(in_array($data['id'],$data['get_don_xin_viec'])) --}}
+{{-- @dd($data['nguoi_tim_viec']['get_don_xin_viec']) --}}
                                                     <div
-                                                        class="btn @if(in_array($data['id'],$data['don_xin_viec']['data']) == false) btn-outline-warning @else btn-warning like-animation @endif waves-effect position-relative call-modal-nop-don"
-                                                        @if(in_array($data['id'],$data['don_xin_viec']['data']) == false) id="call-modal-nop-don" @endif>
-                                                        <i class="fa fa-send">@if(in_array($data['id'],$data['don_xin_viec']['data'])){{' Đã ứng tuyển'}}@else{{' Nộp đơn'}}@endif</i>
+                                                        class="btn @if(in_array($data['id'],$data['nguoi_tim_viec']['get_don_xin_viec']) == false) btn-outline-warning @else btn-warning like-animation @endif waves-effect position-relative call-modal-nop-don"
+                                                        @if(in_array($data['id'],$data['nguoi_tim_viec']['get_don_xin_viec']) == false) id="call-modal-nop-don" @endif>
+                                                        <i class="fa fa-send">@if(in_array($data['id'],$data['nguoi_tim_viec']['get_don_xin_viec'])){{' Đã ứng tuyển'}}@else{{' Nộp đơn'}}@endif</i>
                                                         {{--                                                    <span class="badge badge-danger noti-icon-badge position-absolute" style="right: 0px">{{$data['don_xin_viec']['total']}}</span>--}}
 
                                                     </div>
@@ -137,9 +139,9 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    @if($data['bai_tuyen_dung']->count() != 0)
+                                    @if($data['bai_tuyen_dung_goi_y']->count() != 0)
                                       
-                                        @foreach($data['bai_tuyen_dung'] as $row)
+                                        @foreach($data['bai_tuyen_dung_goi_y'] as $row)
                                             <a class="col-sm-12 col-md-12 ribbon-box iteam-click"
                                                href="{{route('baiviet.getThongTinBaiViet',[$row['id'],'chitiet'=>1])}}">
                                                 <div class="row">

@@ -281,96 +281,7 @@ BaiVietController extends Controller
     //chi tiết bài tuyển dụng
     public function getThongTinBaiViet($post, Request $request)
     {
-        $data = BaiTuyenDung::query()->with([
-                'getNhaTuyenDung'=>function($q){
-                $q->with([
-                    'getTaiKhoan'=>function($q2){
-                    $q2->select('id','avatar','ho_ten');
-                    }
-                ]);
-                }
-                , 'getNganhNghe', 'getCongTy', 'getChucVu', 'getKieuLamViec', 'getDiaDiem', 'getBangCap', 'getKinhNghiem'])->find($post)->toArray();
-      
-
-        // dd(Cache::get('bai_tuyen_dung'));
-        // $data = BaiTuyenDung::query()->with([
-        //     'getNhaTuyenDung'=>function($q){
-        //     $q->with([
-        //         'getTaiKhoan'=>function($q2){
-        //         $q2->select('id','avatar','ho_ten');
-        //         }
-        //     ]);
-        //     }
-        //     , 'getNganhNghe', 'getCongTy', 'getChucVu', 'getKieuLamViec', 'getDiaDiem', 'getBangCap', 'getKinhNghiem'])->find($post)->toArray();
-
-        $data['so_luong_ngay_dang_tin'] = DonHang::query()->select('so_luong')->where('bai_tuyen_dung_id', $data['id'])->where('hang_muc_thanh_toan_id', 1)->first()->toArray();
-
-        $data['tuoi'] = unserialize($data['tuoi']);
-        $data['tieu_de'] = $data['tieu_de'];
-
-        if (Session::get('loai_tai_khoan') != null) {
-            if (intval(Session::get('loai_tai_khoan')) == 1) {
-                $nguoiTimViecQuery = TaiKhoan::query()->find(Auth::user()->id)->getNguoiTimViec()->first();
-                $data['bai_da_luu']['data'] = $nguoiTimViecQuery->getLuuBai->pluck('id')->toArray();
-                //lấy nhà tuyern dụng đã quan tâm
-                $data['nha_tuyen_dung_da_quan_tam']['data'] = $nguoiTimViecQuery->getNhaTuyenDungQuanTam->pluck('id')->toArray();
-                $data['don_xin_viec']['data'] = $nguoiTimViecQuery->getDonXinViec()->get()->pluck('id')->toArray();
-                $data['don_xin_viec']['data'] = $nguoiTimViecQuery->getDonXinViec()->get()->pluck('bai_tuyen_dung_id')->toArray();
-
-                $data['bao_cao']['data'] = $nguoiTimViecQuery->getBaoCao()->get()->pluck('id')->toArray();
-                $nguoiTimViec = $nguoiTimViecQuery->toArray();
-                $data['nguoi_tim_viec'] = $nguoiTimViec;
-                $data['nguoi_tim_viec']['exp_lam_viec'] = unserialize($data['nguoi_tim_viec']['exp_lam_viec']);
-                $data['nguoi_tim_viec']['projects'] = unserialize($data['nguoi_tim_viec']['projects']);
-            }
-        }
-
-        $newQuery = BaiTuyenDung::with([
-                'getNhaTuyenDung' => function ($subquery) {
-                    $subquery->select('id', 'tai_khoan_id')->with(
-                        [
-                            'getTaiKhoan' => function ($q) {
-                                $q->select('id', 'ho_ten');
-                            }
-                        ]
-                    );
-                },
-                'getDonHang' => function ($subquery) {
-                    $subquery->select('id', 'so_luong as so_ngay_bai_dang', 'bai_tuyen_dung_id');
-                },
-                'getDiaDiem' => function ($subquery) {
-                    $subquery->select('id', 'name as dia_diem');
-                },
-                'getCongTy' => function ($subquery) {
-                    $subquery->select('id', 'name as cong_ty_name', 'logo as cong_ty_logo');
-                },
-    
-            ]);
-    
-        
-        
-        if ($data['kieu_lam_viec_id'] != null) {
-            $newQuery->where('kieu_lam_viec_id', $data['kieu_lam_viec_id']);
-        }
-
-        $trangThaiDaDuyet = 1;
-
-        $data['bai_tuyen_dung'] = $newQuery->distinct('id')->where('status', $trangThaiDaDuyet)->orWhere('tieu_de','like','%' . $data['tieu_de'] . '%')->paginate(10, ['id', 'tieu_de', 'ten_chuc_vu', 'luong_from', 'luong_to', 'isHot', 'status', 'han_tuyen', 'nha_tuyen_dung_id', 'dia_diem_id', 'cong_ty_id'], 'page');
-        
-        $data['trang_hien_tai'] = $data['bai_tuyen_dung']->currentPage();
-        $data['check_trang'] = $data['bai_tuyen_dung']->nextPageUrl();
-        
-        $data['bai_da_luu']['total'] = LuuBai::query()->where('bai_tuyen_dung_id', $post)->count();
-
-        $data['nha_tuyen_dung_da_quan_tam']['total'] = QuanTam::query()->where('nha_tuyen_dung_id', $data['get_nha_tuyen_dung']['id'])->count();
-
-        $data['cong_ty_nganh_nghe'] = CongTy::query()->find($data['cong_ty_id'])->getNganhNghe()->get()->toArray();
-        $data['quy_mo_nhan_su'] = CongTy::query()->find($data['cong_ty_id'])->getQuyMoNhanSu()->get()->toArray();
-        $data['quy_mo_nhan_su'] = $data['quy_mo_nhan_su'][0];
-
-        $data['get_nha_tuyen_dung']['tai_khoan'] = TaiKhoan::query()->find($data['get_nha_tuyen_dung']['tai_khoan_id'])->toArray();
-        $data['don_xin_viec']['total'] = DonXinViec::query()->where('bai_tuyen_dung_id', $post)->count();
-
+        $data = BaiTuyenDung::getChiTiet($post);
         $typeSend = 1;
         return view('BaiViet.chiTiet', compact('data', 'typeSend'));
     }
@@ -383,104 +294,102 @@ BaiVietController extends Controller
      */
     public function getThongTinBaiVietClick($post, Request $request)
     {
-
-        $query = BaiTuyenDung::with([
-            'getNhaTuyenDung' => function ($subquery) {
-                $subquery->select('id', 'tai_khoan_id')->with(
-                    [
-                        'getTaiKhoan' => function ($q) {
-                            $q->select('id', 'ho_ten');
-                        }
-                    ]
-                );
-            },
-            'getDonHang' => function ($subquery) {
-                $subquery->select('id', 'so_luong', 'bai_tuyen_dung_id');
-            },
-            'getDiaDiem' => function ($subquery) {
-                $subquery->select('id', 'name');
-            },
-            'getCongTy' => function ($subquery) {
-                $subquery->select('id', 'name', 'logo','dia_chi','gioi_thieu','websites','so_nhan_vien')->with(
-                    [
-                        'getQuyMoNhanSu'=> function ($subquery2){
-                        $subquery2->select('id', 'name');
-                    },
-                    'getNganhNghe'
-                    ]
+        $data = BaiTuyenDung::getChiTiet($post);
+//         $query = BaiTuyenDung::with([
+//             'getNhaTuyenDung' => function ($subquery) {
+//                 $subquery->select('id', 'tai_khoan_id')->with(
+//                     [
+//                         'getTaiKhoan' => function ($q) {
+//                             $q->select('id', 'ho_ten');
+//                         }
+//                     ]
+//                 );
+//             },
+//             'getDonHang' => function ($subquery) {
+//                 $subquery->select('id', 'so_luong', 'bai_tuyen_dung_id');
+//             },
+//             'getDiaDiem' => function ($subquery) {
+//                 $subquery->select('id', 'name');
+//             },
+//             'getCongTy' => function ($subquery) {
+//                 $subquery->select('id', 'name', 'logo','dia_chi','gioi_thieu','websites','so_nhan_vien')->with(
+//                     [
+//                         'getQuyMoNhanSu'=> function ($subquery2){
+//                         $subquery2->select('id', 'name');
+//                     },
+//                     'getNganhNghe'
+//                     ]
                 
-                )->get();
-            },
-            // 'getCongTy',
-            'getNganhNghe',
-            'getChucVu' => function ($subquery) {
-                $subquery->select('id', 'name');
-            },
-            'getKinhNghiem' => function ($subquery) {
-                $subquery->select('id', 'name');
-            },
-            'getKieuLamViec' => function ($subquery) {
-                $subquery->select('id', 'name');
-            },
-            'getBangCap' => function ($subquery) {
-                $subquery->select('id', 'name');
-            },
-        ])->select(['id', 'tieu_de', 'ten_chuc_vu', 'luong_from','yeu_cau_ho_so','luong_to', 'tuoi', 'gioi_tinh_tuyen', 'so_luong_tuyen', 'isHot', 'status', 'han_tuyen', 'nha_tuyen_dung_id', 'dia_diem_id', 'chuc_vu_id', 'kinh_nghiem_id', 'cong_ty_id', 'kieu_lam_viec_id', 'bang_cap_id','mo_ta','yeu_cau_cong_viec','quyen_loi','dia_chi'])->find($post)->toArray();
+//                 )->get();
+//             },
+//             // 'getCongTy',
+//             'getNganhNghe',
+//             'getChucVu' => function ($subquery) {
+//                 $subquery->select('id', 'name');
+//             },
+//             'getKinhNghiem' => function ($subquery) {
+//                 $subquery->select('id', 'name');
+//             },
+//             'getKieuLamViec' => function ($subquery) {
+//                 $subquery->select('id', 'name');
+//             },
+//             'getBangCap' => function ($subquery) {
+//                 $subquery->select('id', 'name');
+//             },
+//         ])->select(['id', 'tieu_de', 'ten_chuc_vu', 'luong_from','yeu_cau_ho_so','luong_to', 'tuoi', 'gioi_tinh_tuyen', 'so_luong_tuyen', 'isHot', 'status', 'han_tuyen', 'nha_tuyen_dung_id', 'dia_diem_id', 'chuc_vu_id', 'kinh_nghiem_id', 'cong_ty_id', 'kieu_lam_viec_id', 'bang_cap_id','mo_ta','yeu_cau_cong_viec','quyen_loi','dia_chi'])->find($post)->toArray();
      
-        
-        // dd(Cache::get('bai_tuyen_dung_click'));
-        $data = $query;
-//        $data['luong'] = unserialize($data['luong']);
-        $data['tuoi'] = unserialize($data['tuoi']);
-        $data['tieu_de'] = ucwords($data['tieu_de']);
-        $data['yeu_cau_ho_so'] = unserialize($data['yeu_cau_ho_so']);
-        if (Session::has('loai_tai_khoan')) {
-            if (intval(Session::get('loai_tai_khoan')) == 1) {
-                $nguoiTimViecTim = TaiKhoan::query()->find(Auth::user()->id)->getNguoiTimViec()->first();
-                    $data['bai_da_luu']['data'] = $nguoiTimViecTim->getLuuBai->pluck('id')->toArray();
-                $data['don_xin_viec']['data'] = $nguoiTimViecTim->getDonXinViec()->get()->pluck('id')->toArray();
-                $data['don_xin_viec']['data'] = $nguoiTimViecTim->getDonXinViec()->get()->pluck('bai_tuyen_dung_id')->toArray();
-                    $nguoiTimViecTim->with([
-                    'getNhaTuyenDungQuanTam' => function ($subquery) {
-                        $subquery->select('nha_tuyen_dung.id')->withPivot('nguoi_tim_viec_id', 'nha_tuyen_dung_id');
-                    },
-//                    'getDonXinViec' => function ($subquery) {
-//                        $subquery->select('id', 'nguoi_tim_viec_id', 'bai_tuyen_dung_id');
-//                    },
-                    'getBaoCao' => function ($subquery) {
-                        $subquery->select('nha_tuyen_dung.id')->withPivot('nguoi_tim_viec_id', 'nha_tuyen_dung_id');
-                    },
-                ]);
-                $data['nguoi_tim_viec'] = $nguoiTimViecTim->get()->toArray()[0];
-//                $data['bai_da_luu']['data'] = $data['nguoi_tim_viec']['get_luu_bai'];
-                $data['nguoi_tim_viec']['exp_lam_viec'] = unserialize($data['nguoi_tim_viec']['exp_lam_viec']);
-                $data['nguoi_tim_viec']['projects'] = unserialize($data['nguoi_tim_viec']['projects']);
-                $data['nguoi_tim_viec']['social'] = unserialize($data['nguoi_tim_viec']['social']);
-                $data['nguoi_tim_viec']['ky_nang'] = unserialize($data['nguoi_tim_viec']['ky_nang']);
 
-            }
-        } else {
-            $data['bai_da_luu']['data'] = array();
-            //lấy nhà tuyern dụng đã quan tâm
-            $data['nha_tuyen_dung_da_quan_tam']['data'] = array();
-            $data['don_xin_viec']['data'] = array();
-            $data['nguoi_tim_viec'] = array();
-            $data['nguoi_tim_viec']['exp_lam_viec'] = array();
-            $data['nguoi_tim_viec']['projects'] = array();
-            $data['nha_tuyen_dung_da_bao_cao']['data'] = array();
-        }
+//         $data = $query;
 
-        $data['bai_da_luu']['total'] = LuuBai::query()->where('bai_tuyen_dung_id', $post)->count();
+//         $data['tuoi'] = unserialize($data['tuoi']);
+//         $data['tieu_de'] = ucwords($data['tieu_de']);
+//         $data['yeu_cau_ho_so'] = unserialize($data['yeu_cau_ho_so']);
+//         if (Session::has('loai_tai_khoan')) {
+//             if (intval(Session::get('loai_tai_khoan')) == 1) {
+//                 $nguoiTimViecTim = TaiKhoan::query()->find(Auth::user()->id)->getNguoiTimViec()->first();
+//                     $data['bai_da_luu']['data'] = $nguoiTimViecTim->getLuuBai->pluck('id')->toArray();
+//                 $data['don_xin_viec']['data'] = $nguoiTimViecTim->getDonXinViec()->get()->pluck('id')->toArray();
+//                 $data['don_xin_viec']['data'] = $nguoiTimViecTim->getDonXinViec()->get()->pluck('bai_tuyen_dung_id')->toArray();
+//                     $nguoiTimViecTim->with([
+//                     'getNhaTuyenDungQuanTam' => function ($subquery) {
+//                         $subquery->select('nha_tuyen_dung.id')->withPivot('nguoi_tim_viec_id', 'nha_tuyen_dung_id');
+//                     },
+//                     'getBaoCao' => function ($subquery) {
+//                         $subquery->select('nha_tuyen_dung.id')->withPivot('nguoi_tim_viec_id', 'nha_tuyen_dung_id');
+//                     },
+//                 ]);
+//                 $data['nguoi_tim_viec'] = $nguoiTimViecTim->get()->toArray()[0];
+//                 $data['nguoi_tim_viec']['exp_lam_viec'] = unserialize($data['nguoi_tim_viec']['exp_lam_viec']);
+//                 $data['nguoi_tim_viec']['projects'] = unserialize($data['nguoi_tim_viec']['projects']);
+//                 $data['nguoi_tim_viec']['social'] = unserialize($data['nguoi_tim_viec']['social']);
+//                 $data['nguoi_tim_viec']['ky_nang'] = unserialize($data['nguoi_tim_viec']['ky_nang']);
 
-        $data['nha_tuyen_dung_da_quan_tam']['total'] = QuanTam::query()->where('nha_tuyen_dung_id', $data['get_nha_tuyen_dung']['id'])->count();
-        $data['don_xin_viec']['total'] = DonXinViec::query()->where('bai_tuyen_dung_id', $post)->count();
-//dd($data);
+//             }
+//         } else {
+//             $data['bai_da_luu']['data'] = array();
+//             //lấy nhà tuyern dụng đã quan tâm
+//             $data['nha_tuyen_dung_da_quan_tam']['data'] = array();
+//             $data['don_xin_viec']['data'] = array();
+//             $data['nguoi_tim_viec'] = array();
+//             $data['nguoi_tim_viec']['exp_lam_viec'] = array();
+//             $data['nguoi_tim_viec']['projects'] = array();
+//             $data['nha_tuyen_dung_da_bao_cao']['data'] = array();
+//         }
+
+//         $data['bai_da_luu']['total'] = LuuBai::query()->where('bai_tuyen_dung_id', $post)->count();
+
+//         $data['nha_tuyen_dung_da_quan_tam']['total'] = QuanTam::query()->where('nha_tuyen_dung_id', $data['get_nha_tuyen_dung']['id'])->count();
+//         $data['don_xin_viec']['total'] = DonXinViec::query()->where('bai_tuyen_dung_id', $post)->count();
+// //dd($data);
+
+
+
         switch (intval($request->get('chitiet'))) {
             case 0:
                 return $data;
             case 1:
                 $typeSend = 1;
-                return view('BaiViet.chiTiet', compact('data', 'nguoiTimViec', 'typeSend'));
+                return view('BaiViet.chiTiet', compact('data', 'typeSend'));
         }
     }
 
@@ -493,11 +402,15 @@ BaiVietController extends Controller
     {
         try {
             $idPost = $request->id;
-//            dd($idPost);
+           
             $status = intval($request->thich);
+            // dd($idPost, $status);
             $nguoiLike = NguoiTimViec::query()->where('tai_khoan_id', Auth::user()->id)->first();
 //            return $nguoiLike;
+// dd($nguoiLike->toArray());
             $baiTuyenDung = BaiTuyenDung::query()->find($idPost);
+
+            // dd($baiTuyenDung->toArray());
             switch ($status) {
                 case 0:
                     $baiTuyenDung->getLuuBai()->detach($nguoiLike);

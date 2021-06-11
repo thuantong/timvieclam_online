@@ -31,7 +31,8 @@ Route::namespace('Auth')->group(function (){
 //Trang chủ
 Route::namespace('TrangChu')->group(function () {
     Route::name('trangchu.')->group(function () {
-        Route::get('/', 'TrangChuController@index')->name('index')->middleware('cacheResponse:1200');;
+        // Route::get('/', 'TrangChuController@index')->name('index')->middleware('cacheResponse:1200');
+        Route::get('/', 'TrangChuController@index')->name('index');
         Route::get('/danh-sach-viec-lam', 'TrangChuController@vietLam')->name('vietLam');
         Route::get('/gioi-thieu-ve-chung-toi', 'TrangChuController@gioiThieuVeChungToi')->name('gioiThieuVeChungToi');
 
@@ -83,6 +84,7 @@ Route::namespace('BaiViet')->group(function (){
         Route::get('/tin-tuyen-dung', 'BaiVietController@layTatCaBaiViet');
         Route::post('/dang-bai-viet/luu-tin','BaiVietController@savePost')->name('savepost')->middleware(['auth','email.confirm']);
         Route::get('/bai-viet/thong-tin&baiviet={post}&chitiet=1','BaiVietController@getThongTinBaiViet')->name('getThongTinBaiViet')->middleware(['auth','email.confirm']);
+        // Route::get('/bai-viet/thong-tin&baiviet={post}&chitiet=1','BaiVietController@getThongTinBaiViet')->name('getThongTinBaiViet');
         Route::get('/bai-viet/thong-tin&baiviet={post}&chitiet=0','BaiVietController@getThongTinBaiVietClick')->name('getThongTinBaiVietClick');
         Route::post('/bai-viet/like','BaiVietController@likePost')->name('likePost')->middleware(['auth','email.confirm']);
         Route::get('/bai-viet/chinh-sua','BaiVietController@chinhSua')->name('chinhSua')->middleware(['auth','email.confirm']);

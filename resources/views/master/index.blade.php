@@ -36,9 +36,11 @@
     <!-- feather Awesome -->
     <link rel="stylesheet" type="text/css"
           href="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\icon\feather\css\feather.css')}}">
-    <link href="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\css\croppie\croppie.css')}}" rel="stylesheet"
-          type="text/css">
-    <link href="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\css\croppie\demo.css')}}" rel="stylesheet" type="text/css">
+    {{-- <link href="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\js\croppie\2_6_4\croppie.css')}}" rel="stylesheet"
+          type="text/css"> --}}
+    <link href="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\js\cropper\Cropper.css')}}" rel="stylesheet" type="text/css">
+    {{-- <link href="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\css\croppie\demo.css')}}" rel="stylesheet" type="text/css"> --}}
+    {{-- <link href="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\js\cropbox\style.css')}}" rel="stylesheet" type="text/css"> --}}
 
     <!-- Jquery Toast css -->
     <link href="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\js\vtoast\vtoast.css')}}" rel="stylesheet" type="text/css">
@@ -734,14 +736,17 @@
 <!-- Modal-Effect -->
 <script src="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\libs\custombox\custombox.min.js')}}"></script>
 
-<script src="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\js\croppie\croppie.js')}}"></script>
+<script src="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\js\cropper\cropper.js')}}"></script>
+{{-- <script src="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\js\croppie\2_6_4\croppie.js')}}"></script> --}}
+{{-- <script src="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\js\cropbox\cropbox.js')}}"></script> --}}
 <!-- App js -->
+
 <script src="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\js\app.min.js')}}"></script>
 <script src="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\js\customs-js-mine.js')}}"></script>
 @include('script_js.select2.script')
 @stack('scripts')
 <!-- Vendor js -->
-
+<script src="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\js\app\uploadImage.js')}}"></script>
 <script src="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\js\app\lay-danh-sach-viec-lam.js')}}"></script>
 <script type="text/javascript">
 

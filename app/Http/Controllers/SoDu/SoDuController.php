@@ -31,52 +31,36 @@ class SoDuController extends Controller
     public function index(){
 //        dd($this->taiKhoan->getNhaTuyenDung->getSoDu);
 //        dd($this->loaiTaiKhoan);
-        switch ($this->loaiTaiKhoan['id']) {
-            case 1:
-                $data['data'] = $this->taiKhoan->getNguoiTimViec->getSoDu;
+        // switch ($this->loaiTaiKhoan['id']) {
+        //     case 1:
+        //         $data['data'] = $this->taiKhoan->getNguoiTimViec->getSoDu;
 
-                break;
-            case 2:
-                $data['data'] = $this->taiKhoan->getNhaTuyenDung->getSoDu;
-                break;
+        //         break;
+        //     case 2:
+        //         $data['data'] = $this->taiKhoan->getNhaTuyenDung->getSoDu;
+        //         break;
+        // }
+        $soDu = $this->taiKhoan->getSoDu;
+    
+        if($soDu == null){
+            $data['data'] = array();
         }
+        $data['data'] = $soDu;
+        
         return view('SoDu.index',compact('data'));
     }
     public function dangKy(){
         $title = 'Đăng ký';
         try {
-            $soDu = new SoDu();
-            $soDu->ten_tai_khoan = Str::random(12);
-
-            switch ($this->loaiTaiKhoan['id']) {
-                case 1:
-                    if ($this->taiKhoan->getNguoiTimViec->getSoDu == null) {
-                        $soDuNew = $this->taiKhoan->getNguoiTimViec->getSoDu()->save($soDu);
-                        Session::put('so_du', $soDuNew['tong_tien']);
-                    }
-
-                    break;
-                case 2:
-//                    dd($this->taiKhoan->getNhaTuyenDung['id']);
-                    $newSoDu = new SoDu();
-                    $newSoDu->tong_tien = 200;
-                    $newSoDu->ten_tai_khoan = $soDu->ten_tai_khoan;
-                    $newSoDu->nha_tuyen_dung_id = $this->taiKhoan->getNhaTuyenDung['id'];
-                    $newSoDu->save();
-//                    if ($this->taiKhoan->getNhaTuyenDung->getSoDu == null) {
-////                        $soDuNew = $this->taiKhoan->getNhaTuyenDung->getSoDu()->save($soDu);
-//                        Session::put('so_du', $soDuNew['tong_tien']);
-                        Session::put('so_du', $newSoDu['tong_tien']);
-//                    }
-                    break;
-            }
-
+            $data = array(
+                'tong_tien'=>200,
+                'tai_khoan_id'=> $this->taiKhoan->id
+            );
+            $newSoDu = new SoDu();
+            $newSoDu->setSoDu($data);
+            Session::put('so_du', $newSoDu['tong_tien']);
             return $this->getResponse($title,200,'Đăng ký tài khoản thành công!');
         }catch (\Exception $e){
-            return $this->getResponse($title,400,$e->getMessage());
-        }catch (InvalidArgumentException $e) {
-            return $this->getResponse($title,400,$e->getMessage());
-        }catch (QueryException  $e) {
             return $this->getResponse($title,400,$e->getMessage());
         }
     }

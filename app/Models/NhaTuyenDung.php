@@ -19,10 +19,48 @@ class NhaTuyenDung extends Model
         'gioi_tinh',
         'nam_sinh',
         'status',
+        'email',
+        'dia_chi',
+        'websites',
+        'fax',
+        'phone',
+        'gio_lam_viec',
+        'ngay_lam_viec',
+        'so_nhan_vien',
+        'so_chi_nhanh',
+        'dia_chi_chi_nhanh',
+        'logo',
+        'gioi_thieu',
+       
+        'nam_thanh_lap',
     ];
     protected $attributes = [
         'status' => 1,
     ];
+
+    public function getGioLamViecAttribute(){
+        return unserialize($this->attributes['gio_lam_viec']);
+    }
+    public function getNgayLamViecAttribute(){
+        return unserialize($this->attributes['ngay_lam_viec']);
+    }
+    public function getDiaChiChiNhanhAttribute(){
+        return unserialize($this->attributes['dia_chi_chi_nhanh']);
+    }
+    // public function getNganhNgheIdsAttribute(){
+    //     return $this->getNganhNgheId();
+    // }
+
+
+    public function getNganhNghe()
+    {
+        return $this->belongsToMany(NganhNghe::class, 'nganh_nghe_nha_tuyen_dung', 'nha_tuyen_dung_id', 'nganh_nghe_id');
+    }
+
+    public function getNganhNgheId()
+    {
+        return $this->getNganhNghe->pluck('id');
+    }
 
 
     //Quan tâm người tìm việc

@@ -121,9 +121,9 @@ class MyLoginController extends Controller
 //                return redirect()->back();
 //                return back();
             case 2:
-                $nhaTuyenDung = $findUser->getNhaTuyenDung;
+                $nhaTuyenDung = $findUser;
                 $soDu = $nhaTuyenDung->getSoDu;
-
+                // dd($soDu);
                 //check và lưu số dư
                 if ($soDu != null) {
                     Session::put('so_du', $soDu['tong_tien']);

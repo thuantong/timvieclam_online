@@ -129,7 +129,7 @@ echo '<a class="btn btn-white waves-effect border text-dark loc-nganh-nghe" href
                     sơ yêu cầu</u></h4>
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 ho_so_yeu_cau_cv"
                  id="ho_so_yeu_cau">
-                    @if (isset($data['yeu_cau_ho_so']))
+                    @if (isset($data['yeu_cau_ho_so']) && count($data['yeu_cau_ho_so']))
                     {{ implode(', ', array_map(function($c) {
                         switch($c){
                             case 1:
@@ -152,7 +152,7 @@ echo '<a class="btn btn-white waves-effect border text-dark loc-nganh-nghe" href
 
                         }
                  
-                    }, unserialize($data['yeu_cau_ho_so']))) }} 
+                    }, $data['yeu_cau_ho_so'])) }} 
                     @endif
                                                                         
             </div>

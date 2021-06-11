@@ -68,28 +68,9 @@
     <script src="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\libs\bootstrap-touchspin\jquery.bootstrap-touchspin.min.js')}}"></script>
 
     <!-- Plugins js -->
-{{--    <script src="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\libs\katex\katex.min.js')}}"></script>--}}
+
     <script src="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\libs\quill\quill.min.js')}}"></script>
-{{--    <script src="//cdn.quilljs.com/1.0.0/quill.js"></script>--}}
-{{--    <script src="//cdn.quilljs.com/1.0.0/quill.min.js"></script>--}}
-{{----}}
-{{--    <!-- Theme included stylesheets -->--}}
-{{--    <link href="//cdn.quilljs.com/1.0.0/quill.snow.css" rel="stylesheet">--}}
-{{--    <link href="//cdn.quilljs.com/1.0.0/quill.bubble.css" rel="stylesheet">--}}
 
-    <!-- Core build with no theme, formatting, non-essential modules -->
-{{--    <link href="//cdn.quilljs.com/1.0.0/quill.core.css" rel="stylesheet">--}}
-{{--    <script src="//cdn.quilljs.com/1.0.0/quill.core.js"></script>--}}
-
-    <!-- Init js-->
-{{--    <script src="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\js\pages\form-quilljs.init.js')}}"></script>--}}
-{{--    <script type="text/javascript" src="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\js\app\themMoiCongTy.js')}}"></script>--}}
-{{--    <script src="//cdn.quilljs.com/1.0.0/quill.js"></script>--}}
-{{--    <script src="//cdn.quilljs.com/1.0.0/quill.min.js"></script>--}}
-{{--    <script src="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\libs\quill\quill.min.js')}}"></script>--}}
-{{--    <script src="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\libs\katex\katex.min.js')}}"></script>--}}
-    <!-- Init js-->
-{{--    <script src="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\js\pages\form-quilljs.init.js')}}"></script>--}}
     <script type="text/javascript"
             src="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\libs\date-time-picker\moment-with-locales.min.js')}}"></script>
     <script type="text/javascript" src="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\libs\sweetalert2\sweetalert2.min.js')}}"></script>

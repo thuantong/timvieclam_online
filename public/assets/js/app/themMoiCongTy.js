@@ -1,5 +1,9 @@
 
 $(function () {
+    
+    getImage();
+    
+    // console.log("hoô")
     $("div#them-moi-cong-ty #logo_cong_ty").hover(function () {
         if ($(window).width() >= 576) {
             $(this).find('div.hover-me').fadeIn('fast');
@@ -9,6 +13,7 @@ $(function () {
             $(this).find('div.hover-me').fadeOut('fast');
         }
     });
+    
     $(document).on('click', '.logo_cong_ty_view', function () {
         $('#xem_anh_dai_dien').modal('show');
         let value = $(this).parents('#logo_cong_ty').find('img').attr('src');
@@ -82,47 +87,50 @@ $(function () {
     //
     //     }
     // });
-    var $uploadCrop_congty;
+    // var $uploadCrop_congty;
 
-    function readFile(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
+    // function readFile(input) {
+    //     if (input.files && input.files[0]) {
+    //         var reader = new FileReader();
 
-            reader.onload = function (e) {
-                $('.upload-demo').addClass('ready');
-                $uploadCrop_congty.croppie('bind', {
-                    url: e.target.result,
-                }).then(function () {
-                    console.log('jQuery bind complete');
-                });
-            };
-            //
-            reader.readAsDataURL(input.files[0]);
-        } else {
-            swal('Sorry - you\'re browser doesn\'t support the FileReader API');
-        }
-    }
+    //         reader.onload = function (e) {
+    //             $('.upload-demo').addClass('ready');
+    //             $uploadCrop_congty.croppie('bind', {
+    //                 url: e.target.result,
+    //             }).then(function () {
+    //                 console.log('jQuery bind complete');
+    //             });
+    //         };
+    //         //
+    //         reader.readAsDataURL(input.files[0]);
+    //     } else {
+    //         swal('Sorry - you\'re browser doesn\'t support the FileReader API');
+    //     }
+    // }
 
-    $uploadCrop_congty = $('#doi_anh_dai_dien.congty').find('#upload-demo').croppie({
-        viewport: {
-            width: 350,
-            height: 350,
-        },
-        enableExif: false,
-    });
+    // $uploadCrop_congty = $('#doi_anh_dai_dien.congty').find('#upload-demo').croppie({
+    //     viewport: {
+    //         width: 350,
+    //         height: 350,
+    //     },
+    //     enableExif: false,
+    // });
 
     $(document).on('click', '#logo_cong_ty .logo_cong_ty_change', function () {
-        $(this).parents('#logo_cong_ty').find('.logo_cong_ty_file').trigger('click');
+        $(this).parents('#logo_cong_ty').find('.file-upload').trigger('click');
     });
     $(document).on('click', '.logo_cong_ty_change-mobile', function () {
         $('#logo_cong_ty .logo_cong_ty_change').trigger('click');
     });
+    $(document).on('click','.change-img-upload',function(){
+        $('#logo_cong_ty .logo_cong_ty_change').trigger('click');
+    })
 
-    $(document).on('change', '#logo_cong_ty .logo_cong_ty_file', function () {
-        let getModal = $(this).parents('.modal').attr('id');
-        $('#doi_anh_dai_dien.congty').data('type', getModal).modal('show');
-        readFile(this);
-    });
+    // $(document).on('change', '#logo_cong_ty .logo_cong_ty_file', function () {
+    //     let getModal = $(this).parents('.modal').attr('id');
+    //     $('#doi_anh_dai_dien.congty').data('type', getModal).modal('show');
+    //     readFile(this);
+    // });
     $('div.modal#them-moi-cong-ty').on('hidden.bs.modal', function () {
         // alert()
         $(this).find('#logo_cong_ty').find('img').attr('src', 'images/default-company-logo.jpg').data('src', 'images/default-company-logo.jpg');
@@ -171,51 +179,60 @@ $(function () {
             //     break;
         }
     });
-    $('#doi_anh_dai_dien.congty').find('.modal-footer').find('button:eq(1)#save').on('click', function () {
-        let __this = $(this);
-        let type = $(this).parents('.modal').data('type');
-        console.log('modal nè', type);
+    $(document).on('hidden.bs.modal','#doi_anh_dai_dien',function () {
+        $('.logo_cong_ty_file').val('');
+    })
+    // $('#doi_anh_dai_dien.congty').find('.modal-footer').find('button:eq(1)#save').on('click', function () {
+    //     let __this = $(this);
+    //     let type = $(this).parents('.modal').data('type');
+    //     // console.log('modal nè', type);
 
-        // console.log(type)
-        let elementID = '';
-        switch (type) {
-            case 'them-moi-cong-ty':
-                // elementID = $('#' + type).find('#logo_cong_ty');
-                elementID = $('body').find('#logo_cong_ty');
-                break;
-            case 'cap-nhat-cong-ty':
+    //     // console.log(type)
+    //     let elementID = '';
+    //     switch (type) {
+    //         case 'them-moi-cong-ty':
+    //             // elementID = $('#' + type).find('#logo_cong_ty');
+    //             elementID = $('body').find('#logo_cong_ty');
+    //             break;
+    //         case 'cap-nhat-cong-ty':
 
-                elementID = $('#them-moi-cong-ty').find('#logo_cong_ty');
-                break;
-        }
-        let namePicture = elementID.find('input[type="file"]')[0].files[0].name;
-        $uploadCrop_congty.croppie('result', {
-            type: 'canvas',
-            size: 'viewport',
-        }).then(function (resp) {
-            let method = 'post';
-            let url = '/nha-tuyen-dung/set-logo-company';
-            let data = {
-                fileName: resp,
-                name: namePicture,
-            };
-            sendAjaxNoFunc(method, url, data, __this.attr('id')).done(function (e) {
-                // console.log('data', e.reset[0])
-                elementID.find('img').attr('src', getBaseURL+e.reset[0]).data('data', e.reset[0]);
-                getHtmlResponse(e);
+    //             elementID = $('#them-moi-cong-ty').find('#logo_cong_ty');
+    //             break;
+    //     }
+    //     let namePicture = elementID.find('input[type="file"]')[0].files[0].name;
+    //     // $uploadCrop_congty.croppie('result', {
+    //     //     type: 'canvas',
+    //     //     size: 'viewport',
+    //     // }).then(function (resp) {
+    //     //     console.log(elementID)
+    //     //     elementID.find('img').attr('src', resp);
+            
+    //     //     // let method = 'post';
+    //     //     // let url = '/nha-tuyen-dung/set-logo-company';
+    //     //     // let data = {
+    //     //     //     fileName: resp,
+    //     //     //     name: namePicture,
+    //     //     // };
+    //     //     // sendAjaxNoFunc(method, url, data, __this.attr('id')).done(function (e) {
+    //     //     //     // console.log('data', e.reset[0])
+    //     //     //     elementID.find('img').attr('src', getBaseURL+e.reset[0]).data('data', e.reset[0]);
+    //     //     //     getHtmlResponse(e);
 
-                if (e.status == 200) {
-                    $('#doi_anh_dai_dien.congty').modal('hide');
+    //     //     //     if (e.status == 200) {
+    //     //     //         $('#doi_anh_dai_dien.congty').modal('hide');
 
-                }
-            })
+    //     //     //     }
+    //     //     // })
 
-        });
-    });
+    //     });
+    // });
 });
 
 $(document).on('click', 'button#save-cong-ty', function () {
-    // alert()
+    // console.log(cropperUpload)
+    // return;
+    // alert()\
+    let avatarCongTy = cropperUpload != null ? cropperUpload.getCroppedImage() : $('#logo_cong_ty').find('img').data('data');
     let __this = $(this);
     let gio_lam_viec = [];
     let ngay_lam_viec = [];
@@ -257,17 +274,18 @@ $(document).on('click', 'button#save-cong-ty', function () {
             quy_mo_nhan_su: getParents.find('#quy_mo_nhan_su').find('option:checked').val(),
             linh_vuc_hoat_dong: getParents.find('#linh_vuc_hoat_dong').val(),
             fax_cong_ty: getParents.find('#fax_cong_ty').val(),
-            logo_cong_ty: getParents.find('#logo_cong_ty').find('img').data('data'),
+            // logo_cong_ty: getParents.find('#logo_cong_ty').find('img').data('data'),
             gioi_thieu_cong_ty: getParents.find('#gioi_thieu_cong_ty').val(),
             so_luong_chi_nhanh: so_luong_chi_nhanh.val(),
             dia_chi_chi_nhanh: array_dia_chi_chi_nhanh,
             nam_thanh_lap: getParents.find('#nam_thanh_lap').val(),
             dia_diem_id: getParents.find('#dia_diem').val(),
+            avatar :  avatarCongTy
         }
         // console.log(dataSend);
         // return;
         sendAjaxNoFunc('post', '/danh-sach-cong-ty/tao-moi', dataSend, __this.attr('id')).done(res => {
-            console.log('them moi',res);
+            // console.log('them moi',res);
             getHtmlResponse(res);
             if (res.status == 200) {
                 if (__this.parents('.modal').length > 0){

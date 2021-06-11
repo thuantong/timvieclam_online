@@ -15,7 +15,7 @@
     @include('CongTy.modal.xemAnhDaiDien')
     @include('CongTy.modal.anh_dai_dien')
 
-    <div class="modal fade bs-example-modal-center" id="xem_anh_dai_dien" tabindex="-1" role="dialog"
+    {{-- <div class="modal fade bs-example-modal-center" id="xem_anh_dai_dien" tabindex="-1" role="dialog"
          aria-labelledby="myCenterModalLabel" aria-hidden="true" style="display: none;">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -23,7 +23,7 @@
                 {{--                    <h4 class="modal-title" id="myCenterModalLabel">Center modal</h4>--}}
                 {{--                    --}}
                 {{--                </div>--}}
-                <div class="modal-body p-0">
+                {{--  <div class="modal-body p-0">
                     <button type="button" class="close position-absolute text-danger" style="right: 1rem"
                             data-dismiss="modal"
                             aria-hidden="true">×
@@ -32,9 +32,9 @@
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
+    </div><!-- /.modal --> --}}
 
-    <div class="modal fade bs-example-modal-center thong-tin" id="doi_anh_dai_dien" tabindex="-1" role="dialog"
+    {{-- <div class="modal fade bs-example-modal-center thong-tin" id="doi_anh_dai_dien" tabindex="-1" role="dialog"
          aria-labelledby="myCenterModalLabel" aria-hidden="true" style="display: none;">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -45,7 +45,7 @@
                 <div class="modal-body">
                     <div class="demo-wrap upload-demo">
                         {{--                        <div class="container">--}}
-                        <div class="row">
+                        {{--<div class="row">
 
                             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                                 <div class="upload-msg">
@@ -57,7 +57,7 @@
                             </div>
                         </div>
                         {{--                        </div>--}}
-                    </div>
+                   {{--   </div>
 
                 </div>
                 <div class="modal-footer">
@@ -68,9 +68,9 @@
                     </button>
                 </div>
 
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
+            </div>
+        </div>
+    </div> --}}
 
 
 
@@ -81,7 +81,7 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
                         <li class="breadcrumb-item"><a>Thông tin</a></li>
-                        <li class="breadcrumb-item active">Thông tin nhà tuyển dụng</li>
+                        <li class="breadcrumb-item active">Thông tin cá nhân</li>
                     </ol>
                 </div>
                 <h4 class="page-title">{{__('Phần Nhà Tuyển Dụng')}}</h4>
@@ -116,7 +116,7 @@
                     <label class="col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
                         <h4 class="bg-light p-2 text-uppercase">{{__('Thông Tin Nhà Tuyển Dụng')}}</h4></label>
                 </div>
-                <div class="row form-group">
+                {{-- <div class="row form-group">
                     <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center text-md-right">
                         <label for="ho_ten"><abbr class="text-danger  font-15">* </abbr>{{__('Họ tên: ')}}</label>
                     </div>
@@ -128,7 +128,7 @@
                             <strong></strong>
                         </span>
                     </div>
-                </div>
+                </div> --}}
                 <div class="row form-group">
                     <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center text-md-right">
                         <label for="email"><abbr class="text-danger  font-15">* </abbr>{{__('Email: ')}}
@@ -158,7 +158,7 @@
 
                     <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 text-left">
                         <input class="form-control not-null" id="dia_chi" title="Địa chỉ"
-                               value="@if($data['nha_tuyen_dung']['dia_chi'] != null){{$data['nha_tuyen_dung']['dia_chi']}}@endif">
+                               value="@if($data['dia_chi'] != null){{$data['dia_chi']}}@endif">
 
                         <span class="invalid-feedback" role="alert">
                             <strong></strong>
@@ -177,9 +177,9 @@
                             <option value="" disabled selected
                                     class="text-center">{{__('Chọn giới tính')}}</option>
                             <option value="1"
-                                    @if($data['nha_tuyen_dung']['gioi_tinh'] != null && $data['nha_tuyen_dung']['gioi_tinh'] == 1) selected @endif>{{__('Nam')}}</option>
+                                    @if($data['gioi_tinh'] != null && $data['gioi_tinh'] == 1) selected @endif>{{__('Nam')}}</option>
                             <option value="2"
-                                    @if($data['nha_tuyen_dung']['gioi_tinh'] != null && $data['nha_tuyen_dung']['gioi_tinh'] == 2) selected @endif>{{__('Nữ')}}</option>
+                                    @if($data['gioi_tinh'] != null && $data['gioi_tinh'] == 2) selected @endif>{{__('Nữ')}}</option>
                         </select>
 
                         <span class="invalid-feedback" role="alert">
@@ -197,7 +197,7 @@
 
                     <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 text-left">
                         <input class="form-control not-null" id="ngay_sinh_tuyen_dung" title="Ngày sinh"
-                               value="@if($data['nha_tuyen_dung']['nam_sinh'] != null){{\Illuminate\Support\Carbon::createFromFormat('Y-m-d',$data['nha_tuyen_dung']['nam_sinh'])->format('d/m/Y')}}@else{{date('d/m/Y')}}@endif">
+                               value="@if($data['nam_sinh'] != null){{\Illuminate\Support\Carbon::createFromFormat('Y-m-d',$data['nam_sinh'])->format('d/m/Y')}}@else{{date('d/m/Y')}}@endif">
 
                         <span class="invalid-feedback" role="alert">
                             <strong></strong>
@@ -230,15 +230,15 @@
                             <div class="col-sm-9 col-md-10 col-lg-10 col-xl-10 pr-0">
                                 <div class="row">
                                     {{--                                    <div class="col-sm-12 col-md-4">--}}
-                                    {{--                                        <img src="@if(isset($data['cong_ty']) && $data['cong_ty']['logo'] != null){{URL::asset(''.$data['cong_ty']['logo'].'')}}@else{{URL::asset('images/default-company-logo.jpg')}}@endif" width="100" height="100">--}}
+                                    {{--                                        <img src="@if(isset($data) && $data['logo'] != null){{URL::asset(''.$data['logo'].'')}}@else{{URL::asset('images/default-company-logo.jpg')}}@endif" width="100" height="100">--}}
                                     <input id="cong_ty_tuyen_dung" class="not-null" title="Công ty tuyển dụng"
                                            type="hidden" title="Công ty"
-                                           value="@if(isset($data['cong_ty']) && $data['cong_ty']['id'] != null){{$data['cong_ty']['id']}}@endif">
+                                           value="@if(isset($data) && $data['id'] != null){{$data['id']}}@endif">
 
                                     {{--                                    </div>--}}
                                     <div class="col-sm-12 col-md-12 text-center"
-                                         id="cong_ty_tuyen_dung_name">@if(isset($data['cong_ty']) && $data['cong_ty']['name'] != null)
-                                            <h5>{{ucwords($data['cong_ty']['name'])}}</h5>@else <h5>{{'Chưa thêm công ty tuyển dụng'}}</h5> @endif
+                                         id="cong_ty_tuyen_dung_name">@if(isset($data) && $data['name'] != null)
+                                            <h5>{{ucwords($data['name'])}}</h5>@else <h5>{{'Chưa thêm công ty tuyển dụng'}}</h5> @endif
                                     </div>
                                     <span class="invalid-feedback" role="alert">
                             <strong></strong>
@@ -248,8 +248,8 @@
                                 {{--                                    title="Công ty tuyển dụng">--}}
                                 {{--                                <option value="" disabled selected>Công ty</option>--}}
 
-                                {{--                                @if($data['cong_ty'] != null)--}}
-                                {{--                                    @foreach($data['cong_ty'] as $row)--}}
+                                {{--                                @if($data != null)--}}
+                                {{--                                    @foreach($data as $row)--}}
                                 {{--                                        <option value="{{$row['id']}}"--}}
                                 {{--                                                data-img="{{URL::asset($row['logo'])}}">{{$row['name']}}</option>--}}
                                 {{--                                    @endforeach--}}
@@ -267,45 +267,14 @@
 
                     </div>
                 </div>
-                <div class="row form-group d-none">
-                    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center text-md-right">
-                        <label for="avatar_tuyen_dung">{{__('Ảnh đại diện: ')}}</label>
-                    </div>
-                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 center-element position-relative">
-                        <div style="width: 8rem;height: 8rem;" id="avatar_tuyen_dung">
-                            {{--                            <img src="{{URL::asset(Session::get('avatar'))}}" class="avatar-xl img-thumbnail" data-data="{{Session::get('avatar')}}"--}}
-                            <img
-                                src="@if(Auth::user()->avatar != null){{URL::asset(env('URL_ASSET_PUBLIC').Auth::user()->avatar)}}@else{{URL::asset(env('URL_ASSET_PUBLIC').'images\default-user-icon-8.jpg')}}@endif"
-                                class="avatar-xl img-thumbnail" data-data="{{Auth::user()->avatar}}"
-                                alt="profile-image" tabindex="-1" style="width: 100%;height: 100%">
-                            <div class="position-absolute center-element"
-                                 style="display:none;width: 8rem;height: 8rem;background-color: rgba(50, 58, 70, .55);top:0">
-                                <div>
-                                    <div class="row mt-1 mb-1">
-                                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
-                                            <button class="btn btn-success btn-sm">Đổi ảnh</button>
-                                            <input type="file" class="d-none">
-                                        </div>
-                                    </div>
-                                    <div class="row mt-1 mb-1">
-                                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
-                                            <button class="btn btn-light btn-sm">Xem ảnh</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </div>
-                </div>
+                
                 <div class="row form-group">
                     <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
                         <label>Giới thiệu bản thân:</label>
                     </div>
                     <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                         <textarea class="form-control"
-                                  id="gioi_thieu">@if($data['nha_tuyen_dung']['gioi_thieu']){{$data['nha_tuyen_dung']['gioi_thieu']}}@endif</textarea>
+                                  id="gioi_thieu">@if($data['gioi_thieu']){{$data['gioi_thieu']}}@endif</textarea>
                     </div>
                 </div>
                 <h5 class="mb-3 text-uppercase bg-light p-2 text-center text-md-left"><i class="mdi mdi-earth mr-1"></i>
@@ -321,7 +290,7 @@
                                 </div>
                                 {{--                                unserialize($nguoiTimViec['social'])[0]--}}
                                 <input type="text" class="form-control social-link" id="social-fb"
-                                       value="@if($data['nha_tuyen_dung']['mang_xa_hoi'] != null){{unserialize($data['nha_tuyen_dung']['mang_xa_hoi'])[0]}}@endif"
+                                       value="@if($data['mang_xa_hoi'] != null){{unserialize($data['mang_xa_hoi'])[0]}}@endif"
                                        placeholder="Url">
                             </div>
                         </div>
@@ -335,7 +304,7 @@
                                                                 class="fa fa-twitter"></i></span>
                                 </div>
                                 <input type="text" class="form-control social-link" id="social-tw"
-                                       value="@if($data['nha_tuyen_dung']['mang_xa_hoi'] != null){{unserialize($data['nha_tuyen_dung']['mang_xa_hoi'])[1]}}@endif"
+                                       value="@if($data['mang_xa_hoi'] != null){{unserialize($data['mang_xa_hoi'])[1]}}@endif"
                                        placeholder="Username">
                             </div>
                         </div>
@@ -351,7 +320,7 @@
                                     <span class="input-group-text"><i class="fa fa-instagram"></i></span>
                                 </div>
                                 <input type="text" class="form-control social-link" id="social-insta"
-                                       value="@if($data['nha_tuyen_dung']['mang_xa_hoi'] != null){{unserialize($data['nha_tuyen_dung']['mang_xa_hoi'])[2]}}@endif"
+                                       value="@if($data['mang_xa_hoi'] != null){{unserialize($data['mang_xa_hoi'])[2]}}@endif"
                                        placeholder="Url">
                             </div>
                         </div>
@@ -365,7 +334,7 @@
                                                                 class="fa fa-linkedin"></i></span>
                                 </div>
                                 <input type="text" class="form-control social-link" id="social-lin"
-                                       value="@if($data['nha_tuyen_dung']['mang_xa_hoi'] != null){{unserialize($data['nha_tuyen_dung']['mang_xa_hoi'])[3]}}@endif"
+                                       value="@if($data['mang_xa_hoi'] != null){{unserialize($data['mang_xa_hoi'])[3]}}@endif"
                                        placeholder="Url">
                             </div>
                         </div>
@@ -382,7 +351,7 @@
                                                                 class="fa fa-skype"></i></span>
                                 </div>
                                 <input type="text" class="form-control social-link" id="social-sky"
-                                       value="@if($data['nha_tuyen_dung']['mang_xa_hoi'] != null){{unserialize($data['nha_tuyen_dung']['mang_xa_hoi'])[4]}}@endif"
+                                       value="@if($data['mang_xa_hoi'] != null){{unserialize($data['mang_xa_hoi'])[4]}}@endif"
                                        placeholder="@username">
                             </div>
                         </div>
@@ -396,7 +365,7 @@
                                                                 class="fa fa-github"></i></span>
                                 </div>
                                 <input type="text" class="form-control social-link" id="social-gh"
-                                       value="@if($data['nha_tuyen_dung']['mang_xa_hoi'] != null){{unserialize($data['nha_tuyen_dung']['mang_xa_hoi'])[5]}}@endif"
+                                       value="@if($data['mang_xa_hoi'] != null){{unserialize($data['mang_xa_hoi'])[5]}}@endif"
                                        placeholder="Username">
                             </div>
                         </div>
@@ -426,6 +395,8 @@
 
     <script type="text/javascript" src="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\js\app\nhaTuyenDung.js')}}"></script>
     <script type="text/javascript" src="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\js\app\doi_mat_khau.js')}}"></script>
+   
+    {{-- <script type="text/javascript" src="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\js\app\themMoiCongTy.js')}}"></script> --}}
     {{--    init valiable of confirm email--}}
     <script type="text/javascript">
         let data_action_confifm = '{{Auth::user()->id}}';
@@ -435,6 +406,7 @@
     <script type="text/javascript" src="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\js\date-picker-vi.js')}}"></script>
     <script>
         $(function () {
+            // getImage();
             var fixedScroll = $('#scroll-fixed').offset();
             const headerTop = fixedScroll.top;
             $(window).on('scroll', function () {
@@ -450,7 +422,7 @@
         let HTMLcongTy = null;
         let getBaseURL = '{{URL::asset('/')}}';
         const initEventCapNhatCongTy = () => {
-            $('#doi_anh_dai_dien.congty').data('type', 'them-moi-cong-ty')
+            // $('#doi_anh_dai_dien').data('type', 'them-moi-cong-ty')
             select2Default($('select#from_day'));
             select2Default($('select#to_day'));
             select2Default($('select#quy_mo_nhan_su'));
@@ -501,6 +473,7 @@
     </script>
 
     <script type="text/javascript" src="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\js\app\themMoiCongTy.js')}}"></script>
+    {{-- <script type="text/javascript" src="{{URL::asset(env('URL_ASSET_PUBLIC').'assets\js\app\uploadImage.js')}}"></script> --}}
     <script>
         $(document).on('click', 'button#call-them-moi-cong-ty', function () {
             $('div.modal#them-moi-cong-ty').modal('show');

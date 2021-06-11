@@ -31,108 +31,108 @@ $(function () {
     });
     $('select#gioi_tinh_tuyen_dung').select2();
 
-    $("#logo_cong_ty").hover(function () {
-        $(this).find('div').fadeIn('fast');
+    // $("#logo_cong_ty").hover(function () {
+    //     $(this).find('div').fadeIn('fast');
 
-    }, function () {
-        $(this).find('div').fadeOut('fast');
-    });
-    $("#avatar_tuyen_dung").hover(function () {
-        $(this).find('div').fadeIn('fast');
+    // }, function () {
+    //     $(this).find('div').fadeOut('fast');
+    // });
+    // $("#avatar_tuyen_dung").hover(function () {
+    //     $(this).find('div').fadeIn('fast');
 
-    }, function () {
-        $(this).find('div').fadeOut('fast');
-    });
+    // }, function () {
+    //     $(this).find('div').fadeOut('fast');
+    // });
 
-    $('#logo_cong_ty').find('button').eq(1).on('click', function () {
-        $('#xem_anh_dai_dien').modal('show');
-        let value = $(this).parents('#logo_cong_ty').find('img').attr('src');
-        $('#xem_anh_dai_dien').find('.modal-body').find('img').attr('src', value);
-    });
+    // $('#logo_cong_ty').find('button').eq(1).on('click', function () {
+    //     $('#xem_anh_dai_dien').modal('show');
+    //     let value = $(this).parents('#logo_cong_ty').find('img').attr('src');
+    //     $('#xem_anh_dai_dien').find('.modal-body').find('img').attr('src', value);
+    // });
 
-    $('#avatar_tuyen_dung').find('button').eq(1).on('click', function () {
-        $('#xem_anh_dai_dien').modal('show');
-        let value = $(this).parents('#avatar_tuyen_dung').find('img').attr('src');
-        $('#xem_anh_dai_dien').find('.modal-body').find('img').attr('src', value);
-    });
+    // $('#avatar_tuyen_dung').find('button').eq(1).on('click', function () {
+    //     $('#xem_anh_dai_dien').modal('show');
+    //     let value = $(this).parents('#avatar_tuyen_dung').find('img').attr('src');
+    //     $('#xem_anh_dai_dien').find('.modal-body').find('img').attr('src', value);
+    // });
 
-    var $uploadCrop;
+    // var $uploadCrop;
 
-    function readFile(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
+    // function readFile(input) {
+    //     if (input.files && input.files[0]) {
+    //         var reader = new FileReader();
 
-            reader.onload = function (e) {
-                $('#doi_anh_dai_dien.thong-tin').find('.upload-demo').addClass('ready');
-                $uploadCrop.croppie('bind', {
-                    url: e.target.result,
-                }).then(function () {
-                    console.log('jQuery bind complete');
-                });
-            };
-            //
-            reader.readAsDataURL(input.files[0]);
-        } else {
-            swal('Sorry - you\'re browser doesn\'t support the FileReader API');
-        }
-    }
+    //         reader.onload = function (e) {
+    //             $('#doi_anh_dai_dien.thong-tin').find('.upload-demo').addClass('ready');
+    //             $uploadCrop.croppie('bind', {
+    //                 url: e.target.result,
+    //             }).then(function () {
+    //                 console.log('jQuery bind complete');
+    //             });
+    //         };
+    //         //
+    //         reader.readAsDataURL(input.files[0]);
+    //     } else {
+    //         swal('Sorry - you\'re browser doesn\'t support the FileReader API');
+    //     }
+    // }
 
-    $uploadCrop = $('#doi_anh_dai_dien.thong-tin').find('#upload-demo').croppie({
-        viewport: {
-            width: 400,
-            height: 400,
-        },
-        enableExif: false,
-    });
+    // $uploadCrop = $('#doi_anh_dai_dien.thong-tin').find('#upload-demo').croppie({
+    //     viewport: {
+    //         width: 400,
+    //         height: 400,
+    //     },
+    //     enableExif: false,
+    // });
 
     // save
-    $('#logo_cong_ty').find('button').eq(0).on('click', function () {
-        $(this).parent().find('input[type="file"]').trigger('click');
+    // $('#logo_cong_ty').find('button').eq(0).on('click', function () {
+    //     $(this).parent().find('input[type="file"]').trigger('click');
 
-    });
-    $('#logo_cong_ty').parent().find('input[type="file"]').on('change', function () {
-        $('#doi_anh_dai_dien.thong-tin').data('type','congty').modal('show');
-        readFile(this);
-    });
-    $('#doi_anh_dai_dien.thong-tin').on('hidden.bs.modal',function () {
-        let type = $(this).data('type');
-        switch (type) {
-            case 'congty':
-                $('#logo_cong_ty').parent().find('input[type="file"]').val('');
-                break;
-            case 'tuyendung':
-                $('#avatar_tuyen_dung').parent().find('input[type="file"]').val('');
-                break;
-        }
-    });
-    $('#doi_anh_dai_dien.thong-tin').find('.modal-footer').find('button:eq(1)#save').on('click',function () {
-        let __this = $(this);
-        let elementID = '';
-        switch ($('#doi_anh_dai_dien.thong-tin').data('type')) {
-            case 'congty': elementID = '#'+ $('#logo_cong_ty').attr('id');
-                break;
-            case 'tuyendung': elementID = '#'+ $('#avatar_tuyen_dung').attr('id');
-                break;
-        }
-        let namePicture = $(elementID).parent().find('input[type="file"]')[0].files[0].name;
-        $uploadCrop.croppie('result', {
-            type: 'canvas',
-            size: 'viewport',
-        }).then(function (resp) {
-            let method = 'post';
-            let url = '/nha-tuyen-dung/set-logo-company';
-            let data = {
-                    fileName: resp,
-                    name: namePicture,
-            };
-            sendAjaxNoFunc(method,url,data,__this.attr('id')).done(function (e) {
-                $(elementID).find('img').attr('src', e.reset[0]).data('data',e.reset[0]);
-                getHtmlResponse(e);
-                $('#doi_anh_dai_dien.thong-tin').modal('hide');
-            })
+    // });
+    // $('#logo_cong_ty').parent().find('input[type="file"]').on('change', function () {
+    //     $('#doi_anh_dai_dien.thong-tin').data('type','congty').modal('show');
+    //     readFile(this);
+    // });
+    // $('#doi_anh_dai_dien.thong-tin').on('hidden.bs.modal',function () {
+    //     let type = $(this).data('type');
+    //     switch (type) {
+    //         case 'congty':
+    //             $('#logo_cong_ty').parent().find('input[type="file"]').val('');
+    //             break;
+    //         case 'tuyendung':
+    //             $('#avatar_tuyen_dung').parent().find('input[type="file"]').val('');
+    //             break;
+    //     }
+    // });
+    // $('#doi_anh_dai_dien.thong-tin').find('.modal-footer').find('button:eq(1)#save').on('click',function () {
+    //     let __this = $(this);
+    //     let elementID = '';
+    //     switch ($('#doi_anh_dai_dien.thong-tin').data('type')) {
+    //         case 'congty': elementID = '#'+ $('#logo_cong_ty').attr('id');
+    //             break;
+    //         case 'tuyendung': elementID = '#'+ $('#avatar_tuyen_dung').attr('id');
+    //             break;
+    //     }
+    //     let namePicture = $(elementID).parent().find('input[type="file"]')[0].files[0].name;
+    //     $uploadCrop.croppie('result', {
+    //         type: 'canvas',
+    //         size: 'viewport',
+    //     }).then(function (resp) {
+    //         let method = 'post';
+    //         let url = '/nha-tuyen-dung/set-logo-company';
+    //         let data = {
+    //                 fileName: resp,
+    //                 name: namePicture,
+    //         };
+    //         sendAjaxNoFunc(method,url,data,__this.attr('id')).done(function (e) {
+    //             $(elementID).find('img').attr('src', e.reset[0]).data('data',e.reset[0]);
+    //             getHtmlResponse(e);
+    //             $('#doi_anh_dai_dien.thong-tin').modal('hide');
+    //         })
 
-        });
-    });
+    //     });
+    // });
 
 
     //change email
@@ -149,14 +149,14 @@ $(function () {
         })
     });
 
-    $('#avatar_tuyen_dung').find('button').eq(0).on('click', function () {
-        $(this).parent().find('input[type="file"]').trigger('click');
+    // $('#avatar_tuyen_dung').find('button').eq(0).on('click', function () {
+    //     $(this).parent().find('input[type="file"]').trigger('click');
 
-    });
-    $('#avatar_tuyen_dung').parent().find('input[type="file"]').on('change', function () {
-        $('#doi_anh_dai_dien.thong-tin').data('type','tuyendung').modal('show');
-        readFile(this);
-    });
+    // });
+    // $('#avatar_tuyen_dung').parent().find('input[type="file"]').on('change', function () {
+    //     $('#doi_anh_dai_dien.thong-tin').data('type','tuyendung').modal('show');
+    //     readFile(this);
+    // });
 });
 
 $(document).on('click','.save-profile',function () {

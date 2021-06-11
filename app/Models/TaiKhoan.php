@@ -51,6 +51,17 @@ class TaiKhoan extends Authenticatable
     protected $attributes = [
         'status' => 0,
     ];
+    //lấy số dư
+    public function getSoDu()
+    {
+        return $this->hasOne(SoDu::class, 'tai_khoan_id');
+    }
+
+    public function getSoDuId()
+    {
+        return $this->getSoDu->pluck('id');
+    }
+
 
     //lấy phân quyền
     public function getPhanQuyen(){

@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'eeaeea98dbb2385142978a7f2c5da3bd37b6431f',
+        'reference' => '68498c0383a6a2ed9164656574c46f9f329bc09a',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -38,13 +38,13 @@
             'dev_requirement' => false,
         ),
         'cordoval/hamcrest-php' => array(
-            'dev_requirement' => false,
+            'dev_requirement' => true,
             'replaced' => array(
                 0 => '*',
             ),
         ),
         'davedevelopment/hamcrest-php' => array(
-            'dev_requirement' => false,
+            'dev_requirement' => true,
             'replaced' => array(
                 0 => '*',
             ),
@@ -236,7 +236,7 @@
             'install_path' => __DIR__ . '/../hamcrest/hamcrest-php',
             'aliases' => array(),
             'reference' => '8c3d0a3f6af734494ad8f6fbbee0ba92422859f3',
-            'dev_requirement' => false,
+            'dev_requirement' => true,
         ),
         'illuminate/auth' => array(
             'dev_requirement' => false,
@@ -413,7 +413,7 @@
             ),
         ),
         'kodova/hamcrest-php' => array(
-            'dev_requirement' => false,
+            'dev_requirement' => true,
             'replaced' => array(
                 0 => '*',
             ),
@@ -433,7 +433,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'eeaeea98dbb2385142978a7f2c5da3bd37b6431f',
+            'reference' => '68498c0383a6a2ed9164656574c46f9f329bc09a',
             'dev_requirement' => false,
         ),
         'laravel/tinker' => array(
@@ -479,7 +479,7 @@
             'install_path' => __DIR__ . '/../mockery/mockery',
             'aliases' => array(),
             'reference' => 'd1339f64479af1bee0e82a0413813fe5345a54ea',
-            'dev_requirement' => false,
+            'dev_requirement' => true,
         ),
         'monolog/monolog' => array(
             'pretty_version' => '2.2.0',
@@ -910,24 +910,6 @@
             'aliases' => array(),
             'reference' => '99732be0ddb3361e16ad77b68ba41efc8e979019',
             'dev_requirement' => true,
-        ),
-        'spatie/laravel-package-tools' => array(
-            'pretty_version' => '1.9.0',
-            'version' => '1.9.0.0',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../spatie/laravel-package-tools',
-            'aliases' => array(),
-            'reference' => 'cf4c4cec220575e2864c6082842d76822421f1b1',
-            'dev_requirement' => false,
-        ),
-        'spatie/laravel-responsecache' => array(
-            'pretty_version' => '6.6.9',
-            'version' => '6.6.9.0',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../spatie/laravel-responsecache',
-            'aliases' => array(),
-            'reference' => 'cab93fa63fd60e03dc5bb33aef7b45cc014ed6a3',
-            'dev_requirement' => false,
         ),
         'swiftmailer/swiftmailer' => array(
             'pretty_version' => 'v6.2.7',

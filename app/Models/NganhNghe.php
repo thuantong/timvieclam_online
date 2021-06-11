@@ -20,6 +20,12 @@ class NganhNghe extends Model
     public function getCongTyId(){
         return $this->getCongTy->pluck('id');
     }
+    public function getNhaTuyenDung(){
+        return $this->belongsToMany(NhaTuyenDung::class,'nganh_nghe_nha_tuyen_dung','nganh_nghe_id','nha_tuyen_dung_id');
+    }
+    public function getNhaTuyenDungId(){
+        return $this->getNhaTuyenDung->pluck('id');
+    }
 
     public function getBaiTuyenDung(){
         return $this->belongsToMany(BaiTuyenDung::class,'bai_tuyen_dung_nganh_nghe','nganh_nghe_id','bai_tuyen_dung_id');

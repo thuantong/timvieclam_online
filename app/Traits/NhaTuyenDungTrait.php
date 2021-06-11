@@ -26,15 +26,16 @@ trait NhaTuyenDungTrait
     {
             $nhaTuyenDung = TaiKhoan::query()->find(Auth::user()->id)->getNhaTuyenDung;
 
-            $data['nha_tuyen_dung'] = $nhaTuyenDung->toArray();
-            $data['kinh_nghiem'] = KinhNghiem::query()->orderBy('id', 'asc')->get();
-            $data['nganh_nghe'] = NganhNghe::query()->orderBy('name', 'asc')->get();
-            $data['cong_ty'] = $nhaTuyenDung->getCongTy()->first(['id', 'name', 'logo']);
-            $data['chuc_vu'] = ChucVu::query()->orderBy('name', 'asc')->get();
-            $data['dia_diem'] = DiaDiem::query()->orderBy('name', 'asc')->get();
-            $data['kieu_lam_viec'] = KieuLamViec::query()->orderBy('name', 'asc')->get();
-            $data['bang_cap'] = BangCap::query()->orderBy('name', 'asc')->get();
-            $data['quy_mo_nhan_su'] = QuyMoNhanSu::query()->orderBy('id', 'asc')->get();
+            $data = $nhaTuyenDung->toArray();
+            // $data['nha_tuyen_dung'] = $nhaTuyenDung->toArray();
+            // $data['kinh_nghiem'] = KinhNghiem::query()->orderBy('id', 'asc')->get();
+            // $data['nganh_nghe'] = NganhNghe::query()->orderBy('name', 'asc')->get();
+            // $data['cong_ty'] = $nhaTuyenDung->getCongTy()->first(['id', 'name', 'logo']);
+            // $data['chuc_vu'] = ChucVu::query()->orderBy('name', 'asc')->get();
+            // $data['dia_diem'] = DiaDiem::query()->orderBy('name', 'asc')->get();
+            // $data['kieu_lam_viec'] = KieuLamViec::query()->orderBy('name', 'asc')->get();
+            // $data['bang_cap'] = BangCap::query()->orderBy('name', 'asc')->get();
+            // $data['quy_mo_nhan_su'] = QuyMoNhanSu::query()->orderBy('id', 'asc')->get();
             return view('User.nhaTuyenDung',compact('data'));
     }
 

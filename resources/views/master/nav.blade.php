@@ -80,7 +80,8 @@
                     <li>
                         <a href="{{route('quanlybaidang.index')}}" class="waves-effect">
                             <i class="fa fa-list-alt"></i>
-                            <span>{{__('Quản lý bài đăng').'('.\App\Models\TaiKhoan::query()->find(\Illuminate\Support\Facades\Auth::user()->id)->getNhaTuyenDung->getBaiViet()->count().")"}}</span>
+                            {{-- <span>{{__('Quản lý bài đăng').'('.\App\Models\TaiKhoan::query()->find(\Illuminate\Support\Facades\Auth::user()->id)->getNhaTuyenDung->getBaiViet()->count().")"}}</span> --}}
+                            {{-- <span>{{__('Quản lý bài đăng').'('.\App\Models\TaiKhoan::query()->find(\Illuminate\Support\Facades\Auth::user()->id)->getNhaTuyenDung->getBaiViet()->count().")"}}</span> --}}
                         </a>
                     </li>
 

@@ -12,9 +12,10 @@ use App\Models\TaiKhoan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
-
+use App\Traits\UploadImage;
 class CongTyController extends Controller
 {
+    use UploadImage;
     private $nhaTuyenDung;
 
     public function __construct()
@@ -23,7 +24,7 @@ class CongTyController extends Controller
         $this->middleware(['auth','email.confirm','nha_tuyen_dung']);
         $this->middleware(function ($request, $next) {
 //            abort(404);
-        $this->nhaTuyenDung = TaiKhoan::query()->find(Auth::user()->id)->getNhaTuyenDung;
+        // $this->nhaTuyenDung = TaiKhoan::query()->find(Auth::user()->id)->getNhaTuyenDung;
 
         return $next($request);
     });
@@ -37,24 +38,25 @@ class CongTyController extends Controller
 //        dd($nhaTuyenDung);
     }
     public function getData(){
-        $data['nganh_nghe'] = NganhNghe::all()->toArray();
-        $data['quy_mo_nhan_su'] = QuyMoNhanSu::all()->toArray();
-        $data['dia_diem'] = DiaDiem::all()->toArray();
-        $checkCongty =$this->nhaTuyenDung;
-        if($checkCongty->getCongTy()->count() == 1){
-            $data['data'] = $checkCongty->getCongTy()->first();
-            if ($data['data'] != null){
-                $getNganhNghe = $data['data']->getNganhNgheId()->toArray();
-                $data['data'] = $data['data']->toArray();
-                $data['data']['nganh_nghe_ids'] = $getNganhNghe;
-                $data['data']['dia_chi_chi_nhanh'] = unserialize($data['data']['dia_chi_chi_nhanh']);
-                $data['data']['gio_lam_viec'] = unserialize($data['data']['gio_lam_viec']);
-                $data['data']['ngay_lam_viec'] = unserialize($data['data']['ngay_lam_viec']);
-            }
+        
+        $taiKhoan = TaiKhoan::query()->find(Auth::user()->id);
+        $data =$taiKhoan->getNhaTuyenDung->toArray();
+        $data['nganh_nghe_ids'] = $taiKhoan->getNhaTuyenDung->getNganhNgheId()->toArray();
+      
+        // if($checkCongty != null){
+        //     $data['data'] = $checkCongty->getCongTy()->first();
+        //     if ($data['data'] != null){
+        //         $getNganhNghe = $data['data']->getNganhNgheId()->toArray();
+        //         $data['data'] = $data['data']->toArray();
+        //         $data['data']['nganh_nghe_ids'] = $getNganhNghe;
+        //         $data['data']['dia_chi_chi_nhanh'] = unserialize($data['data']['dia_chi_chi_nhanh']);
+        //         $data['data']['gio_lam_viec'] = unserialize($data['data']['gio_lam_viec']);
+        //         $data['data']['ngay_lam_viec'] = unserialize($data['data']['ngay_lam_viec']);
+        //     }
     
-        }else{
-             $data['data'] = array();
-        }
+        // }else{
+        //      $data['data'] = array();
+        // }
     
         
         return $data;
@@ -63,9 +65,8 @@ class CongTyController extends Controller
     {
 
         $data = $this->getData();
-//        dd($data);
-//        dd(\GuzzleHttp\json_decode());
-    //    dd(isset($data['data']));
+        // dd($data);
+        // dd(TaiKhoan::query()->find(Auth::user()->id)->getNhaTuyenDung->toArray());
         return view('CongTy.index', compact('data'));
     }
 
@@ -77,7 +78,7 @@ class CongTyController extends Controller
 //        $congTy =   CongTy::with('getNhaTuyenDung')->groupBy('getNhaTuyenDung.id')->get();
 //        $data['data'] = collect($congTy)->toArray()->groupBy('id');
 //        $sortDirection = 'desc';
-        $getCongTy['data'] = $this->nhaTuyenDung->getCongTy()->orderBy('created_at', 'desc')->get();
+        $getCongTy['data'] = $this->nhaTuyenDung;
 //        $data = $getCongTy[0];
 //        $data['data'] = NhaTuyenDung::with('getCongTy')->get();
 //        for ($i= 0;$i<1000;$i++){
@@ -97,20 +98,21 @@ class CongTyController extends Controller
 
     public function setDanhSach(Request $request)
     {
-//        echo $request->logo_cong_ty;
-//        dd($request);
-//        $congTyNew->ten_cong_ty = serialize($request->linh_vuc_hoat_dong);
+
         $title = 'Cập nhật';
         try {
             if ($request->id == null){
-                $congTyNew = new CongTy();
+                $congTyNew = new NhaTuyenDung();
             }else{
-                $congTyNew = CongTy::query()->find($request->id);
+                $congTyNew = NhaTuyenDung::query()->find($request->id);
             }
             $taiKhoan = TaiKhoan::query()->find(Auth::user()->id);
-            $taiKhoan->avatar = $request->logo_cong_ty != null ? $request->logo_cong_ty : 'images/default-company-logo.jpg';
+            // $taiKhoan->avatar = $request->logo_cong_ty != null ? $request->logo_cong_ty : 'images/default-company-logo.jpg';
+            $taiKhoan->avatar = $request->avatar != null &&  $request->avatar != 'images/default-company-logo.jpg' ? $this->getImageFromBase64($request->avatar) : 'images/default-company-logo.jpg';
+            
+            $taiKhoan->ho_ten = $request->ten_cong_ty;
             $taiKhoan->save();
-            $congTyNew->name = $request->ten_cong_ty;
+            
             $congTyNew->websites = $request->link_website;
             $congTyNew->email = $request->email_cong_ty;
             $congTyNew->phone = $request->dien_thoai_cong_ty;
@@ -118,21 +120,23 @@ class CongTyController extends Controller
             $congTyNew->dia_diem_id = $request->dia_diem_id;
             $congTyNew->gio_lam_viec = serialize($request->gio_lam_viec);
             $congTyNew->ngay_lam_viec = serialize($request->ngay_lam_viec);
-            $congTyNew->so_nhan_vien = $request->quy_mo_nhan_su;
+            $congTyNew->so_luong_nhan_vien_id = $request->quy_mo_nhan_su;
             $congTyNew->fax = $request->fax_cong_ty;
-            $congTyNew->logo = $request->logo_cong_ty != null ? $request->logo_cong_ty : 'images/default-company-logo.jpg';
+            // $congTyNew->logo = $request->logo_cong_ty != null ? $request->logo_cong_ty : 'images/default-company-logo.jpg';
             $congTyNew->gioi_thieu = $request->gioi_thieu_cong_ty;
             $congTyNew->so_chi_nhanh = $request->so_luong_chi_nhanh;
-            $congTyNew->dia_chi_chi_nhanh = serialize($request->dia_chi_chi_nhanh);
+            $congTyNew->so_chi_nhanh = $request->so_luong_chi_nhanh;
+            $congTyNew->tai_khoan_id = Auth::user()->id;
             $congTyNew->nam_thanh_lap = $request->nam_thanh_lap;
 
+            
             $congTyNew->save();
-
+            
             $nganhNghe = $request->linh_vuc_hoat_dong;
-            $nhaTuyenDung = $this->nhaTuyenDung;
-            if ($request->id == null){
-                $nhaTuyenDung->getCongTy()->save($congTyNew);
-            }
+            // $nhaTuyenDung = $this->nhaTuyenDung;
+            // if ($request->id == null){
+            //     $nhaTuyenDung->getCongTy()->save($congTyNew);
+            // }
 
             $congTyNew->getNganhNghe()->detach();
             $congTyNew->getNganhNghe()->attach($nganhNghe);

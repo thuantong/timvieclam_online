@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class   CreateSoDuTable extends Migration
+class UpdateSoDuTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class   CreateSoDuTable extends Migration
      */
     public function up()
     {
-        Schema::create('so_du', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->decimal('tong_tien',12);
-            $table->string('ten_tai_khoan')->nullable();
-            // $table->bigInteger('nguoi_tim_viec_id')->unsigned()->nullable();
-            // $table->bigInteger('nha_tuyen_dung_id')->unsigned()->nullable();
+        Schema::table('so_du', function (Blueprint $table) {
+            $table->bigInteger('tai_khoan_id')->unsigned()->nullable();
+            $table->foreign('tai_khoan_id')->references('id')->on('tai_khoan')->onDelete('no action')->onUpdate('no action');
         });
     }
 

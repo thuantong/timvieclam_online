@@ -111,18 +111,20 @@
         }
 
         const getThongTinChiTietPost = (e) => {
+            $(".content-detail-left").animate({ scrollTop: 0 }, "fast");
+
             // console.log('con cac ne', e);
             let baseURL = '{{ URL::asset('/') }}';
-                // console.log("bc"+baseURL);
-            // console.log('con cac dđne', e['don_xin_viec']['data'].length);
+            // console.log(e)
             // return;
+          
             if (e != null) {
+                console.log(e.nguoi_tim_viec)
                 if (parseInt(loaiTaiKhoan) == 1) {
-                    // console.log(e.bai_da_luu.data.findIndex(x=>x.id == e.id))
-
-                    if (e.bai_da_luu.data !== undefined) {
+                   
+                    if (e.nguoi_tim_viec.get_luu_bai !== undefined) {
                         // if (e.bai_da_luu.data.includes(e.id) == true) {
-                        if (e.bai_da_luu.data.findIndex(x => x == e.id) != -1) {
+                        if (e.nguoi_tim_viec.get_luu_bai.findIndex(x => x == e.id) != -1) {
                             $('.trang-chu-like-post').removeClass('btn-outline-primary');
                             $('.trang-chu-like-post').addClass('btn-primary');
                             $('.trang-chu-like-post').addClass('like-animation');
@@ -136,10 +138,11 @@
 
                         }
                     }
+                  
                     //
-                    if (e.don_xin_viec.data != null) {
+                    if (e.nguoi_tim_viec.get_don_xin_viec != null) {
                         // get_don_xin_viec
-                        if (e.don_xin_viec.data != null && e.don_xin_viec.data.findIndex(x => x == e.id) != -1) {
+                        if (e.nguoi_tim_viec.get_don_xin_viec != null && e.nguoi_tim_viec.get_don_xin_viec.findIndex(x => x == e.id) != -1) {
                             $('.call-modal-nop-don').removeClass('btn-outline-warning');
                             $('.call-modal-nop-don').addClass('btn-warning');
                             $('.call-modal-nop-don').addClass('like-animation');
@@ -156,6 +159,7 @@
                     }
 
                 }
+
                 $('.call-nhan-tin-tuyen-dung').attr('id','call-nhan-tin-tuyen-dung');
                 let getBasicURL = '{{URL::asset('/')}}';
                 let idTaiKhoanDangNhap = null;
@@ -163,13 +167,13 @@
                 idTaiKhoanDangNhap = '{{Auth::user()->id}}';
                 @endif
                 $('.call-nhan-tin-tuyen-dung').attr('href',getBasicURL+'nhan-tin-nguoi-dung?to='+e.get_nha_tuyen_dung.tai_khoan_id+'&from='+idTaiKhoanDangNhap);
-
+                // return;
                 $('.tieu-de-chi-tiet').data('id', e.id);
                 idBaiTuyenDung = $('.tieu-de-chi-tiet').data('id');
                 //lượt thích
                 // total_thich
-                $('.tong-luot-thich').text(e.bai_da_luu.total);
-                $('.tong-ung-tuyen').text(e.don_xin_viec.total);
+                $('.tong-luot-thich').text(e.get_luu_bai.length);
+                $('.tong-ung-tuyen').text(e.get_don_xin_viec.length);
 
                 // return;
 
@@ -212,7 +216,7 @@
                 $('.cong_ty_dia_chi').text(" "+e.get_cong_ty.dia_chi);
                 $('.quy_mo').text(" "+e.get_cong_ty.get_quy_mo_nhan_su.name);
                 $('.gioi_thieu').text(" "+e.get_cong_ty.gioi_thieu);
-                
+                // return;
                 
                 $('.mo_ta_cong_viec').html(e.mo_ta);
                 $('.yeu_cau_cong_viec').html(e.yeu_cau_cong_viec);
@@ -342,9 +346,9 @@
                 if (__this.hasClass('iteam-click-active') == false) {
                     getThongTinChiTietPost(null);
 
-                    sendAjaxNoFunc(ajax.method, ajax.url, ajax.data, '').done(r => {
+                    sendAjaxNoFunc(ajax.method, ajax.url, ajax.data, '').done(async (r) => {
                         // console.log('thongtin', r);
-                        getThongTinChiTietPost(r);
+                        await getThongTinChiTietPost(r);
                         __this.addClass('iteam-click-active')
                     });
                 }
