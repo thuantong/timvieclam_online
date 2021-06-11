@@ -276,6 +276,7 @@
                         @foreach($quy_mo_nhan_su as $row)
                             <option value="{{$row['id']}}" @if(isset($data['so_luong_nhan_vien_id']) && $data['so_luong_nhan_vien_id'] != null) @if($row['id'] == $data['so_luong_nhan_vien_id']){{'selected'}}@endif @endif>{{$row['name']}}</option>
                         @endforeach
+                        {{-- abc --}}
                     @endif
                 </select>
                 <span class="invalid-feedback" role="alert">
