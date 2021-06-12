@@ -51,7 +51,7 @@
 {{--    <div class="row center-element">--}}
 
     {{-- @if (isset($data['data']) && (count($data['data']) > 0)) --}}
-    @include('CongTy.content')
+    @include('congty.content')
 
     {{-- @endif --}}
    
