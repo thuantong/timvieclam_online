@@ -28,8 +28,8 @@
     </div>
   
     {{-- @if (isset($data['data']) && (count($data['data']) > 0)) --}}
-    @include('CongTy.modal.anh_dai_dien')
-    @include('CongTy.modal.xemAnhDaiDien')
+    @include('congty.modal.anh_dai_dien')
+    @include('congty.modal.xemAnhDaiDien')
     {{-- @endif --}}
     
 
