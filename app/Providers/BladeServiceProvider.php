@@ -28,20 +28,20 @@ class BladeServiceProvider extends ServiceProvider
 
     public function variBlade()
     {
-        $bladeDiaDiem = DiaDiem::all()->toArray();
-        View::share('dia_diem', $bladeDiaDiem);
-        $bladeNganhNghe = NganhNghe::all()->toArray();
-        View::share('nganh_nghe', $bladeNganhNghe);
-        $bladeBangCap = BangCap::all()->toArray();
-        View::share('bang_cap', $bladeBangCap);
-        $bladeChucVu = ChucVu::all()->toArray();
-        View::share('chuc_vu', $bladeChucVu);
-        $bladeKieuLamViec = KieuLamViec::all()->toArray();
-        View::share('kieu_lam_viec', $bladeKieuLamViec);
-        $bladeQuy_mo_nhan_su = QuyMoNhanSu::all()->toArray();
-        View::share('quy_mo_nhan_su', $bladeQuy_mo_nhan_su);
-        $bladeKinhNghiem = KinhNghiem::all()->toArray();
-        View::share('kinh_nghiem', $bladeKinhNghiem);
+        // $bladeDiaDiem = DiaDiem::all()->toArray();
+        // View::share('dia_diem', $bladeDiaDiem);
+        // $bladeNganhNghe = NganhNghe::all()->toArray();
+        // View::share('nganh_nghe', $bladeNganhNghe);
+        // $bladeBangCap = BangCap::all()->toArray();
+        // View::share('bang_cap', $bladeBangCap);
+        // $bladeChucVu = ChucVu::all()->toArray();
+        // View::share('chuc_vu', $bladeChucVu);
+        // $bladeKieuLamViec = KieuLamViec::all()->toArray();
+        // View::share('kieu_lam_viec', $bladeKieuLamViec);
+        // $bladeQuy_mo_nhan_su = QuyMoNhanSu::all()->toArray();
+        // View::share('quy_mo_nhan_su', $bladeQuy_mo_nhan_su);
+        // $bladeKinhNghiem = KinhNghiem::all()->toArray();
+        // View::share('kinh_nghiem', $bladeKinhNghiem);
         // dd('cc');
     }
     /**
