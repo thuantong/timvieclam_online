@@ -39,12 +39,12 @@ class AdminTrangChuController extends Controller
         }
 
         $tongSoTK = TaiKhoan::query()->count();
-        $tongSoNhaTuyenDung = ((float)NhaTuyenDung::query()->count() / (float)$tongSoTK) * 100;
-        $tongSoNguoiTimViec = ((float)NguoiTimViec::query()->count() / (float)$tongSoTK) * 100;
-        $tongSoQuanTriVien = ((float)QuanTriVien::query()->count() / (float)$tongSoTK) * 100;
+        $tongSoNhaTuyenDung = ((float)collect(TaiKhoan::query()->with('getNhaTuyenDung')->get()->toArray())->whereNotNull('get_nha_tuyen_dung')->count() / (float)$tongSoTK) * 100;
+        $tongSoNguoiTimViec = ((float)collect(TaiKhoan::query()->with('getNguoiTimViec')->get()->toArray())->whereNotNull('get_nguoi_tim_viec')->count() / (float)$tongSoTK) * 100;
+        $tongSoQuanTriVien = ((float)collect(TaiKhoan::query()->with('getQuanTriVien')->get()->toArray())->whereNotNull('get_quan_tri_vien')->count() / (float)$tongSoTK) * 100;
 
 
-        dd(TaiKhoan::query()->with('getNhaTuyenDung')->count());
+        // dd(collect(TaiKhoan::query()->with('getNhaTuyenDung')->get()->toArray())->whereNotNull('get_nha_tuyen_dung')->count());
         $newData[0] = array(
             'value' => $tongSoNhaTuyenDung, 'label' => 'Nhà tuyển dụng'
         );
