@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-use Spatie\ResponseCache\Facades\ResponseCache;
+// use Spatie\ResponseCache\Facades\ResponseCache;
 class DuyetBaiVietController extends Controller
 {
     public function __construct()
@@ -72,7 +72,7 @@ class DuyetBaiVietController extends Controller
             $baiTuyenDung->status = 1;//accept
             $baiTuyenDung->han_bai_viet = Carbon::now($this->tzHoChiMinh())->addDays($donHang->so_luong)->toDateTimeString();
                 $baiTuyenDung->save();
-                ResponseCache::clear();
+                // ResponseCache::clear();
             return $this->getResponse($title,200,'Phê duyệt bài viết '.$baiTuyenDung->tieu_de.' Thành công!');
         }catch (\Exception $e){
             return $this->getResponse($title,400,'Phê duyệt bài viết '.$baiTuyenDung->tieu_de.' Thất bại!');

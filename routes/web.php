@@ -49,7 +49,7 @@ Route::namespace('TrangChu')->group(function () {
 Route::namespace('User')->group(function () {
     Route::name('user.')->group(function () {
         Route::resource('/user', 'UserController');
-//        Route::post('/tai-khoan/xac-nhan-email', 'UserController@sendVerifyEmail');
+    //    Route::post('/tai-khoan/xac-nhan-email', 'UserController@sendVerifyEmail');
         Route::get('/nguoi-tim-viec', 'UserController@getEmployee')->name('nguoiTimViec');
 //        Route::get('/user-employer', 'UserController@getEmployer');
         Route::get('/user-set-employer', 'UserController@setEmployee');

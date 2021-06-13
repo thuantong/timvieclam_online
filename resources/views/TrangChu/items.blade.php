@@ -2,20 +2,22 @@
 @if(count($data['bai_tuyen_dung']) != 0)
 
     <input type="hidden" class="item-container-page" data-current="{{$data['trang_hien_tai']}}" data-pageurl="{{$data['check_trang']}}">
+    
+    {{-- @dd($data['bai_tuyen_dung']) --}}
     @foreach($data['bai_tuyen_dung'] as $row)
-
+    {{-- @dd($row['id']) --}}
     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 bg-white ribbon-box iteam-click" data-id="{{$row['id']}}">
         <div class="row">
             <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2 p-0 center-element">
 
-                <img src="{{URL::asset(env('URL_ASSET_PUBLIC').$row['get_cong_ty']['logo'])}}" class="border" style="width: calc(100%)">
+                <img src="{{URL::asset(env('URL_ASSET_PUBLIC').$row['get_nha_tuyen_dung']['get_tai_khoan']['avatar'])}}" class="border" style="width: calc(100%)">
 
             </div>
             <div class="col-sm-10 col-md-10 col-lg-10 col-xl-10 text-center">
                 <div class="row">
                     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 text"><h5 class="mb-0"><a class="xem-chi-tiet-post" href="{{route('baiviet.getThongTinBaiViet',[$row['id'],'chitiet'=>1])}}"><span title="{{$row['tieu_de']}}" class="text-capitalize">{{$row['tieu_de']}}</span></a>
                         </h5></div>
-                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 text text-uppercase"><i><span title="{{$row['get_cong_ty']['name']}}">{{$row['get_cong_ty']['name']}}</span></i>
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 text text-uppercase"><i><span title="{{$row['get_nha_tuyen_dung']['get_tai_khoan']['ho_ten']}}">{{$row['get_nha_tuyen_dung']['get_tai_khoan']['ho_ten']}}</span></i>
                     </div>
                     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                         <div class="row">

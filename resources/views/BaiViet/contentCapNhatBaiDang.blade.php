@@ -27,13 +27,13 @@
                         <div class="col-sm-9 col-md-10 col-lg-10 col-xl-10 pr-0">
                             <div class="row">
                                 <div class="col-sm-12 col-md-4">
-                                    <img src="@if((count($data['cong_ty']) > 0) && isset($data['cong_ty']) && $data['cong_ty']['logo'] != null){{URL::asset(''.$data['cong_ty']['logo'].'')}}@else{{URL::asset('images/default-company-logo.jpg')}}@endif" width="100" height="100">
-                                    <input id="cong_ty_tuyen_dung_update" class="not-null" type="hidden" title="Công ty" value="@if((count($data['cong_ty']) > 0) && isset($data['cong_ty']) && $data['cong_ty']['id'] != null){{$data['cong_ty']['id']}}@endif">
+                                    <img src="@if((count($data) > 0) && isset($data)){{URL::asset(env('URL_ASSET_PUBLIC').Auth::user()->avatar.'')}}@else{{URL::asset(env('URL_ASSET_PUBLIC').'images/default-company-logo.jpg')}}@endif" width="100" height="100">
+                                    <input id="cong_ty_tuyen_dung_update" class="not-null" type="hidden" title="Công ty" value="@if((count($data) > 0) && isset($data) && $data['id'] != null){{$data['id']}}@endif">
                                     <span class="invalid-feedback" role="alert">
                             <strong></strong>
                         </span>
                                 </div>
-                                <div class="col-sm-12 col-md-8" id="cong_ty_tuyen_dung_name">@if((count($data['cong_ty']) > 0) && isset($data['cong_ty']) && $data['cong_ty']['name'] != null)<h5>{{ucwords($data['cong_ty']['name'])}}</h5>@else{{'Chưa thêm công ty tuyển dụng'}}@endif</div>
+                                <div class="col-sm-12 col-md-8" id="cong_ty_tuyen_dung_name">@if((count($data) > 0) && isset($data))<h5>{{Auth::user()->ho_ten}}</h5>@else{{'Chưa thêm công ty tuyển dụng'}}@endif</div>
                             </div>
 
                         </div>
@@ -52,8 +52,8 @@
                 <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2">
                     <select class="form-control not-null chuc_vu_tuyen" id="chuc_vu_tuyen_update" title="Chức vụ tuyển dụng">
                         <option value="" selected disabled>Chọn chức vụ</option>
-                        @if($data['chuc_vu'] != null)
-                            @foreach($data['chuc_vu'] as $row)
+                        @if($chuc_vu != null)
+                            @foreach($chuc_vu as $row)
                                 <option value="{{$row['id']}}">{{$row['name']}}</option>
                             @endforeach
                         @endif
@@ -94,10 +94,11 @@
                 <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
                     <select class="form-control not-null so_kinh_nghiem" id="so_kinh_nghiem_update" title="Số năm kinh nghiệm">
                         <option selected disabled value="">Chọn kinh nghiệm</option>
-                        @foreach($data['kinh_nghiem'] as $row)
+                        @if($kinh_nghiem != null)
+                        @foreach($kinh_nghiem as $row)
                             <option value="{{$row['id']}}">{{$row['name']}}</option>
                         @endforeach
-
+@endif
                     </select>
                     <span class="invalid-feedback" role="alert">
                             <strong></strong>
@@ -145,8 +146,8 @@
                 <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
                     <select class="form-control not-null nganh_nghe" multiple id="nganh_nghe_update" title="Ngành nghề">
                         {{--                            <option selected disabled value="">Ngành nghề</option>--}}
-                        @if($data['nganh_nghe'] != null)
-                            @foreach($data['nganh_nghe'] as $row)
+                        @if($nganh_nghe != null)
+                            @foreach($nganh_nghe as $row)
                                 <option value="{{$row['id']}}">{{$row['name']}}</option>
                             @endforeach
                         @endif
@@ -186,8 +187,8 @@
                 <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
                     <select class="form-control not-null bang_cap" id="bang_cap_update" title="Bằng cấp yêu cầu">
                         <option disabled selected value="">{{__('Chọn học vấn')}}</option>
-                        @if($data['bang_cap'] != null)
-                            @foreach($data['bang_cap'] as $row)
+                        @if($bang_cap != null)
+                            @foreach($bang_cap as $row)
                                 <option value="{{$row['id']}}">{{$row['name']}}</option>
                             @endforeach
                         @endif
@@ -220,8 +221,8 @@
                 <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
                     <select class="form-control not-null dia_diem_lam_viec" id="dia_diem_lam_viec_update" title="Địa điểm làm việc">
                         <option disabled selected value="">{{__('Chọn địa điểm')}}</option>
-                        @if($data['dia_diem'] != null)
-                            @foreach($data['dia_diem'] as $row)
+                        @if($dia_diem != null)
+                            @foreach($dia_diem as $row)
                                 <option value="{{$row['id']}}">{{$row['name']}}</option>
                             @endforeach
                         @endif
@@ -238,8 +239,8 @@
                 <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2">
                     <select class="form-control not-null hinh_thuc" id="hinh_thuc_update" title="Hình thức">
                         <option disabled selected value="">{{__('Chọn hình thức')}}</option>
-                        @if($data['kieu_lam_viec'] != null)
-                            @foreach($data['kieu_lam_viec'] as $row)
+                        @if($kieu_lam_viec != null)
+                            @foreach($kieu_lam_viec as $row)
                                 <option value="{{$row['id']}}">{{$row['name']}}</option>
 
                             @endforeach

@@ -32,37 +32,34 @@ class QuanLyBaiDangController extends Controller
     public function index(){
 //        $btd = BaiTuyenDung::query()->whereDate(['han_tuyen','>=',Carbon::now()->format('d/m/Y'));
 //
-        $data['kinh_nghiem'] = KinhNghiem::query()->orderBy('id', 'asc')->get()->toArray();
-        $data['nganh_nghe'] = NganhNghe::query()->orderBy('name', 'asc')->get()->toArray();
+        $taiKhoan = TaiKhoan::query()->find(Auth::user()->id);
+        $data =$taiKhoan->getNhaTuyenDung->toArray();
+        $data['nganh_nghe_ids'] = $taiKhoan->getNhaTuyenDung->getNganhNgheId()->toArray();
+        // $data['kinh_nghiem'] = KinhNghiem::query()->orderBy('id', 'asc')->get()->toArray();
+        // $data['nganh_nghe'] = NganhNghe::query()->orderBy('name', 'asc')->get()->toArray();
     
-        $checkCongTy = $this->nhaTuyenDung->getCongTy();
-        if($checkCongTy->get()->toArray() != null){
-            $data['cong_ty'] = $checkCongTy->orderBy('created_at', 'desc')->first()->toArray();
-        }else{
-            $data['cong_ty'] = array();
-        }
-        $data['chuc_vu'] = ChucVu::query()->orderBy('name', 'asc')->get()->toArray();
-        $data['dia_diem'] = DiaDiem::query()->orderBy('name', 'asc')->get()->toArray();
-        $data['kieu_lam_viec'] = KieuLamViec::query()->orderBy('name', 'asc')->get()->toArray();
-        $data['bang_cap'] = BangCap::query()->orderBy('name', 'asc')->get()->toArray();
-        $data['quy_mo_nhan_su'] = QuyMoNhanSu::query()->orderBy('id', 'asc')->get()->toArray();
+        // $checkCongTy = $this->nhaTuyenDung->getCongTy();
+        // if($checkCongTy->get()->toArray() != null){
+        //     $data['cong_ty'] = $checkCongTy->orderBy('created_at', 'desc')->first()->toArray();
+        // }else{
+        //     $data['cong_ty'] = array();
+        // }
+        // $data['chuc_vu'] = ChucVu::query()->orderBy('name', 'asc')->get()->toArray();
+        // $data['dia_diem'] = DiaDiem::query()->orderBy('name', 'asc')->get()->toArray();
+        // $data['kieu_lam_viec'] = KieuLamViec::query()->orderBy('name', 'asc')->get()->toArray();
+        // $data['bang_cap'] = BangCap::query()->orderBy('name', 'asc')->get()->toArray();
+        // $data['quy_mo_nhan_su'] = QuyMoNhanSu::query()->orderBy('id', 'asc')->get()->toArray();
     //    dd();
         return view('QuanLyTuyenDung.QLBaiDang.index',compact('data'));
     }
     public function getDanhSach(Request $request){
-//        $data['data'] = BaiTuyenDung::with(['getChucVu','getKieuLamViec','getNhaTuyenDung','getCongTy','getDiaDiem','getBangCap','getNganhNghe',
-//
-//            'getDuyetTin'=>function($q){
-//            $q->select('id','noi_dung','bai_dang_id');
-//            }
-//        ])->get()->toArray();
 
         $query = BaiTuyenDung::with([
             'getNhaTuyenDung' => function ($subquery) {
                 $subquery->select('id', 'tai_khoan_id')->with(
                     [
                         'getTaiKhoan' => function ($q) {
-                            $q->select('id', 'ho_ten')->where('id',Auth::user()->id);
+                            $q->select('id', 'ho_ten','avatar')->where('id',Auth::user()->id);
                         }
                     ]
                 );
@@ -79,9 +76,7 @@ class QuanLyBaiDangController extends Controller
                 }
 
             },
-            'getCongTy' => function ($subquery) {
-                $subquery->select('id', 'name', 'logo');
-            },
+            
             'getNganhNghe' =>function($q) use ($request){
                 if ($request->exists('nganh_nghe') && $request->get('nganh_nghe') != "") {
                     $q->where('nganh_nghe_id',$request->get('nganh_nghe'));
@@ -136,7 +131,7 @@ class QuanLyBaiDangController extends Controller
         }else if($request->exists('bai_viet') && $request->get('bai_viet') == "") {
             $query;
         }else{
-            $trangThaiDangChoDuyet = 0;
+            $trangThaiDangChoDuyet = 1;//trạng thái đang tuyển dụng
             $query->where('status',$trangThaiDangChoDuyet);
 //            $query;
         }

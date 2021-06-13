@@ -27,15 +27,7 @@ trait NhaTuyenDungTrait
             $nhaTuyenDung = TaiKhoan::query()->find(Auth::user()->id)->getNhaTuyenDung;
 
             $data = $nhaTuyenDung->toArray();
-            // $data['nha_tuyen_dung'] = $nhaTuyenDung->toArray();
-            // $data['kinh_nghiem'] = KinhNghiem::query()->orderBy('id', 'asc')->get();
-            // $data['nganh_nghe'] = NganhNghe::query()->orderBy('name', 'asc')->get();
-            // $data['cong_ty'] = $nhaTuyenDung->getCongTy()->first(['id', 'name', 'logo']);
-            // $data['chuc_vu'] = ChucVu::query()->orderBy('name', 'asc')->get();
-            // $data['dia_diem'] = DiaDiem::query()->orderBy('name', 'asc')->get();
-            // $data['kieu_lam_viec'] = KieuLamViec::query()->orderBy('name', 'asc')->get();
-            // $data['bang_cap'] = BangCap::query()->orderBy('name', 'asc')->get();
-            // $data['quy_mo_nhan_su'] = QuyMoNhanSu::query()->orderBy('id', 'asc')->get();
+            
             return view('User.nhaTuyenDung',compact('data'));
     }
 
@@ -78,7 +70,7 @@ trait NhaTuyenDungTrait
         $title = 'Cập nhật';
         try {
             $taiKhoan = TaiKhoan::query()->find(Auth::user()->id);
-            $taiKhoan->ho_ten = $request->ho_ten_nhatuyendung;
+            // $taiKhoan->ho_ten = $request->ho_ten_nhatuyendung;
             $taiKhoan->email = $request->email_nhatuyendung;
             $taiKhoan->phone = $request->phone_nhatuyendung;
 //            $taiKhoan->avatar = $request->avatar_nhatuyendung;
@@ -86,7 +78,7 @@ trait NhaTuyenDungTrait
             $nhaTuyenDung = $taiKhoan->getNhaTuyenDung;
 //            $nhaTuyenDung->ho_ten = $request->ho_ten_nhatuyendung;
             $nhaTuyenDung->gioi_tinh = $request->gioi_tinh_nhatuyendung;
-            $nhaTuyenDung->gioi_thieu = $request->gioi_thieu_nhatuyendung;
+            // $nhaTuyenDung->gioi_thieu = $request->gioi_thieu_nhatuyendung;
             $nhaTuyenDung->dia_chi = $request->dia_chi_nhatuyendung;
 //            $nhaTuyenDung->avatar = $request->avatar_nhatuyendung;
             $nhaTuyenDung->mang_xa_hoi = serialize($request->social_nhatuyendung);

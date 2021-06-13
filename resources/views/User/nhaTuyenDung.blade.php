@@ -134,14 +134,14 @@
                         <label for="email"><abbr class="text-danger  font-15">* </abbr>{{__('Email: ')}}
                         </label>
                     </div>
-                    <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8 text-left">
+                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 text-left">
                         <div class="input-group">
                             <input class="form-control email-not-null"
                                    placeholder="@if(Auth::user()->email == null){{"Nhập email"}}@endif"
                                    id="email" data-rule="email" title="Email người tuyển dụng"
                                    value="@if(Auth::user()->email != null){{Auth::user()->email}}@endif">
                             <button
-                                class="btn @if(Auth::user()->email != Auth::user()->email_confirmed){{__('btn-primary')}}@else{{__('btn-success')}}@endif"
+                                class="btn btn-sm @if(Auth::user()->email != Auth::user()->email_confirmed){{__('btn-primary')}}@else{{__('btn-success')}}@endif"
                                 @if(Auth::user()->email != Auth::user()->email_confirmed) id="gui-xac-nhan-email" @endif>@if(Auth::user()->email != Auth::user()->email_confirmed){{__('Gửi xác thực email')}}@else{{__('Đã xác nhận')}}@endif</button>
                         </div>
                         <span class="text-success message-response"></span>
@@ -225,50 +225,54 @@
                     <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center text-md-right">
                         <label><abbr class="text-danger  font-15">* </abbr>{{__('Công ty tuyển dụng:')}}</label>
                     </div>
-                    <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8">
-                        <div class="row">
-                            <div class="col-sm-9 col-md-10 col-lg-10 col-xl-10 pr-0">
-                                <div class="row">
-                                    {{--                                    <div class="col-sm-12 col-md-4">--}}
-                                    {{--                                        <img src="@if(isset($data) && $data['logo'] != null){{URL::asset(''.$data['logo'].'')}}@else{{URL::asset('images/default-company-logo.jpg')}}@endif" width="100" height="100">--}}
-                                    <input id="cong_ty_tuyen_dung" class="not-null" title="Công ty tuyển dụng"
+                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        <div class="input-group">
+                            <input id="cong_ty_tuyen_dung" class="form-control not-null" title="Công ty tuyển dụng"
                                            type="hidden" title="Công ty"
                                            value="@if(isset($data) && $data['id'] != null){{$data['id']}}@endif">
+                                           <input id="cong_ty_tuyen_dung_name" class="form-control font-weight-bold text-center disabled" disabled value="@if(isset($data) != null && $data['tai_khoan_id'] != null){{ucwords(Auth::user()->ho_ten)}}@else{{'Chưa thêm công ty tuyển dụng'}}@endif">
+                                           <button class="btn waves-effect float-right btn-warning btn-sm call-them-moi-cong-ty"
+                                           id="call-them-moi-cong-ty">Chỉnh sửa
+                                   </button>
+                        </div>
 
-                                    {{--                                    </div>--}}
-                                    <div class="col-sm-12 col-md-12 text-center"
-                                         id="cong_ty_tuyen_dung_name">@if(isset($data) && $data['name'] != null)
-                                            <h5>{{ucwords($data['name'])}}</h5>@else <h5>{{'Chưa thêm công ty tuyển dụng'}}</h5> @endif
-                                    </div>
-                                    <span class="invalid-feedback" role="alert">
+                        <span class="text-success message-response"></span>
+                        <span class="invalid-feedback" role="alert">
                             <strong></strong>
                         </span>
-                                </div>
-                                {{--                            <select class="form-control not-null cong_ty_tuyen_dung" id="cong_ty_tuyen_dung"--}}
-                                {{--                                    title="Công ty tuyển dụng">--}}
-                                {{--                                <option value="" disabled selected>Công ty</option>--}}
 
-                                {{--                                @if($data != null)--}}
-                                {{--                                    @foreach($data as $row)--}}
-                                {{--                                        <option value="{{$row['id']}}"--}}
-                                {{--                                                data-img="{{URL::asset($row['logo'])}}">{{$row['name']}}</option>--}}
-                                {{--                                    @endforeach--}}
-                                {{--                                @endif--}}
+                        {{-- <div class="input-group"> --}}
+                            {{-- <div class="col-sm-12 col-md-12 col-lg-12 border col-xl-12 pr-0"> --}}
+                                {{-- <div class="row"> --}}
+                                    {{--                                    <div class="col-sm-12 col-md-4">--}}
+                                    {{--                                        <img src="@if(isset($data) && $data['logo'] != null){{URL::asset(''.$data['logo'].'')}}@else{{URL::asset('images/default-company-logo.jpg')}}@endif" width="100" height="100">--}}
+                                    
 
-                                {{--                            </select>--}}
-
-                            </div>
-                            <div class="col-sm-3 col-md-2 col-lg-2 col-xl-2 pl-0">
+                                    {{--                                    </div>--}}
+                                    {{-- <div class="col-sm-12 col-md-12 text-center"
+                                         id="cong_ty_tuyen_dung_name">@if(isset($data) != null && $data['tai_khoan_id'] != null)
+                                         <h5>{{ucwords(Auth::user()->ho_ten)}}</h5>@else <h5>{{'Chưa thêm công ty tuyển dụng'}}</h5> @endif<button class="btn waves-effect float-right btn-warning btn-sm call-them-moi-cong-ty"
+                                            id="call-them-moi-cong-ty">Chỉnh sửa
+                                    </button>
+                                            
+                                    </div>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong></strong>
+                                    </span> --}}
+                                {{-- </div> --}}
+                            
+                            {{-- </div> --}}
+                            {{-- <div class="col-sm-3 col-md-2 col-lg-2 col-xl-2 pl-0">
                                 <button class="btn waves-effect btn-primary call-them-moi-cong-ty"
                                         id="call-them-moi-cong-ty">Chỉnh sửa
                                 </button>
-                            </div>
-                        </div>
+                            </div> --}}
+                        {{-- </div> --}}
 
                     </div>
                 </div>
                 
-                <div class="row form-group">
+                {{-- <div class="row form-group">
                     <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
                         <label>Giới thiệu bản thân:</label>
                     </div>
@@ -276,7 +280,7 @@
                         <textarea class="form-control"
                                   id="gioi_thieu">@if($data['gioi_thieu']){{$data['gioi_thieu']}}@endif</textarea>
                     </div>
-                </div>
+                </div> --}}
                 <h5 class="mb-3 text-uppercase bg-light p-2 text-center text-md-left"><i class="mdi mdi-earth mr-1"></i>
                     {{__('Mạng xã hội:')}}</h5>
                 <div class="row">

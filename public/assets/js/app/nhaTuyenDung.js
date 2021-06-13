@@ -175,14 +175,14 @@ $(document).on('click','.save-profile',function () {
         let url = '/nha-tuyen-dung/update';
         let data = {
 
-            ho_ten_nhatuyendung : $('#ho_ten').val(),
+            // ho_ten_nhatuyendung : $('#ho_ten').val(),
             email_nhatuyendung : $('#email').val(),
             gioi_tinh_nhatuyendung : $('#gioi_tinh_tuyen_dung').val(),
             dia_chi_nhatuyendung : $('#dia_chi').val(),
             ngay_sinh_nhatuyendung : $('#ngay_sinh_tuyen_dung').val(),
             phone_nhatuyendung : $('#phone_tuyen_dung').val(),
-            avatar_nhatuyendung : $('#avatar_tuyen_dung').find('img').data('data'),
-            gioi_thieu_nhatuyendung : $('#gioi_thieu').val(),
+            // avatar_nhatuyendung : $('#avatar_tuyen_dung').find('img').data('data'),
+            // gioi_thieu_nhatuyendung : $('#gioi_thieu').val(),
             social_nhatuyendung : social
 
         };

@@ -153,6 +153,9 @@ echo '<a class="btn btn-white waves-effect border text-dark loc-nganh-nghe" href
                         }
                  
                     }, $data['yeu_cau_ho_so'])) }} 
+                    @else
+                        
+                    Không yêu cầu hồ sơ
                     @endif
                                                                         
             </div>

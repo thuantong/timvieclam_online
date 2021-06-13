@@ -86,8 +86,7 @@
         <ul class="list-unstyled topnav-menu float-right mb-0">
             @if(Session::get('loai_tai_khoan') != 3)
             <li>
-
-                <a href="/" class="nav-link d-none d-md-block text-white">
+                <a href="/" class="nav-link d-none d-md-block">
                     Việc làm
                 </a>
             </li>
@@ -98,7 +97,7 @@
                     <a class="nav-link center-element search-field-new-query" id="search-field-new-query"
                        data-toggle="collapse" data-target="#collapseExample" aria-expanded="false"
                        aria-controls="collapseExample">
-                        <span class="text-white">Tìm kiếm</span>
+                        <span>Tìm kiếm</span>
                     </a>
                 </li>
                         @endif
@@ -308,7 +307,7 @@
             @endif
             <li>
                 <button class="button-menu-mobile waves-effect waves-light nav-link">
-                    <i class="text-white icofont icofont-navigation-menu"></i>
+                    <i class="icofont icofont-navigation-menu"></i>
                 </button>
             </li>
 
@@ -318,14 +317,10 @@
             <li>
                 <a href="/@if(Session::get('loai_tai_khoan') == 3){{'admin'}}@endif" class="nav-link logo text-center">
             <span class="logo">
-                <span class="logo-lg-text-light text-white">{{env('APP_NAME')}}@if(Session::get('loai_tai_khoan') == 3){{'AD'}}@endif</span>
-{{--                            <img src="assets\images\logo-sm.png" alt="" height="24">--}}
-            {{--                            <img src="assets\images\logo-light.png" alt="" height="20">--}}
-            <!-- <span class="logo-lg-text-light">Xeria</span> -->
+                <span class="">{{env('APP_NAME')}}@if(Session::get('loai_tai_khoan') == 3){{'AD'}}@endif</span>
+
             </span>
-                    {{--                    <span class="logo-sm">--}}
-                    {{--                        <span class="logo-sm-text-dark text-white">TMJ</span>--}}
-                    {{--                        </span>--}}
+                
                 </a>
             </li>
 
@@ -458,7 +453,7 @@
     <!-- ============================================================== -->
 
     <div class="content-page pr-0 pl-0 pr-lg-1 pl-lg-1">
-        <div class="content">
+        <div class="content pt-2">
 
             <!-- Start Content-->
             <div class="container-fluid">

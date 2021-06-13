@@ -30,7 +30,7 @@ class ConfirmEmailController extends Controller
         $title = 'Gửi xác thực';
 
         try {
-            $__stringRandom = Str::random('200') . date('d') . Str::random('20') . date('m') . Str::random('20') . date('Y') . Str::random('40');
+            $__stringRandom = Str::random('20') . date('d') . Str::random('20') . date('m') . Str::random('20') . date('Y') . Str::random('40');
             $__token = $__stringRandom;
             $taiKhoan = TaiKhoan::query()->find($dataAjax['action']);
             $taiKhoan->email = $dataAjax['email'];
@@ -56,25 +56,10 @@ class ConfirmEmailController extends Controller
 
         try {
 
-//            $query = TaiKhoan::all()->toArray();
-//            dd($query);
-//            $taiKhoan = null;
-//            $id = null;
-//            if (Auth::user() == null) {
-//                foreach ($query as $row) {
-//                    if (Hash::check($token, $row['email_verify_code'])) {
-//                        $id = $row['id'];
-//                    }
-//                }
-            $taiKhoan = TaiKhoan::query()->where('email_verify_code',$token)->first();
 
-//            dd($taiKhoan);
-//            dd($taiKhoan->email_verify_code);
-//            $taiKhoan = TaiKhoan::query()->find($userID);
-//            }else if (Auth::user() != null){
-//                $taiKhoan = TaiKhoan::query()->find(Auth::user()->id);
-//            }
-//dd($userID);
+            $taiKhoan = TaiKhoan::query()->where('email_verify_code',$token)->first();
+            // dd($taiKhoan);
+        
             if($taiKhoan != null){
                 if($taiKhoan->email_confirmed == null || $taiKhoan->email_confirmed != $taiKhoan->email){
                     if ($taiKhoan->email_verify_code == null) {

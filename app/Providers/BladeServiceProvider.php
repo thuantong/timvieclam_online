@@ -6,6 +6,7 @@ use App\Models\BangCap;
 use App\Models\ChucVu;
 use App\Models\DiaDiem;
 use App\Models\KieuLamViec;
+use App\Models\KinhNghiem;
 use App\Models\NganhNghe;
 use App\Models\QuyMoNhanSu;
 use Illuminate\Support\Facades\View;
@@ -39,6 +40,8 @@ class BladeServiceProvider extends ServiceProvider
         View::share('kieu_lam_viec', $bladeKieuLamViec);
         $bladeQuy_mo_nhan_su = QuyMoNhanSu::all()->toArray();
         View::share('quy_mo_nhan_su', $bladeQuy_mo_nhan_su);
+        $bladeKinhNghiem = KinhNghiem::all()->toArray();
+        View::share('kinh_nghiem', $bladeKinhNghiem);
         // dd('cc');
     }
     /**

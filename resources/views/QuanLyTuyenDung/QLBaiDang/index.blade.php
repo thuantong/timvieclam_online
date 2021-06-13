@@ -130,9 +130,11 @@
                             <div class="col-sm-12 col-md-12">
                                 <select class="form-control qltd-search-field" id="qltd-dia-diem">
                                     <option value="">Tất cả</option>
-                                    @foreach($data['dia_diem'] as $row)
+                                    @if($dia_diem != null)
+                                    @foreach($dia_diem as $row)
                                         <option value="{{$row['id']}}">{{$row['name']}}</option>
                                         @endforeach
+                                        @endif
                                 </select>
                             </div>
                         </div>
@@ -145,9 +147,11 @@
                             <div class="col-sm-12 col-md-12">
                                 <select class="form-control  qltd-search-field" id="qltd-nganh-nghe">
                                     <option value="">Tất cả</option>
-                                    @foreach($data['nganh_nghe'] as $row)
+                                    @if($nganh_nghe != null)
+                                    @foreach($nganh_nghe as $row)
                                         <option value="{{$row['id']}}">{{$row['name']}}</option>
                                     @endforeach
+                                    @endif
                                 </select>
                             </div>
                         </div>
@@ -160,9 +164,11 @@
                             <div class="col-sm-12 col-md-12">
                                 <select class="form-control qltd-search-field" id="qltd-chuc-vu">
                                     <option value="">Tất cả</option>
-                                    @foreach($data['chuc_vu'] as $row)
+                                    @if($nganh_nghe != null)
+                                    @foreach($chuc_vu as $row)
                                         <option value="{{$row['id']}}">{{$row['name']}}</option>
                                     @endforeach
+                                    @endif
                                 </select>
                             </div>
                         </div>
@@ -194,9 +200,11 @@
                             <div class="col-sm-12 col-md-12">
                                 <select class="form-control  qltd-search-field" id="qltd-kinh-nghiem">
                                     <option value="">Tất cả</option>
-                                    @foreach($data['kinh_nghiem'] as $row)
+                                    @if($kinh_nghiem != null)
+                                    @foreach($kinh_nghiem as $row)
                                         <option value="{{$row['id']}}">{{$row['name']}}</option>
                                     @endforeach
+                                    @endif
                                 </select>
                             </div>
                         </div>
@@ -226,11 +234,11 @@
                             <div class="col-sm-12 col-md-12">
                                 <select class="form-control qltd-search-field" id="qltd-bai-viet">
                                     <option  value="">Tất cả</option>
-                                    <option value="1">Đang tuyển dụng</option>
-                                    <option  value="2">Đã bị từ chối</option>
-                                    <option selected  value="0">Chờ được duyệt</option>
+                                    <option selected value="1">Đang tuyển dụng</option>
+                                    <option value="2">Đã bị từ chối</option>
+                                    <option value="0">Chờ được duyệt</option>
                                     <option value="0">Bị từ chối - Đã chỉnh sửa</option>
-                                    <option  value="4">Đã tạm ngưng</option>
+                                    <option value="4">Đã tạm ngưng</option>
 
                                 </select>
                             </div>
@@ -240,10 +248,10 @@
                         <div class="row">
 
                             <div class="col-sm-12 col-md-12 text-center">
-                                <label>Ngày Đăng Tin</label>
+                                <label>Ngày Đăng Tin Từ:</label>
                             </div>
                             <div class="col-sm-12 col-md-12">
-                                <input class="form-control" id="qltd-ngay-dang">
+                                <input class="form-control text-center" id="qltd-ngay-dang" value="{{ date('d/m/Y') }}">
                             </div>
                         </div>
 

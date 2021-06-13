@@ -42,6 +42,9 @@ class AdminTrangChuController extends Controller
         $tongSoNhaTuyenDung = ((float)NhaTuyenDung::query()->count() / (float)$tongSoTK) * 100;
         $tongSoNguoiTimViec = ((float)NguoiTimViec::query()->count() / (float)$tongSoTK) * 100;
         $tongSoQuanTriVien = ((float)QuanTriVien::query()->count() / (float)$tongSoTK) * 100;
+
+
+        dd(TaiKhoan::query()->with('getNhaTuyenDung')->count());
         $newData[0] = array(
             'value' => $tongSoNhaTuyenDung, 'label' => 'Nhà tuyển dụng'
         );

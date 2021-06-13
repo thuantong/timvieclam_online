@@ -32,6 +32,7 @@ class BaiTuyenDung extends Model
         'yeu_cau_ho_so',
         'ky_nang_basic',
         'han_bai_viet',
+        'websites',
         'status',
         'isHot',
         'created_at',
@@ -148,18 +149,44 @@ class BaiTuyenDung extends Model
         return $this->belongsToMany(NguoiTimViec::class,'luu_bai','bai_tuyen_dung_id','nguoi_tim_viec_id');
     }
 
+    public static function getAllBaiTuyenDung(){
+        return BaiTuyenDung::query()->with([
+            'getNhaTuyenDung'=>function($query2){
+                $query2->with([
+                    'getTaiKhoan'=>function($q3){
+                        $q3->select('id','ho_ten','phone','avatar');
+                    },
+                    'getQuyMoNhanSu',
+                    'getNganhNghe'
+                ]);
+            }
+
+        ])
+        
+        
+        ->get()->toArray();
+        // return $data;
+    }
+
     public static function getChiTiet($post)
     {
         $data = BaiTuyenDung::with([
             'getNhaTuyenDung' => function ($subquery) {
-                $subquery->select('id', 'tai_khoan_id')->with(
+                $subquery->select('id', 'tai_khoan_id','dia_chi','gioi_thieu','dia_diem_id','so_luong_nhan_vien_id','websites')->with(
                     [
                         'getTaiKhoan' => function ($q) {
-                            $q->select('id', 'ho_ten');
+                            $q->select('id', 'ho_ten','avatar');
                         },
                         'getNguoiTimViecQuanTam'=>function($q){
                             $q->count();
-                        }
+                        },
+                        'getQuyMoNhanSu'=> function ($subquery2){
+                                        $subquery2->select('id', 'name');
+                                    },
+                                    'getDiaDiem' => function ($q) {
+                                        $q->select('id', 'name');
+                                    },
+                        'getNganhNghe'
                     ]
                 );
             },
@@ -171,17 +198,17 @@ class BaiTuyenDung extends Model
             'getDiaDiem' => function ($subquery) {
                 $subquery->select('id', 'name');
             },
-            'getCongTy' => function ($subquery) {
-                $subquery->select('id', 'name', 'logo','dia_chi','gioi_thieu','websites','so_nhan_vien')->with(
-                    [
-                        'getQuyMoNhanSu'=> function ($subquery2){
-                        $subquery2->select('id', 'name');
-                    },
-                    'getNganhNghe'
-                    ]
+            // 'getCongTy' => function ($subquery) {
+            //     $subquery->select('id', 'name', 'logo','dia_chi','gioi_thieu','websites','so_nhan_vien')->with(
+            //         [
+            //             'getQuyMoNhanSu'=> function ($subquery2){
+            //             $subquery2->select('id', 'name');
+            //         },
+            //         'getNganhNghe'
+            //         ]
                 
-                )->get();
-            },
+            //     )->get();
+            // },
             // 'getCongTy',
             'getNganhNghe',
             'getChucVu' => function ($subquery) {
@@ -256,7 +283,7 @@ class BaiTuyenDung extends Model
                 $subquery->select('id', 'tai_khoan_id')->with(
                     [
                         'getTaiKhoan' => function ($q) {
-                            $q->select('id', 'ho_ten');
+                            $q->select('id', 'ho_ten','avatar');
                         }
                     ]
                 );
@@ -267,9 +294,7 @@ class BaiTuyenDung extends Model
             'getDiaDiem' => function ($subquery) {
                 $subquery->select('id', 'name as dia_diem');
             },
-            'getCongTy' => function ($subquery) {
-                $subquery->select('id', 'name as cong_ty_name', 'logo as cong_ty_logo');
-            },
+        
 
         ]);
 
@@ -278,7 +303,7 @@ class BaiTuyenDung extends Model
         }
         $trangThaiDaDuyet = 1;
 
-        $data['bai_tuyen_dung_goi_y'] = $newQuery->distinct('id')->where('status', $trangThaiDaDuyet)->orWhere('tieu_de','like','%' . $data['tieu_de'] . '%')->paginate(10, ['id', 'tieu_de', 'ten_chuc_vu', 'luong_from', 'luong_to', 'isHot', 'status', 'han_tuyen', 'nha_tuyen_dung_id', 'dia_diem_id', 'cong_ty_id'], 'page');
+        $data['bai_tuyen_dung_goi_y'] = $newQuery->distinct('id')->with(['getNhaTuyenDung'=>function($q){$q->select('id','tai_khoan_id')->with(['getTaiKhoan'=>function($q2){$q2->select('id','ho_ten','avatar');}]);}])->where('status', $trangThaiDaDuyet)->orWhere('tieu_de','like','%' . $data['tieu_de'] . '%')->paginate(10, ['id', 'tieu_de', 'ten_chuc_vu', 'luong_from', 'luong_to', 'isHot', 'status', 'han_tuyen', 'nha_tuyen_dung_id', 'dia_diem_id', ], 'page');
         $data['trang_hien_tai'] = $data['bai_tuyen_dung_goi_y']->currentPage();
         $data['check_trang'] = $data['bai_tuyen_dung_goi_y']->nextPageUrl();
         return $data;

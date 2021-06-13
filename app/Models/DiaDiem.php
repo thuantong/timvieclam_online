@@ -18,4 +18,7 @@ class DiaDiem extends Model
     public function getNguoiTimViec(){
         return $this->hasOne(NguoiTimViec::class,'dia_diem_id');
     }
+    public function getNhaTuyenDung(){
+        return $this->hasOne(NhaTuyenDung::class,'dia_diem_id');
+    }
 }

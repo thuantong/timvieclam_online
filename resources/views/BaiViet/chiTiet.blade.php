@@ -140,13 +140,15 @@
                                 </div>
                                 <div class="row">
                                     @if($data['bai_tuyen_dung_goi_y']->count() != 0)
-                                      
+                                      {{-- @dd(['bai_tuyen_dung_goi_y']) --}}
                                         @foreach($data['bai_tuyen_dung_goi_y'] as $row)
+                                        {{-- @dd($row->toArray()['get_nha_tuyen_dung']) --}}
                                             <a class="col-sm-12 col-md-12 ribbon-box iteam-click"
                                                href="{{route('baiviet.getThongTinBaiViet',[$row['id'],'chitiet'=>1])}}">
                                                 <div class="row">
                                                     <div class="col-sm-4">
-                                                        <img src="{{URL::asset(env('URL_ASSET_PUBLIC').$row['getCongTy']->cong_ty_logo)}}"
+                                                        {{-- @dd() --}}
+                                                        <img src="{{URL::asset(env('URL_ASSET_PUBLIC').$row->toArray()['get_nha_tuyen_dung']['get_tai_khoan']['avatar'])}}"
                                                              class="border" style="width: calc(100%)">
                                                     </div>
                                                     <div class="col-sm-8">
@@ -158,7 +160,7 @@
                                                         <div class="row">
                                                             <small
                                                                 class="col-sm-12 col-md-12 overflow-hidden text-dark text-uppercase">
-                                                                {{$row['getCongTy']->cong_ty_name}}
+                                                                {{$row->toArray()['get_nha_tuyen_dung']['get_tai_khoan']['ho_ten']}}
                                                             </small>
                                                         </div>
                                                         <div class="row">

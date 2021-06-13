@@ -47,7 +47,7 @@ const getDanhSach = () => {
             data: 'get_chuc_vu.name'
         },
         {
-            data: 'get_cong_ty.name'
+            data: 'get_nha_tuyen_dung.get_tai_khoan.ho_ten'
         },
         {
             data: 'han_bai_viet',

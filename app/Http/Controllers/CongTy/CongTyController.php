@@ -42,7 +42,7 @@ class CongTyController extends Controller
         $taiKhoan = TaiKhoan::query()->find(Auth::user()->id);
         $data =$taiKhoan->getNhaTuyenDung->toArray();
         $data['nganh_nghe_ids'] = $taiKhoan->getNhaTuyenDung->getNganhNgheId()->toArray();
-      
+        
         // if($checkCongty != null){
         //     $data['data'] = $checkCongty->getCongTy()->first();
         //     if ($data['data'] != null){
@@ -67,7 +67,7 @@ class CongTyController extends Controller
         $data = $this->getData();
         // dd($data);
         // dd(TaiKhoan::query()->find(Auth::user()->id)->getNhaTuyenDung->toArray());
-        return view('CongTy.index', compact('data'));
+        return view('congty.index', compact('data'));
     }
 
     public function getDanhSach()
@@ -98,7 +98,7 @@ class CongTyController extends Controller
 
     public function setDanhSach(Request $request)
     {
-
+        // dd($request->all());
         $title = 'Cập nhật';
         try {
             if ($request->id == null){
@@ -108,7 +108,7 @@ class CongTyController extends Controller
             }
             $taiKhoan = TaiKhoan::query()->find(Auth::user()->id);
             // $taiKhoan->avatar = $request->logo_cong_ty != null ? $request->logo_cong_ty : 'images/default-company-logo.jpg';
-            $taiKhoan->avatar = $request->avatar != null &&  $request->avatar != 'images/default-company-logo.jpg' ? $this->getImageFromBase64($request->avatar) : 'images/default-company-logo.jpg';
+            $taiKhoan->avatar = ($request->avatar != null) ? $this->getImageFromBase64($request->avatar) : $taiKhoan->avatar;
             
             $taiKhoan->ho_ten = $request->ten_cong_ty;
             $taiKhoan->save();
@@ -125,7 +125,7 @@ class CongTyController extends Controller
             // $congTyNew->logo = $request->logo_cong_ty != null ? $request->logo_cong_ty : 'images/default-company-logo.jpg';
             $congTyNew->gioi_thieu = $request->gioi_thieu_cong_ty;
             $congTyNew->so_chi_nhanh = $request->so_luong_chi_nhanh;
-            $congTyNew->so_chi_nhanh = $request->so_luong_chi_nhanh;
+            $congTyNew->dia_chi_chi_nhanh = serialize($request->dia_chi_chi_nhanh);
             $congTyNew->tai_khoan_id = Auth::user()->id;
             $congTyNew->nam_thanh_lap = $request->nam_thanh_lap;
 
@@ -142,6 +142,8 @@ class CongTyController extends Controller
             $congTyNew->getNganhNghe()->attach($nganhNghe);
 
             $message = 'Cập nhật công ty thành công!';
+           
+            $congTyNew->ho_ten = $taiKhoan->ho_ten;
             return $this->getResponse($title, 200, $message, $congTyNew);
         } catch (\Exception $e) {
             $message = 'Cập nhật công ty thất bại! Kiểm tra lại dữ liệu!';

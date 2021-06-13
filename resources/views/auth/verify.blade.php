@@ -16,16 +16,17 @@
 
                     {{ __('Để sử dụng dịch vụ của ứng đụng trang,') }}
                     {{ __('Bạn cần xác thực lại thông tin email! Và sau đó, kiểm tra lại hộp thư của emai: ')}}
-                    <div class="form-group row">
+                    <div class="form-group row mb-0">
                         <div class="col-sm-12 col-md-12">
                             <div class="input-group">
                                 <input class="form-control email-not-null" id="email" value="{{Auth::user()->email}}">
                                 <button class="btn btn-primary" id="gui-xac-nhan-email">Gửi xác thực email</button>
-                                <small>Nếu không thấy mail, vui lòng kiểm tra lại email hoặc trong mục thư rác!</small>
+                                
                                 <span class="invalid-feedback" role="alert">
                                         <strong></strong>
                                     </span>
                             </div>
+                            <p><small>Nếu không thấy mail, vui lòng kiểm tra lại email hoặc kiểm tra mục thư rác!</small></p>
                             <span class="text-success message-response"></span>
                         </div>
 

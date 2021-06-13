@@ -1,6 +1,8 @@
 $(document).on('click','.chinh_sua',function () {
     let __this = $(this);
     let idBTD =  __this.data('id');
+// console.log(idBTD)
+    // return;
     let ajax = {
         method: 'get',
         url: '/bai-viet/chinh-sua',
@@ -124,7 +126,7 @@ $(document).on('click','#chinh-sua-bai-tuyen-dung-modal #save',function () {
         // console.log(data)
         // return;
         sendAjaxNoFunc('post', '/bai-viet/chinh-sua/luu-tin', data, __this.attr('id')).done(e => {
-            console.log(e)
+            // console.log(e)
             getHtmlResponse(e);
             if (e.status == 405) {
                 alertConfirm(e).then(result => {

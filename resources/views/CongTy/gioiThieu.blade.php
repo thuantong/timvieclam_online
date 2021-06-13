@@ -1,17 +1,17 @@
-{{-- @dd(isset($data['get_cong_ty'])) --}}
+{{-- @dd($data) --}}
 <div class="row">
     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 p-0">
         <div class="card-box p-1 mb-1">
             <div class="row">
                 <div class="col-sm-12 col-md-12">
                     <h4 class="tieu_de p-1 m-0 text-center bg-light text-uppercase cong_ty"
-                        id="ten_cong_ty">@if(isset($data['get_cong_ty']) && $data['get_cong_ty'] != null) @if($data['get_cong_ty']['name'] != null){{$data['get_cong_ty']['name']}}@endif @endif</h4>
+                        id="ten_cong_ty">@if(isset($data['get_nha_tuyen_dung']) && $data['get_nha_tuyen_dung'] != null) @if($data['get_nha_tuyen_dung']['get_tai_khoan'] != null){{$data['get_nha_tuyen_dung']['get_tai_khoan']['ho_ten']}}@endif @endif</h4>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-6 col-md-2 p-1">
                     <img
-                        src="@if(isset($data['get_cong_ty']) && $data['get_cong_ty']['logo'] != null){{URL::asset(env('URL_ASSET_PUBLIC').$data['get_cong_ty']['logo'].'')}}@endif"
+                        src="@if(isset($data['get_nha_tuyen_dung'])){{URL::asset(env('URL_ASSET_PUBLIC').$data['get_nha_tuyen_dung']['get_tai_khoan']['avatar'].'')}}@endif"
                         class="cong_ty_logo" style="width: calc(100%)">
 
                 </div>
@@ -19,10 +19,10 @@
                     <div class="row">
                         <div class="col-sm-12 col-md-12">
                             <i class="cong_ty_nganh_nghe">
-                                @if(isset($data['cong_ty_nganh_nghe']) && $data['cong_ty_nganh_nghe'] != null)
+                                @if(isset($data['get_nha_tuyen_dung']['get_nganh_nghe']) && $data['get_nha_tuyen_dung']['get_nganh_nghe'] != null)
                                     {{implode(' - ', array_map(function($c) {
                                             return $c['name'];
-                                        }, $data['cong_ty_nganh_nghe']))}}
+                                        }, $data['get_nha_tuyen_dung']['get_nganh_nghe']))}}
                                 @endif
                             </i>
                         </div>
@@ -30,8 +30,8 @@
                     <div class="row">
                         <div class="col-sm-12 col-md-12">
                             <span class="fa fa-globe"></span><span class="cong_ty_websites">
-                                    @if(isset($data['get_cong_ty']) && $data['get_cong_ty'] != null)
-                                    {{$data['get_cong_ty']['websites']}}
+                                    @if(isset($data['get_nha_tuyen_dung']) && $data['get_nha_tuyen_dung'] != null)
+                                    {{$data['get_nha_tuyen_dung']['websites']}}
                                 @endif
                                 </span>
 
@@ -40,8 +40,8 @@
                     <div class="row">
                         <div class="col-sm-12 col-md-12">
                             <span class="icofont icofont-location-pin"></span><span class="cong_ty_dia_chi">
-                                    @if(isset($data['get_cong_ty']) && $data['get_cong_ty'] != null)
-                                    {{$data['get_cong_ty']['dia_chi']}}
+                                    @if(isset($data['get_nha_tuyen_dung']) && $data['get_nha_tuyen_dung'] != null)
+                                    {{$data['get_nha_tuyen_dung']['dia_chi']}}
                                 @endif
                                 </span>
                         </div>
@@ -49,8 +49,8 @@
                     <div class="row">
                         <div class="col-sm-12 col-md-12">
                             <span class="fa fa-group"></span><span class="quy_mo">
-                            @if(isset($data['get_cong_ty']) && $data['get_cong_ty'] != null)
-                                    {{$data['get_cong_ty']['get_quy_mo_nhan_su']['name']}}
+                            @if(isset($data['get_nha_tuyen_dung']) && $data['get_nha_tuyen_dung'] != null)
+                                    {{$data['get_nha_tuyen_dung']['get_quy_mo_nhan_su']['name']}}
                                 @endif
                              </span>
                         </div>
@@ -66,9 +66,9 @@
                     <div class="row">
                         <div class="col-sm-12 col-md-12 overflow-hidden" style="max-height: 20vh">
                             <span class="gioi_thieu">
-                                    @if(isset($data['get_cong_ty']) && $data['get_cong_ty'] != null)
+                                    @if(isset($data['get_nha_tuyen_dung']) && $data['get_nha_tuyen_dung'] != null)
                                     {{--                                            @for($i = 0 ; $i < 200; $i++)--}}
-                                    {{$data['get_cong_ty']['gioi_thieu']}}
+                                    {{$data['get_nha_tuyen_dung']['gioi_thieu']}}
                                     {{--                                                @endfor--}}
 
                                 @endif
@@ -81,7 +81,7 @@
                     <div class="row">
                         <div class="col-sm-12 col-md-12 text-left">
 
-                            <a href="@if(isset($data['get_cong_ty'])){{route('nhatuyendung.chiTietNhaTuyenDung',['nha_tuyen_dung'=>$data['get_nha_tuyen_dung']['id'] ])}}@endif" class="btn-sm btn btn-default text-primary p-0">[Xem chi tiết]</a>
+                            <a href="@if(isset($data['get_nha_tuyen_dung'])){{route('nhatuyendung.chiTietNhaTuyenDung',['nha_tuyen_dung'=>$data['get_nha_tuyen_dung']['id'] ])}}@endif" class="btn-sm btn btn-default text-primary p-0">[Xem chi tiết]</a>
                         </div>
 
                     </div>
@@ -89,7 +89,7 @@
 
                 </div>
                 <div class="col-sm-12 col-md-12 text-center">
-                    @if(isset($data['get_cong_ty']) && intval(Session::get('loai_tai_khoan')) == 1)
+                    @if(isset($data['get_nha_tuyen_dung']) && intval(Session::get('loai_tai_khoan')) == 1)
                         <div class="row">
                             <div class="col-sm-6 col-md-6 text-left">
                                 {{-- @dd($data['nguoi_tim_viec']['get_nha_tuyen_dung_quan_tam']) --}}

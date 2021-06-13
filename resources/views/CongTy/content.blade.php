@@ -4,7 +4,7 @@
 <div class="col-sm-12 col-md-8 pl-0 pr-0">
     <div class="card-box">
         <input id="object-fillter" type="hidden"
-               value="@if(isset($data['data']) && (count($data['data']) > 0) && $data['data']['id'] != null){{$data['data']['id']}}@endif"
+               value="@if(isset($data) && (count($data) > 0) && $data['id'] != null){{$data['id']}}@endif"
         >
         <div class="row form-group">
             <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center text-md-right">
@@ -158,7 +158,7 @@
             </div>
             <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8 text-left" id="dia_chi_chi_nhanh_append">
                 @if(isset($data) && (count($data) > 0) && $data['dia_chi_chi_nhanh'] != null)
-                    @for($i = 0 ,$row = $data['data']['dia_chi_chi_nhanh']; $i < count($row);$i++)
+                    @for($i = 0 ,$row = $data['dia_chi_chi_nhanh']; $i < count($row);$i++)
                         {{--                            @foreach($data['data']['dia_chi_chi_nhanh'] as $row)--}}
                         <div class="xoa-element">Địa chỉ chi nhánh số {{$i+1}}:<input class="form-control dia_chi_chi_nhanh child-not-null" title="Địa chỉ chi nhánh" value="{{$row[$i]}}"><span class="invalid-feedback" role="alert">
                                                             <strong></strong>

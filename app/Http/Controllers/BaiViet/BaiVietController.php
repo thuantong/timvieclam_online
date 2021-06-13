@@ -65,7 +65,10 @@ BaiVietController extends Controller
 
     public function getSoDu()
     {
-        return $this->nhaTuyenDung->getSoDu;
+        $taiKhoan = TaiKhoan::query()->find(Auth::user()->id);
+
+        // dd($taiKhoan->getSoDu->toArray());
+        return $taiKhoan->getSoDu;
     }
 
     public function khoiTaoThongTin()
@@ -92,23 +95,26 @@ BaiVietController extends Controller
             return view('SoDu.index', compact('checkSoDu'));
         }
 
-        $this->nhaTuyenDung = TaiKhoan::query()->find(Auth::user()->id)->getNhaTuyenDung;
+        $taiKhoan = TaiKhoan::query()->find(Auth::user()->id);
+        $data =$taiKhoan->getNhaTuyenDung->toArray();
+        $data['nganh_nghe_ids'] = $taiKhoan->getNhaTuyenDung->getNganhNgheId()->toArray();
+        // $this->nhaTuyenDung = TaiKhoan::query()->find(Auth::user()->id)->getNhaTuyenDung;
 
-        $data['kinh_nghiem'] = KinhNghiem::query()->orderBy('id', 'asc')->get()->toArray();
-        $data['nganh_nghe'] = NganhNghe::query()->orderBy('name', 'asc')->get()->toArray();
-        $checkCongty =$this->nhaTuyenDung;
-        if($checkCongty->getCongTy()->count() == 1){
-            $data['cong_ty'] = $checkCongty->getCongTy()->first(['id', 'name', 'logo'])->toArray();
-        }else{
-             $data['cong_ty'] = array();
-        }
+        // $data['kinh_nghiem'] = KinhNghiem::query()->orderBy('id', 'asc')->get()->toArray();
+        // $data['nganh_nghe'] = NganhNghe::query()->orderBy('name', 'asc')->get()->toArray();
+        // $checkCongty =$this->nhaTuyenDung;
+        // if($checkCongty->getCongTy()->count() == 1){
+        //     $data['cong_ty'] = $checkCongty->getCongTy()->first(['id', 'name', 'logo'])->toArray();
+        // }else{
+        //      $data['cong_ty'] = array();
+        // }
         
        
-        $data['chuc_vu'] = ChucVu::query()->orderBy('name', 'asc')->get()->toArray();
-        $data['dia_diem'] = DiaDiem::query()->orderBy('name', 'asc')->get()->toArray();
-        $data['kieu_lam_viec'] = KieuLamViec::query()->orderBy('name', 'asc')->get()->toArray();
-        $data['bang_cap'] = BangCap::query()->orderBy('name', 'asc')->get()->toArray();
-        $data['quy_mo_nhan_su'] = QuyMoNhanSu::query()->orderBy('id', 'asc')->get()->toArray();
+        // $data['chuc_vu'] = ChucVu::query()->orderBy('name', 'asc')->get()->toArray();
+        // $data['dia_diem'] = DiaDiem::query()->orderBy('name', 'asc')->get()->toArray();
+        // $data['kieu_lam_viec'] = KieuLamViec::query()->orderBy('name', 'asc')->get()->toArray();
+        // $data['bang_cap'] = BangCap::query()->orderBy('name', 'asc')->get()->toArray();
+        // $data['quy_mo_nhan_su'] = QuyMoNhanSu::query()->orderBy('id', 'asc')->get()->toArray();
 //        dd($data);
         return view('BaiViet.index', compact('data'));
     }
@@ -150,7 +156,7 @@ BaiVietController extends Controller
             $baiViet->dia_diem_id = $request->dia_diem_lam_viec;//
             $baiViet->kieu_lam_viec_id = $request->hinh_thuc;//
             $baiViet->isHot = $request->is_hot;//
-            $baiViet->cong_ty_id = $request->cong_ty_tuyen_dung;//
+            // $baiViet->cong_ty_id = $request->cong_ty_tuyen_dung;//
             $baiViet->yeu_cau_ho_so = serialize($request->yeu_cau_ho_so);
             $baiViet->created_at = Carbon::now('Asia/Ho_Chi_Minh');
 //            $baiViet->update_at = Carbon::now('Asia/Ho_Chi_Minh');
@@ -283,6 +289,7 @@ BaiVietController extends Controller
     {
         $data = BaiTuyenDung::getChiTiet($post);
         $typeSend = 1;
+        // dd($data );
         return view('BaiViet.chiTiet', compact('data', 'typeSend'));
     }
 
@@ -295,6 +302,7 @@ BaiVietController extends Controller
     public function getThongTinBaiVietClick($post, Request $request)
     {
         $data = BaiTuyenDung::getChiTiet($post);
+        // dd($data);
 //         $query = BaiTuyenDung::with([
 //             'getNhaTuyenDung' => function ($subquery) {
 //                 $subquery->select('id', 'tai_khoan_id')->with(
@@ -577,25 +585,35 @@ BaiVietController extends Controller
     public function chinhSua(Request $request)
     {
         $id = $request->get('id');
-        $baiTuyenDung = BaiTuyenDung::query()->find($id);
-        $baiTuyenDung->getNganhNgheId();
+        $baiTuyenDung = BaiTuyenDung::query()
+        ->with([
+            'getNhaTuyenDung'=>function($q){
+                $q->select('id', 'tai_khoan_id')->with(['getTaiKhoan'=>function($q2){$q2->select('id','ho_ten','avatar');}]);
+            }
+            ,'getNganhNghe'])
+        ->find($id);
+
+        // dd($baiTuyenDung->toArray());
+        // $baiTuyenDung->getNganhNghe();
 //        $baiTuyenDung['luong'] = unserialize($baiTuyenDung['luong']);
-        $baiTuyenDung['tuoi'] = unserialize($baiTuyenDung['tuoi']);
+        // $baiTuyenDung['tuoi'] = unserialize($baiTuyenDung['tuoi']);
 
         $data['data'] = $baiTuyenDung->toArray();
-        $data['data']['get_nganh_nghe'] = $data['data']['get_nganh_nghe'][0]['id'];
+        // dd($data);
 
-        $this->nhaTuyenDung = TaiKhoan::query()->find(Auth::user()->id)->getNhaTuyenDung;
+        // $data['data']['get_nganh_nghe'] = $data['data']['get_nganh_nghe'][0]['id'];
+
+        // $this->nhaTuyenDung = TaiKhoan::query()->find(Auth::user()->id)->getNhaTuyenDung;
 //dd($data);
-        $data['kinh_nghiem'] = KinhNghiem::query()->orderBy('id', 'asc')->get();
+        // $data['kinh_nghiem'] = KinhNghiem::query()->orderBy('id', 'asc')->get();
 
-        $data['nganh_nghe'] = NganhNghe::query()->orderBy('name', 'asc')->get();
-        $data['cong_ty'] = $this->nhaTuyenDung->getCongTy()->first(['id', 'name', 'logo'])->toArray();
-        $data['chuc_vu'] = ChucVu::query()->orderBy('name', 'asc')->get();
-        $data['dia_diem'] = DiaDiem::query()->orderBy('name', 'asc')->get();
-        $data['kieu_lam_viec'] = KieuLamViec::query()->orderBy('name', 'asc')->get();
-        $data['bang_cap'] = BangCap::query()->orderBy('name', 'asc')->get();
-        $data['quy_mo_nhan_su'] = QuyMoNhanSu::query()->orderBy('id', 'asc')->get();
+        // $data['nganh_nghe'] = NganhNghe::query()->orderBy('name', 'asc')->get();
+        // $data['cong_ty'] = $this->nhaTuyenDung->getCongTy()->first(['id', 'name', 'logo'])->toArray();
+        // $data['chuc_vu'] = ChucVu::query()->orderBy('name', 'asc')->get();
+        // $data['dia_diem'] = DiaDiem::query()->orderBy('name', 'asc')->get();
+        // $data['kieu_lam_viec'] = KieuLamViec::query()->orderBy('name', 'asc')->get();
+        // $data['bang_cap'] = BangCap::query()->orderBy('name', 'asc')->get();
+        // $data['quy_mo_nhan_su'] = QuyMoNhanSu::query()->orderBy('id', 'asc')->get();
 //        dd($data['data']['get_nganh_nghe']);
 //        dd($data);
 //        dd(array_search("12",array_column($data['data']['get_nganh_nghe'],'id')));

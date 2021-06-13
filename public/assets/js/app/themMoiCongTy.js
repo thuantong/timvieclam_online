@@ -232,7 +232,8 @@ $(document).on('click', 'button#save-cong-ty', function () {
     // console.log(cropperUpload)
     // return;
     // alert()\
-    let avatarCongTy = cropperUpload != null ? cropperUpload.getCroppedImage() : $('#logo_cong_ty').find('img').data('data');
+    let avatarCongTy = cropperUpload == null ? null : cropperUpload.getCroppedImage();
+
     let __this = $(this);
     let gio_lam_viec = [];
     let ngay_lam_viec = [];
@@ -295,8 +296,8 @@ $(document).on('click', 'button#save-cong-ty', function () {
                     $('body').find('#cong_ty_tuyen_dung').val(dataRespose.id);
                     // if ($('body').find('')
                     $('body').find('#cong_ty_tuyen_dung').parent().find('img').attr('src',getBaseURL+dataRespose.logo);
-                    $('body').find('#cong_ty_tuyen_dung_name').find('h5').text(dataRespose.name);
-                    $('body').find('#cong_ty_tuyen_dung_name').removeClass('form-control is-invalid')
+                    $('body').find('#cong_ty_tuyen_dung_name').val(dataRespose.ho_ten);
+                    // $('body').find('#cong_ty_tuyen_dung_name').removeClass('form-control is-invalid')
                 }else{
                     window.location.href = '/danh-sach-cong-ty';
                 }

@@ -200,9 +200,9 @@
                     $('.bao-cao-button-call').addClass('thong-bao-phan-quyen')
                 }
 
-
+                // console.log(e)
                 $('.tieu-de-chi-tiet').text(e.tieu_de);
-                $('.cong_ty').text(e.get_cong_ty.name);
+                $('.cong_ty').text(e.get_nha_tuyen_dung.get_tai_khoan.ho_ten);
                 $('.name_nguoi_dang').text(e.get_nha_tuyen_dung.get_tai_khoan.ho_ten);
                 $('.chuc_vu').text(e.get_chuc_vu.name);
                 $('.han_nop').text(e.han_tuyen);
@@ -211,19 +211,20 @@
                 $('.yc_bang_cap').text(e.get_bang_cap.name);
 
             
-                $('.cong_ty_logo').attr('src',baseURL+e.get_cong_ty.logo);
-                $('.cong_ty_websites').text(" "+e.get_cong_ty.websites);
-                $('.cong_ty_dia_chi').text(" "+e.get_cong_ty.dia_chi);
-                $('.quy_mo').text(" "+e.get_cong_ty.get_quy_mo_nhan_su.name);
-                $('.gioi_thieu').text(" "+e.get_cong_ty.gioi_thieu);
+                $('.cong_ty_logo').attr('src',baseURL+e.get_nha_tuyen_dung.get_tai_khoan.avatar);
+                $('.cong_ty_websites').text(" "+e.get_nha_tuyen_dung.websites);
+                $('.cong_ty_dia_chi').text(" "+e.get_nha_tuyen_dung.dia_chi);
+                $('.quy_mo').text(" "+e.get_nha_tuyen_dung.get_quy_mo_nhan_su.name);
+                $('.gioi_thieu').text(" "+e.get_nha_tuyen_dung.gioi_thieu);
                 // return;
                 
                 $('.mo_ta_cong_viec').html(e.mo_ta);
                 $('.yeu_cau_cong_viec').html(e.yeu_cau_cong_viec);
                 $('.quyen_loi_cong_viec').html(e.quyen_loi);
                 $('.dia_chi_cv').html(e.dia_chi);
-                $('.cong_ty_nganh_nghe').text(e.get_cong_ty.get_nganh_nghe.map(function(element){return element.name}).join(" - "));
-                $('.ho_so_yeu_cau_cv').text(e.yeu_cau_ho_so.map(function(element){
+                $('.cong_ty_nganh_nghe').text(e.get_nha_tuyen_dung.get_nganh_nghe.map(function(element){return element.name}).join(" - "));
+                if(e.yeu_cau_ho_so != null){
+                    $('.ho_so_yeu_cau_cv').text(e.yeu_cau_ho_so.map(function(element){
                     
                     switch (element) {
                         case "1":
@@ -248,6 +249,8 @@
                     }
              
                 }).join(", "));
+                }
+                
                
                 // return;
                 let gioi_tinh = '';

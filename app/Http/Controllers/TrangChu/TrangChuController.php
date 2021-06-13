@@ -25,7 +25,9 @@ class TrangChuController extends Controller
 
     public function index(Request $request)
     {
-
+        // dd('cc');
+        // $data  = BaiTuyenDung::getAllBaiTuyenDung();
+        // dd($data);
         $data = $this->getBaiTuyenDung($request);
     //    dd($data);
         // dd(json_decode($data,true));
@@ -115,11 +117,9 @@ class TrangChuController extends Controller
                     $subquery->select('id', 'tai_khoan_id')->with(
                         [
                             'getTaiKhoan' => function ($q) {
-                                $q->select('id', 'ho_ten');
+                                $q->select('id', 'ho_ten','avatar');
                             },
-                            'getCongTy'=>function($q){
-                            $q->select('id','logo','name');
-                            }
+                            
                         ]
                     );
                 },
@@ -134,9 +134,7 @@ class TrangChuController extends Controller
                     }
 
                 },
-                'getCongTy' => function ($subquery) {
-                    $subquery->select('id', 'name', 'logo');
-                },
+                
                 'getNganhNghe' =>function($q) use ($request){
                     if ($request->exists('nganh_nghe') && $request->get('nganh_nghe') != "") {
                         $q->where('nganh_nghe_id',$request->get('nganh_nghe'));
@@ -147,6 +145,8 @@ class TrangChuController extends Controller
                 }
 
             ]);
+           
+
             if ($request->exists('page') && $request->get('page') != "") {
                 $page = $request->get('page');
             }
@@ -173,15 +173,16 @@ class TrangChuController extends Controller
                 }
                 $query->where('luong_from','>=',$muc_luong_id);
             }
+            
             if ($request->exists('kieu_lam_viec') && $request->get('kieu_lam_viec') != "") {
                 $query->where('kieu_lam_viec_id',$request->get('kieu_lam_viec'));
             }
             $trangThaiDaDuyet = 1;
             $dataNew = $query->distinct('id')->where('status', $trangThaiDaDuyet);
-
-            // $dataNew = $dataNew->orderBy('isHot', 'desc')->get()->toArray();
-            $dataNew = $dataNew->get()->toArray();
             
+            $dataNew = $dataNew->orderBy('isHot', 'desc')->get()->toArray();
+            // $dataNew = $dataNew;
+            // dd($query->first()->toArray());
             $colect = collect($dataNew);
             if ($request->exists('dia_diem') && $request->get('dia_diem') != "") {
                 $colect = $colect->whereNotNull('get_dia_diem');
@@ -192,7 +193,7 @@ class TrangChuController extends Controller
 
             $perpage = 10;
             $colection = collect($colect);
-
+            // dd($colection);
             $data['bai_tuyen_dung'] = new LengthAwarePaginator(
                 $colection->forPage($page, $perpage),
                 $colection->count(),

@@ -51,6 +51,13 @@ class NhaTuyenDung extends Model
     //     return $this->getNganhNgheId();
     // }
 
+    public function getDiaDiem()
+    {
+        return $this->belongsTo(DiaDiem::class,'dia_diem_id');
+    }
+    public function getQuyMoNhanSu(){
+        return $this->belongsTo(QuyMoNhanSu::class,'so_luong_nhan_vien_id');
+    }
 
     public function getNganhNghe()
     {
@@ -119,6 +126,7 @@ class NhaTuyenDung extends Model
         return $this->getBaiViet->pluck('id');
     }
 
+    
     //lấy số dư
     public function getSoDu()
     {

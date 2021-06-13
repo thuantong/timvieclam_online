@@ -13,8 +13,11 @@ class QuyMoNhanSu extends Model
 //        'ho_ten',
         'name',
         'mo_ta'];
-    public function getCongTy(){
-        return $this->hasMany(CongTy::class,'so_nhan_vien');
+    // public function getCongTy(){
+    //     return $this->hasMany(CongTy::class,'so_nhan_vien');
+    // }
+    public function getNhaTuyenDung(){
+        return $this->hasMany(NhaTuyenDung::class,'so_luong_nhan_vien_id');
     }
     //
 }
