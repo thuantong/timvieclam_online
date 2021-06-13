@@ -178,7 +178,7 @@ class TrangChuController extends Controller
                 $query->where('kieu_lam_viec_id',$request->get('kieu_lam_viec'));
             }
             $trangThaiDaDuyet = 1;
-            $dataNew = $query->distinct('id')->where('status', $trangThaiDaDuyet);
+            $dataNew = $query->distinct('id','isHot')->where('status', $trangThaiDaDuyet);
             
             $dataNew = $dataNew->orderBy('isHot', 'desc')->get()->toArray();
             // $dataNew = $dataNew;
