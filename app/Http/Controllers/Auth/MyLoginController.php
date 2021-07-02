@@ -99,12 +99,12 @@ class MyLoginController extends Controller
         switch ($getPhanQuyen['id']) {
             case 1://Người tìm việc
                 $nguoiTimViec = $findUser->getNguoiTimViec;
-                $soDu = $nguoiTimViec->getSoDu;
+                //$soDu = $nguoiTimViec->getSoDu;
 
                 //check và lưu số dư
-                if ($soDu != null) {
-                    Session::put('so_du', $soDu['tong_tien']);
-                }
+                //if ($soDu != null) {
+                    //Session::put('so_du', $soDu['tong_tien']);
+                //}
 
                 //Lưu avatar
                 Session::put('avatar', $nguoiTimViec['avatar']);
